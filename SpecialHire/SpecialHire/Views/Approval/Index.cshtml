@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "Booking Approval Screen";
+    ViewBag.IsNavigationEnabled = "Yes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .thead-inverse th {
+        color: #fff;
+        background-color: #373a3c;
+        text-align: center;
+    }
+
+    .table-striped td {
+        text-align: center;
+    }
+
+    .modal-lg {
+        min-width: 1250px;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                Booking Approval
+                <small> Approve Bookings</small>
+            </h2>
+        </div>
+    </div>
+    @using (Html.BeginForm("Index", "Approval", FormMethod.Post, new { id = "frmApproval" }))
+    {
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #5bc0de;">
+                    <a data-toggle="collapse" href="#pnlSearch" style="color:white;text-decoration:none;">Search Quotation</a>
+                </div>
+                <div id="pnlSearch" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon" style="min-width: 90px;">Booking Date</div>
+                                        <input type="text" class="form-control date-control-enabled" placeholder="Booking Date" id="txtSearchBookingDate" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Booking ID </div>
+                                        <input type="text" class="form-control" placeholder="Booking ID" id="txtSearchBookingID" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-info" id="btnSearch">Search&nbsp;<i class="fa fa-1x fa-search"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button type="button" class="btn btn-danger" id="btnClear" onclick="ClearFormValues();">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel" id="divSearchResults" style="display:none;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="tblSearchResults">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th>InvoiceNumber</th>
+                                        <th>InvoicedDate</th>
+                                        <th>Organiser</th>
+                                        <th>Contact</th>
+                                        <th>PickUp</th>
+                                        <th>Time</th>
+                                        <th>Destination</th>
+                                        <th>Return</th>
+                                        <th>Comments</th>
+                                        <th>Approve</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    function BindSearchGrid(IsPageLoad) {
+        var BookingDate = "";
+        debugger;
+        if (!IsPageLoad)
+        { BookingDate = $("#txtSearchBookingDate").val(); } else { BookingDate = getLocalDate(new Date()); }
+
+        var BookingID = $("#txtSearchBookingID").val();
+        var tableBody = $("table#tblSearchResults").find("tbody");
+        var buttonClass = "";
+        var rows = "";
+        if (BookingDate == "" && BookingID == "") {
+            //alert("Please enter search criteria!!");
+            //$("#txtSearchBookingDate").focus();
+            //return false;
+            BookingDate = getLocalDate(new Date());
+        }
+        $.ajax({
+            async: false,
+            url: '@Url.Action("SearchPendingBookings", "Approval")',
+            type: 'Post',
+            data: JSON.stringify({ BookingDate: BookingDate, BookingID: BookingID }),
+            dataType: 'json',
+            contentType: 'application/json',
+            error: function (xhr) {
+                alert('Error: ' + xhr.statusText);
+            },
+            success: function (result) {
+                //Now Process the data
+                tableBody.html();
+                if (result.length == 0) {
+                    if (!IsPageLoad)
+                    { alert("No records found for the selected criteria!!"); } else
+                    { alert("No jobs found for today!!"); }
+
+                    $("div#divSearchResults").hide();
+                }
+                else {
+                    $("div#divSearchResults").show();
+                    $(result).each(function (index) {
+                        var CurrentItem = this;
+                        var invoiceDate = getLocalDateFromJsonDate(CurrentItem.InvoiceDate);
+                        var pickUpDate = getLocalDateFromJsonDate(CurrentItem.PickUpDate);
+                        rows = rows + "<tr id='trDispatchVehicle" + index + "'><td>" + CurrentItem.InvoiceNumber + "</td>"
+                        rows = rows + "<td>" + invoiceDate + "</td>"
+                        rows = rows + "<td>" + CurrentItem.OrganiserName + "</td>"
+                        rows = rows + "<td>" + CurrentItem.Contact + "</td>"
+                        rows = rows + "<td>" + CurrentItem.FromLocation+ "</td>"
+                        rows = rows + "<td>" + CurrentItem.PickUpTime + "</td>"
+                        rows = rows + "<td>" + CurrentItem.FromLocation + "</td>"
+                        rows = rows + "<td>" + CurrentItem.ReturnTime + "</td>"
+                        rows = rows + "<td><textarea class='form-control' rows='1' id='txtComment'></textarea></td>"
+                        rows = rows + "<td><button type='button' class='btn btn-success' id='btnApproveBooking' value='" + CurrentItem.ID + "'>Approve&nbsp;<i class='fa fa-thumbs-o-up fa-1x'></i></button></td></tr>";
+                    });
+                    tableBody.html("").html(rows);
+                }
+            }
+        }).done(function (result) {
+            return false;
+        });
+    }
+
+    function SearchBookings() {
+        $("button#btnSearch").click(function () {
+            BindSearchGrid(false);
+        });
+    }
+
+    $(document).ready(function () {
+        SearchBookings();
+        $("#txtSearchBookingDate").val(getLocalDate(new Date()));
+        BindSearchGrid(true);
+    });
+
+    $(document).on("click", "button#btnApproveBooking", function () {
+        var bookingID = $(this).attr("value");
+        var row = $(this).parent().parent();
+        var comment = row.find("textarea#txtComment").val();
+
+        $.ajax({
+            async: false,
+            url: '@Url.Action("UpdateBookingStatus", "Approval")',
+            type: 'Post',
+            data: JSON.stringify({ BookingID: bookingID, Comment: comment }),
+            dataType: 'json',
+            contentType: 'application/json',
+            error: function (xhr) {
+                alert('Error: ' + xhr.statusText);
+            },
+            success: function (result) {
+                BindSearchGrid(false);
+                alert("Approved Successfully..!!");
+            }
+        }).done(function (result) {
+            return false;
+        });
+
+        divDispatcherInfo.modal('show');
+    });
+
+</script>

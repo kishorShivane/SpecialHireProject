@@ -1,0 +1,306 @@
+﻿@model List<SelectListItem>
+<!-- Modal Contents -->
+<div id="divAddDispatcherInfo" class="modal fade ">
+    <!-- class modal and fade -->
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modal-header-info">
+                <!-- modal header -->
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title">Add Dispatcher Information</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="divSearchBooking">
+                    <div class="container">
+                        <div class="panel-group">
+                            <div class="panel panel-info">
+                                <div class="panel-heading" style="background-color: #5bc0de;">
+                                    <a data-toggle="collapse" href="#pnlVehicleInformation" style="color:white;text-decoration:none;">Add Bus & Trailers</a>
+                                </div>
+                                <div id="pnlVehicleInformation" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="row text-center">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="input-group input-group-sm">
+                                                        <div class="input-group-addon">Bus Number</div>
+                                                        <select id="ddlBusFleetNumber" class="select2 form-control" required="true"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="input-group input-group-sm">
+                                                        <div class="input-group-addon">Driver</div>
+                                                        <select id="ddlBusDriver" class="select2 form-control" required="true"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group" id="divTrailerInfo" style="display:none">
+                                                    <div class="input-group input-group-sm">
+                                                        <div class="input-group-addon">Trailer Number</div>
+                                                        <select id="ddlTrailerFleetNumber" class="select2 form-control" required="true"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row text-center">
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-info" id="btnAssign">Assign&nbsp;<i class="fa fa-1x fa-chain"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                                <button type="button" class="btn btn-danger" id="btnClear">Clear</button>&nbsp; &nbsp; &nbsp; &nbsp;
+                                                <a id="lnkPrintDriverSheet" href="#" target="_blank" class="btn btn-success">Driver Sheet&nbsp;<i class="fa fa-1x fa-file-pdf-o"></i></a>&nbsp; &nbsp; &nbsp; &nbsp;
+                                                <a id="lnkPrintMaps" href="#" target="_blank" class="btn btn-primary">Print Maps&nbsp;<i class="fa fa-1x fa-map-marker"></i></a>
+                                                <input type="hidden" id="hdnQuotationID" value="" />
+                                                <input type="hidden" id="hdnBookingVehicleID" value="" />
+                                                <input type="hidden" id="hdnIsTrailerAssigned" value="" />
+                                                <input type="hidden" id="hdnIsVehicleAssigned" value="" />
+                                                <input type="hidden" id="hdnIsJobCompleted" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="divChecklistSurvey" style="display:none">
+                    <div class="container">
+                        <div class="panel-group">
+                            <div class="panel panel-info">
+                                <div class="panel-heading" style="background-color: #5bc0de;">
+                                    <a data-toggle="collapse" href="#pnlChecklistAndSurvey" style="color:white;text-decoration:none;">Dispatcher Checklist & Customer Survey</a>
+                                </div>
+                                <div id="pnlChecklistAndSurvey" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="row text-center">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="background-color:#bce8f1;color:black;"><b>Dispatcher Checklist</b></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Full Uniform</div>
+                                                                <input id="chkFullUniform" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Briefed Pick Up Point</div>
+                                                                <input id="chkBriefedPickUpPoint" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Briefed Final Destination</div>
+                                                                <input id="chkBriefedFinalDestination" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Permit</div>
+                                                                <input id="chkPermit" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Job Card And Maps</div>
+                                                                <input id="chkJobCardAndMaps" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Radio Face</div>
+                                                                <input id="chkRadioFace" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="background-color:#bce8f1;color:black;"><b>Customer Survey</b></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Was Driving On Time</div>
+                                                                <input id="chkWasDrivingOnTime" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Was Driver Properly Attired</div>
+                                                                <input id="chkWasDriverProperlyAttired" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Did He Know the Route</div>
+                                                                <input id="chkDidHeKnowTheRoute" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Did He Adhere To Traffic Rules</div>
+                                                                <input id="chkDidHeAdhereToTrafficRules" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group input-group-sm">
+                                                                <div class="input-group-addon" style="min-width: 200px;">Are Maps Available</div>
+                                                                <input id="chkAreMapsAvailable" type="checkbox" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="divTimeAndSpeedo" style="display:none">
+                    <div class="container">
+                        <div class="panel-group">
+                            <div class="panel panel-info">
+                                <div class="panel-heading" style="background-color: #5bc0de;">
+                                    <a data-toggle="collapse" href="#pnlTimeAndSpeedo" style="color:white;text-decoration:none;">Time & Speedometer Readings</a>
+                                </div>
+                                <div id="pnlTimeAndSpeedo" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="row text-center">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="input-group input-group-sm">
+                                                        <div class="input-group-addon">Time of Leaving Depot</div>
+                                                        @Html.DropDownList("Time of Leaving Depot", Model, new { id = "ddlTimeOfLeavingDepot", @class = "select2 form-control", placeholder = "Time of Leaving Depot", required = "true" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="input-group input-group-sm">
+                                                        <div class="input-group-addon">Speedo Reading Before Leaving From Depot</div>
+                                                        <input type="text" id="txtSpeedoReadingBeforeLeavingFromDepot" class="form-control" required="true" placeholder="Speedo Reading Before" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row text-center">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="input-group input-group-sm">
+                                                        <div class="input-group-addon">Time of Return Depot</div>
+                                                        @Html.DropDownList("Time of Return Depot", Model, new { id = "ddlTimeOfReturnDepot", @class = "select2 form-control", placeholder = "Time of Return Depot", required = "true" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="input-group input-group-sm">
+                                                        <div class="input-group-addon">Speedo Reading Return To Depot</div>
+                                                        <input type="text" id="txtSpeedoReadingReturnToDepot" class="form-control" required="true" placeholder="Speedo Reading After" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="divCustomerComments" style="display:none">
+                    <div class="container">
+                        <div class="panel-group">
+                            <div class="panel panel-info">
+                                <div class="panel-heading" style="background-color: #5bc0de;">
+                                    <a data-toggle="collapse" href="#pnlCustomerComments" style="color:white;text-decoration:none;">Customer Comments</a>
+                                </div>
+                                <div id="pnlCustomerComments" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="row text-center">
+                                            <div class="col-md-12">
+                                                <fieldset>
+                                                    <legend align="left">Customer: <span id="lblCustomerName"></span></legend>
+                                                    <textarea class="form-control" cols="20" id="txtCustomerComments" name="Comments" placeholder="Comments" rows="2"></textarea>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center" id="divButtons" style="display:none">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-info" id="btnSave">Save&nbsp;<i class="fa fa-1x fa-save"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <button type="button" class="btn btn-danger" id="btnClear">Clear</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- modal footer -->
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+</div><!-- / .modal -->

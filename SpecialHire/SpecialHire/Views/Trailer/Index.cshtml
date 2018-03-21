@@ -1,0 +1,240 @@
+﻿@model  SpecialHire.Models.TrailerModel
+@{
+    ViewBag.Title = "Trailer Information";
+    ViewBag.IsNavigationEnabled = "Yes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                Trailer
+                <small> Create Trailer</small>
+            </h2>
+            @*<ol class="breadcrumb">
+                    <li>
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li class="active">BookingQuote</li>
+                </ol>*@
+        </div>
+    </div>
+    @using (Html.BeginForm("Index", "Trailer", FormMethod.Post, new { id = "frmTrailerInformation" }))
+    {
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #5bc0de;">
+                    <a data-toggle="collapse" href="#pnlSearch" style="color:white;text-decoration:none;">Search Trailers</a>
+                </div>
+                <div id="pnlSearch" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Trailer Type</div>
+                                        @Html.DropDownList("Trailer Type", Model.TrailerTypes, new { id = "ddlSearchTrailerType", @class = "form-control select2" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Fleet Number</div>
+                                        <input type="text" class="form-control" placeholder="Fleet Number" id="txtSearchFleetNumber" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">VIN Number</div>
+                                        <input type="text" class="form-control" placeholder="VIN Number" id="txtSearchVINNumber" />
+                                    </div>
+                                </div>
+                            </div>           
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <button type="button" class="btn btn-info" id="btnSearch">Search&nbsp;<i class="fa fa-1x fa-search"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button type="button" class="btn btn-danger" id="btnClear">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Trailer Type<font style="color:red">*</font></div>
+                            @Html.DropDownListFor(m => m.TrailerTypeID, Model.TrailerTypes, new { id = "ddlTrailerType", @class = "form-control select2", placeholder = "Trailer Type", required = "true" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Fleet Number<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.FleetNumber, new { id = "txtFleetNumber", @class = "form-control", maxlength = "200", placeholder = "Fleet Number", required = "true" })
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">  
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">VIN Number<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.VINNumber, new { id = "txtVINNumber", @class = "form-control", maxlength = "200", required = "true", placeholder = "VIN Number" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Registration<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.Registration, new { id = "txtRegistration", @class = "form-control", maxlength = "500", placeholder = "Registration", required = "true" })
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="display:none" id="divTrailerStatus">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Active</div>
+                            @Html.CheckBoxFor(m => m.Status, new { id = "chkStatus", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    @Html.HiddenFor(m => m.ID, new { ID = "hdnTrailerID" })
+                    <button type="submit" class="btn btn-info" id="btnSave"><i class="fa fa-1x fa-save"></i>&nbsp;Save</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger" id="btnClear"><i class="fa fa-1x fa-close"></i>&nbsp;Clear</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@Html.Partial("_SearchResults")
+<script type="text/javascript">
+    $(document).ready(function () {
+        RemoveHighlightedCssOnFocus();
+        ClearFormValues();
+        SearchTrailers();
+        $("button#btnClear").click(function () { ClearFormValues("frmTrailerInformation"); $("div#divTrailerStatus").hide(); });
+        $("button#btnSave").click(function () { return CheckMandatoryFields("frmTrailerInformation", "div") });
+
+        $("input#chkStatus").change(function () {
+            if (checkDependency()) {
+                $("input#chkStatus").prop("checked", "checked");
+                alert("Cannot be In-Active as it is being used in a Job");
+                return false;
+            }
+        });
+    });
+
+    function checkDependency() {
+        var trailerID = $("#hdnTrailerID").val();
+        var response = false;
+        if (!$("input#chkStatus").is(":checked")) {
+            $.ajax({
+                async: false,
+                url: '@Url.Action("CheckDependency", "Trailer")',
+                type: 'Post',
+                data: JSON.stringify({ TrailerID: trailerID }),
+                dataType: 'json',
+                contentType: 'application/json',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    response = result;
+                }
+            }).done(function (result) {
+            });
+        }
+        return response;
+    }
+
+
+    function SearchTrailers() {
+        $("button#btnSearch").click(function () {
+            var TrailerType = $("#ddlSearchTrailerType").val();
+            var VINNumber = $("#txtSearchVINNumber").val();
+            var FleetNumber = $("#txtSearchFleetNumber").val();
+            var tableBody = $("table#tblSearchResults").find("tbody");
+            var rows = "";
+            if (FleetNumber == "" && VINNumber == "" && TrailerType == "0") {
+                alert("Please enter search criteria!!");
+                $("#ddlSearchTrailerType").focus();
+                return false;
+            }
+            else {
+                $.ajax({
+                    async: false,
+                    url: '@Url.Action("SearchTrailers", "Trailer")',
+                    type: 'Post',
+                    data: JSON.stringify({ FleetNumber: FleetNumber, VINNumber: VINNumber, TrailerTypeID: TrailerType }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.statusText);
+                    },
+                    success: function (result) {
+                        //Now Process the data
+                        tableBody.html();
+                        if (result.length == 0) {
+                            alert("No records found for the selected criteria!!");
+                        }
+                        else {
+                            $(result).each(function (index) {
+                                var CurrentItem = this;
+                                rows = rows + "<tr><td><a id='lnkEditTrailer' href='javascript:void(0);' value=" + CurrentItem.ID + " style='text-decoration: none;cursor: pointer;'><span><i class='fa fa-pencil-square-o'></i> </span>Edit</a></td>";
+                                rows = rows + "<td><span id='lblTrailerType'>" + CurrentItem.TrailerType + "</span><input type='hidden' id='hdnStatus' value='" + CurrentItem.Status + "'/></td>";
+                                rows = rows + "<td><span id='lblFleetNumber'>" + CurrentItem.FleetNumber + "</span>";
+                                rows = rows + "<td><span id='lblVINNumber'>" + CurrentItem.VINNumber + "</span><input type='hidden' id='hdnTrailerTypeID' value='" + CurrentItem.TrailerTypeID + "'/></td>";
+                                rows = rows + "<td><span id='lblRegistration'>" + CurrentItem.Registration + "</span></td>";
+                            });
+
+                            tableBody.html("").html(rows);
+
+                            $('div#searchResults').modal('show');
+                        }
+                    }
+                }).done(function (result) {
+                    return false;
+                });
+            }
+        });
+    }
+
+
+    $(document).on("click", "a#lnkEditTrailer", function () {
+        debugger;
+        var busID = $(this).attr("value");
+        var row = $(this).parent().parent();
+        //ClearFormValues("frmBusInformation");
+
+        $("#hdnTrailerID").val(busID);
+        $("#ddlTrailerType").val(row.find("#hdnTrailerTypeID").val()).change();
+        $("#txtFleetNumber").val(row.find("#lblFleetNumber").text());
+        $("#txtVINNumber").val(row.find("#lblVINNumber").text());
+        $("#txtRegistration").val(row.find("#lblRegistration").text());
+        if (row.find("#hdnStatus").val() == "true") {
+            $("#chkStatus").prop("checked", "true");
+        } else { $("#chkStatus").removeProp("checked"); }
+
+        $("div#divTrailerStatus").show();
+        $('div#searchResults').modal('hide');
+    });
+</script>

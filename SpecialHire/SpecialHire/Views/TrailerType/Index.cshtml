@@ -1,0 +1,233 @@
+﻿@model SpecialHire.Models.TrailerTypeModel
+@{
+    ViewBag.Title = "Trailer Type";
+    ViewBag.IsNavigationEnabled = "Yes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                Trailer Type
+                <small> Create Trailer Types</small>
+            </h2>
+            @*<ol class="breadcrumb">
+                    <li>
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li class="active">BookingQuote</li>
+                </ol>*@
+        </div>
+    </div>
+    @using (Html.BeginForm("Index", "TrailerType", FormMethod.Post, new { id = "frmTrailerTypeInformation", encType = "multipart/form-data" }))
+    {
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #5bc0de;">
+                    <a data-toggle="collapse" href="#pnlSearch" style="color:white;text-decoration:none;">Search Trailer Types</a>
+                </div>
+                <div id="pnlSearch" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Trailer Type</div>
+                                        <input type="text" class="form-control" placeholder="Trailer Type" id="txtSearchTrailerType" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <button type="button" class="btn btn-info" id="btnSearch">Search&nbsp;<i class="fa fa-1x fa-search"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button type="button" class="btn btn-danger" id="btnClear">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Trailer Type<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.Type, new
+                       {
+                           id = "txtTrailerType", @*name = "Type",*@ @class = "form-control",
+                           maxlength = "200",
+                           placeholder = "Trailer Type",
+                           required = "true"
+                       })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Max Weight<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.MaxWeight, new
+                       {
+                           id = "txtMaxWeight", @*name = "Capacity",*@ @class = "form-control",
+                           maxlength = "200",
+                           placeholder = "Max Weight",
+                           required = "true"
+                       })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Description<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.Description, new
+                       {
+                           id = "txtDescription", @*name = "Description",*@ @class = "form-control",
+                           maxlength = "500",
+                           placeholder = "Description",
+                           required = "true"
+                       })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" id="divTrailerTypeStatus" style="display:none">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Active</div>
+                            @Html.CheckBoxFor(m => m.Status, new
+                       {
+                           id = "chkStatus", @*name = "Status",*@ @class = "form-control"
+                       })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    @Html.HiddenFor(m => m.ID, new { ID = "hdnTrailerTypeID" })
+                    <button type="submit" class="btn btn-info" id="btnSave"><i class="fa fa-1x fa-save"></i>&nbsp;Save</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger" id="btnClear"><i class="fa fa-1x fa-close"></i>&nbsp;Clear</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@Html.Partial("_SearchResults")
+<script type="text/javascript">
+    $(document).ready(function () {
+        EnforceNumeric();
+        ClearFormValues();
+        SearchTrailerTypes();
+        $("button#btnClear").click(function () { ClearFormValues("frmTrailerTypeInformation"); $("div#divTrailerTypeStatus").hide(); });
+        $("button#btnSave").click(function () { return CheckMandatoryFields("frmTrailerTypeInformation", "div") });
+
+        $("input#chkStatus").change(function () {
+            debugger;
+            var ret = checkDependency();
+            if (ret) {
+                $("input#chkStatus").prop("checked", "checked");
+                alert("Cannot be In-Active as it is being used in a Job");
+                return false;
+            }
+        });
+    });
+
+    function checkDependency() {
+        var trailerTypeID = $("#hdnTrailerTypeID").val();
+        var response = false;
+        if (!$("input#chkStatus").is(":checked")) {
+            $.ajax({
+                async: false,
+                url: '@Url.Action("CheckDependency", "TrailerType")',
+                type: 'Post',
+                data: JSON.stringify({ TrailerTypeID: trailerTypeID }),
+                dataType: 'json',
+                contentType: 'application/json',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    response = result;
+                }
+            }).done(function (result) {
+            });
+        }
+        return response;
+    }
+
+
+    function SearchTrailerTypes() {
+        $("button#btnSearch").click(function () {
+            var TrailerType = $("#txtSearchTrailerType").val();
+            var tableBody = $("table#tblSearchResults").find("tbody");
+            var rows = "";
+            if (TrailerType == "") {
+                alert("Please enter search criteria!!");
+                $("#txtSearchTrailerType").focus();
+                return false;
+            }
+            else {
+                $.ajax({
+                    async: false,
+                    url: '@Url.Action("SearchTrailerTypes", "TrailerType")',
+                    type: 'Post',
+                    data: JSON.stringify({ TrailerType: TrailerType }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.statusText);
+                    },
+                    success: function (result) {
+                        //Now Process the data
+                        tableBody.html();
+                        if (result.length == 0) {
+                            alert("No records found for the selected criteria!!");
+                        }
+                        else {
+                            ClearFormValues();
+
+                            $(result).each(function (index) {
+                                var CurrentItem = this;
+                                rows = rows + "<tr><td><a id='lnkEditTrailerType' href='javascript:void(0);' value=" + CurrentItem.ID + " style='text-decoration: none;cursor: pointer;'><span><i class='fa fa-pencil-square-o'></i> </span>Edit</a></td>";
+                                rows = rows + "<td><span id='lblType'>" + CurrentItem.Type + "</span><input type='hidden' id='hdnStatus' value='" + CurrentItem.Status + "'/></td>"
+                                rows = rows + "<td><span id='lblMaxWeight'>" + CurrentItem.MaxWeight + "</span><input type='hidden' id='hdnDescription' value='" + CurrentItem.Description + "'/></td>"
+                            });
+
+                            tableBody.html("").html(rows);
+
+                            $('div#searchResults').modal('show');
+                        }
+                    }
+                }).done(function (result) {
+                    return false;
+                });
+            }
+        });
+    }
+
+
+    $(document).on("click", "a#lnkEditTrailerType", function () {
+        debugger;
+        var trailerTypeID = $(this).attr("value");
+        var row = $(this).parent().parent();
+        debugger;
+        $("#hdnTrailerTypeID").val(trailerTypeID);
+        $("#txtTrailerType").val(row.find("#lblType").text()).change();
+        $("#txtMaxWeight").val(row.find("#lblMaxWeight").text());
+        $("#txtDescription").val(row.find("#hdnDescription").val());
+
+        if (row.find("#hdnStatus").val() == "true") {
+            $("#chkStatus").prop("checked", "true");
+        } else { $("#chkStatus").removeProp("checked"); }
+
+        $("div#divTrailerTypeStatus").show();
+        $('div#searchResults').modal('hide');
+    });
+</script>
+

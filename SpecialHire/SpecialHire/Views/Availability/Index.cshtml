@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="container-fluid">
+            @*<div class="tooltiptopicevent" style="width:auto;height:auto;position:absolute;z-index:10001;line-height: 200%;border: 2px solid #aaaaaa;border-radius: 5px;">
+                <div class='qtip-titlebar' style="background-color: #3a87ad;border-radius: 3px;">
+                    <div class='qtip-title'>At: bottom right</div>
+                </div>
+                <div class='qtip-content'>SVG Circle</div>
+            </div>*@
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="container-fluid" id='calendar' style="width:80%"></div>
+    </div>
+    <br />
+    <br />
+</div>
+<script>
+    $(document).ready(function () {
+        var url = window.location.href;
+
+        if (url.indexOf("localhost") > 0) {
+            var sourceFullView = { url: '/Availability/GetAvailableBooking/' };
+            var sourceSummaryView = { url: '/Availability/GetAvailableBookingSummary/' };
+        }
+        else {
+            var sourceFullView = { url: '/SpecialHire/Availability/GetAvailableBooking/' };
+            var sourceSummaryView = { url: '/SpecialHire/Availability/GetAvailableBookingSummary/' };
+        }
+       
+        var CalLoading = true;
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev',
+                center: 'title',
+                right: 'next'
+            },
+            theme: true,
+            defaultView: 'month',
+            editable: false,
+            allDaySlot: false,
+            selectable: true,
+            slotMinutes: 15,
+            timeFormat: '',
+            events: sourceSummaryView,
+            //eventColor: '#5bc0de',
+            eventClick: function (calEvent, jsEvent, view) {
+                alert("Title: " + calEvent.title + "\n" + calEvent.id.replace(/\ <br\/> /g,"\n"));
+
+            },
+            eventMouseover: function (data, event, view) {
+                tooltip = '<div class="tooltiptopicevent" style="background: #FFFFE0;width:auto;height:auto;position:absolute;z-index:10001;line-height: 200%;border: 2px solid #aaaaaa;border-radius: 5px;">'
+                tooltip = tooltip + "<div class='qtip-titlebar' style='background-color: #3a87ad;border-radius: 3px;'><div class='qtip-title'>" + getLocalDate(data.start) + "</div></div>";
+                tooltip = tooltip + "<div class='qtip-content'>" + data.id + "</div>";
+                tooltip = tooltip + '</div>';
+
+                $("body").append(tooltip);
+                $(this).mouseover(function (e) {
+                    $(this).css('z-index', 10000);
+                    $('.tooltiptopicevent').fadeIn('500');
+                    $('.tooltiptopicevent').fadeTo('10', 1.9);
+                }).mousemove(function (e) {
+                    $('.tooltiptopicevent').css('top', e.pageY + 10);
+                    $('.tooltiptopicevent').css('left', e.pageX + 20);
+                });
+            },
+            eventMouseout: function (data, event, view) {
+                $(this).css('z-index', 8);
+                $('.tooltiptopicevent').remove();
+            },
+            viewRender: function (view, element) {
+
+                if (!CalLoading) {
+                    if (view.name == 'month') {
+                        $('#calendar').fullCalendar('removeEventSource', sourceSummaryView);
+                        $('#calendar').fullCalendar('removeEventSource', sourceFullView);
+                        $('#calendar').fullCalendar('removeEvents');
+                        $('#calendar').fullCalendar('addEventSource', sourceSummaryView);
+                    }
+                    else {
+                        $('#calendar').fullCalendar('removeEventSource', sourceFullView);
+                        $('#calendar').fullCalendar('removeEventSource', sourceSummaryView);
+                        $('#calendar').fullCalendar('removeEvents');
+                        $('#calendar').fullCalendar('addEventSource', sourceFullView);
+                    }
+                }
+                CalLoading = true;
+            }
+        });
+        CalLoading = false;
+    });
+
+</script>

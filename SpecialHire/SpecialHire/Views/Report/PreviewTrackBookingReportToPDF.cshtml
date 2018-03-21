@@ -1,0 +1,76 @@
+﻿@model List<EbusDataProvider.BookingReporting>
+@{
+    ViewBag.IsNavigationEnabled = "No";
+    Layout = "";
+}
+<html>
+<head>
+    <style>
+        .thead-inverse th {
+            color: #fff;
+            background-color: #373a3c;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>
+                    Track Booking Report
+                    <small> </small>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped" cellspacing="0" cellpadding="3" id="tblSearchResults">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>QuotationNo.</th>
+                                <th>InvoiceNo.</th>
+                                <th>Organiser</th>
+                                <th>Company</th>
+                                <th>QuotationDate</th>
+                                <th>InvoicedDate</th>
+                                <th>Bus Type</th>
+                                <th>FleetNo.</th>
+                                <th>DriverName</th>
+                                <th>QuotationTotal</th>
+                                <th>InvoiceTotal</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Model)
+                            {
+                                var invoiceDate = (row.InvoiceDate.ToString("dd-MMMM-yyyy") == "01-January-1900") ? "" : row.InvoiceDate.ToString("dd-MMMM-yyyy");
+                                var quoteDate = (row.QuotationDate.ToString("dd-MMMM-yyyy") == "01-January-1900") ? "" : row.QuotationDate.ToString("dd-MMMM-yyyy");
+                            <tr>
+                                <td>@row.QuotationNumber</td>
+                                <td>@row.InvoiceNumber</td>
+                                <td>@row.OrganiserName</td>
+                                <td>@row.CompanyName</td>
+                                <td>@quoteDate</td>
+                                <td>@invoiceDate</td>
+                                <td>@row.BusType</td>
+                                <td>@row.FleetNumber</td>
+                                <td>@row.DriverName</td>
+                                <td>@row.QuotationValue</td>
+                                <td>@row.InvoiceTotal</td>
+                                <td>@row.PaymentDifference</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

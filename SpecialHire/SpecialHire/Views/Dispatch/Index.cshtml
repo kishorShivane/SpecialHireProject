@@ -1,0 +1,455 @@
+﻿@model SpecialHire.Models.DispatcherVehicleInfoModel
+@{
+    ViewBag.Title = "Dispatch";
+    ViewBag.IsNavigationEnabled = "Yes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .thead-inverse th {
+        color: #fff;
+        background-color: #373a3c;
+        text-align: center;
+    }
+
+    .table-striped td {
+        text-align: center;
+    }
+
+    .modal-lg {
+        min-width: 1250px;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                Dispatch
+                <small> Assign Busses and Trailers</small>
+            </h2>
+            @*<ol class="breadcrumb">
+                    <li>
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li class="active">BookingQuote</li>
+                </ol>*@
+        </div>
+    </div>
+    @using (Html.BeginForm("Index", "Dispatch", FormMethod.Post, new { id = "frmDispatchQuote" }))
+    {
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #5bc0de;">
+                    <a data-toggle="collapse" href="#pnlSearch" style="color:white;text-decoration:none;">Search Quotation</a>
+                </div>
+                <div id="pnlSearch" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon" style="min-width: 90px;">Booking Date</div>
+                                        <input type="text" class="form-control date-control-enabled" placeholder="Booking Date" id="txtSearchBookingDate" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Booking ID </div>
+                                        <input type="text" class="form-control" placeholder="Booking ID" id="txtSearchBookingID" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-info" id="btnSearch">Search&nbsp;<i class="fa fa-1x fa-search"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button type="button" class="btn btn-danger" id="btnClear" onclick="ClearFormValues();">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel" id="divSearchResults" style="display:none;">
+                <div class="row">
+                    <div class="col-md-12">
+                        Color Codes:
+                        <a id="lnkFresh" href="#" class="btn btn-info">New Job</a> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <a id="lnkAssigned" href="#" class="btn btn-warning">Added Vehicle, Driver, & Trailer</a> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <a id="lnkCompleted" href="#" class="btn btn-success">Job Completed</a> &nbsp; &nbsp; &nbsp; &nbsp;
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="tblSearchResults">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th>Organiser</th>
+                                        <th>Contact</th>
+                                        <th>Pick Up</th>
+                                        <th>Time</th>
+                                        <th>Destination</th>
+                                        <th>Return</th>
+                                        <th>Bus Type</th>
+                                        <th>Fleet Number</th>
+                                        <th>Driver Name</th>
+                                        <th>Pick</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@Html.Partial("_AddDispatcherInfo", Model.Times)
+<script type="text/javascript">
+    var divDispatcherInfo = $("div#divAddDispatcherInfo");
+    var divSearchBooking = divDispatcherInfo.find("div#divSearchBooking");
+    var divChecklistSurvey = divDispatcherInfo.find("div#divChecklistSurvey");
+    var divTimeAndSpeedo = divDispatcherInfo.find("div#divTimeAndSpeedo");
+    var divCustomerComments = divDispatcherInfo.find("div#divCustomerComments");
+    var divButtons = divDispatcherInfo.find("div#divButtons");
+    var ddlBusFleetNumber = divDispatcherInfo.find("select#ddlBusFleetNumber");
+    var ddlBusDriver = divDispatcherInfo.find("select#ddlBusDriver");
+    var ddlTrailerFleetNumber = divDispatcherInfo.find("select#ddlTrailerFleetNumber");
+    var chkFullUniform = divDispatcherInfo.find("input#chkFullUniform");
+    var chkBriefedPickUpPoint = divDispatcherInfo.find("input#chkBriefedPickUpPoint");
+    var chkBriefedFinalDestination = divDispatcherInfo.find("input#chkBriefedFinalDestination");
+    var chkPermit = divDispatcherInfo.find("input#chkPermit");
+    var chkJobCardAndMaps = divDispatcherInfo.find("input#chkJobCardAndMaps");
+    var chkRadioFace = divDispatcherInfo.find("input#chkRadioFace");
+    var chkWasDrivingOnTime = divDispatcherInfo.find("input#chkWasDrivingOnTime");
+    var chkWasDriverProperlyAttired = divDispatcherInfo.find("input#chkWasDriverProperlyAttired");
+    var chkDidHeKnowTheRoute = divDispatcherInfo.find("input#chkDidHeKnowTheRoute");
+    var chkDidHeAdhereToTrafficRules = divDispatcherInfo.find("input#chkDidHeAdhereToTrafficRules");
+    var chkAreMapsAvailable = divDispatcherInfo.find("input#chkAreMapsAvailable");
+    var ddlTimeOfLeavingDepot = divDispatcherInfo.find("select#ddlTimeOfLeavingDepot");
+    var ddlTimeOfReturnDepot = divDispatcherInfo.find("select#ddlTimeOfReturnDepot");
+    var txtSpeedoReadingBeforeLeavingFromDepot = divDispatcherInfo.find("input#txtSpeedoReadingBeforeLeavingFromDepot");
+    var txtSpeedoReadingReturnToDepot = divDispatcherInfo.find("input#txtSpeedoReadingReturnToDepot");
+    var txtCustomerComments = divDispatcherInfo.find("textarea#txtCustomerComments");
+    var lblCustomerName = divDispatcherInfo.find("span#lblCustomerName");
+    var hdnQuotationID = divDispatcherInfo.find("input#hdnQuotationID");
+    var hdnBookingVehicleID = divDispatcherInfo.find("input#hdnBookingVehicleID");
+    var hdnIsTrailerAssigned = divDispatcherInfo.find("input#hdnIsTrailerAssigned");
+    var hdnIsVehicleAssigned = divDispatcherInfo.find("input#hdnIsVehicleAssigned");
+    var hdnIsJobCompleted = divDispatcherInfo.find("input#hdnIsJobCompleted");
+    var btnPrintDriverSheet = divDispatcherInfo.find("a#lnkPrintDriverSheet");
+    var btnPrintMaps = divDispatcherInfo.find("a#lnkPrintMaps");
+
+    function BindSearchGrid(IsPageLoad) {
+        var BookingDate = "";
+        debugger;
+        if (!IsPageLoad)
+        { BookingDate = $("#txtSearchBookingDate").val(); } else { BookingDate = getLocalDate(new Date()); }
+
+        var BookingID = $("#txtSearchBookingID").val();
+        var tableBody = $("table#tblSearchResults").find("tbody");
+        var buttonClass = "";
+        var rows = "";
+        if (BookingDate == "" && BookingID == "") {
+            //alert("Please enter search criteria!!");
+            //$("#txtSearchBookingDate").focus();
+            //return false;
+            BookingDate = getLocalDate(new Date());
+        }
+        $.ajax({
+            async: false,
+            url: '@Url.Action("SearchBookings", "Dispatch")',
+            type: 'Post',
+            data: JSON.stringify({ BookingDate: BookingDate, BookingID: BookingID }),
+            dataType: 'json',
+            contentType: 'application/json',
+            error: function (xhr) {
+                alert('Error: ' + xhr.statusText);
+            },
+            success: function (result) {
+                //Now Process the data
+                tableBody.html();
+                if (result.length == 0) {
+                    if (!IsPageLoad)
+                    { alert("No records found for the selected criteria!!"); } else
+                    { alert("No jobs found for today!!"); }
+
+                    $("div#divSearchResults").hide();
+                }
+                else {
+                    $("div#divSearchResults").show();
+                    $(result).each(function (index) {
+                        var CurrentItem = this;
+                        rows = rows + "<tr id='trDispatchVehicle" + index + "'><td><span id='lblOrganiserName'>" + CurrentItem.OrganiserName + "</span><input type='hidden' id='hdnSearchIsVehicleAssigned' value='" + CurrentItem.IsVehicleAssigned + "'/></td>"
+                        rows = rows + "<td><span id='lblCellNumber'>" + CurrentItem.CellNumber + "</span><input type='hidden' id='hdnSearchIsJobCompleted' value='" + CurrentItem.IsJobCompleted + "'/></td>"
+                        rows = rows + "<td><span id='lblFromLocation'>" + CurrentItem.FromLocation + "</span><input type='hidden' id='hdnNoOfTrailers' value='" + CurrentItem.NumberOfTrailers + "'/></td>"
+                        rows = rows + "<td><span id='lblPickUpTime'>" + CurrentItem.PickUpTime + "</span><input type='hidden' id='hdnNoOfBusses' value='" + CurrentItem.NumberOfBusses + "'/></td>"
+                        rows = rows + "<td><span id='lblToLocation'>" + CurrentItem.ToLocation + "</span><input type='hidden' id='hdnSearchBookingID' value='" + CurrentItem.BookingID + "'/></td>"
+                        rows = rows + "<td><span id='lblReturnTime'>" + CurrentItem.ReturnTime + "</span><input type='hidden' id='hdnSearchBookingVehicleID' value='" + CurrentItem.BookingVehicleID + "'/></td>"
+                        rows = rows + "<td><span id='lblBusType'>" + CurrentItem.BusType + "</span><input type='hidden' id='hdnSearchIsTrailerAssigned' value='" + CurrentItem.IsTrailerAssigned + "'/></td>";
+                        rows = rows + "<td><span id='lblFleetNumber'>" + CurrentItem.FleetNumber + "</span></td>";
+                        rows = rows + "<td><span id='lblDriverName'>" + CurrentItem.DriverName + "</span></td>";
+                        if (CurrentItem.IsVehicleAssigned) {
+                            if (CurrentItem.IsJobCompleted) buttonClass = "btn-success"; else buttonClass = "btn-warning";
+                        } else { buttonClass = "btn-info"; }
+                        rows = rows + "<td><button type='button' class='btn " + buttonClass + "' style='padding: 0px 10px;' id='btnAddDispatcherInfo' value='" + CurrentItem.QuotationID + "'>Add Dispatcher Info</button></td></tr>";
+                    });
+                    tableBody.html("").html(rows);
+                }
+            }
+        }).done(function (result) {
+            return false;
+        });
+    }
+
+    function SearchBookings() {
+        $("button#btnSearch").click(function () {
+            BindSearchGrid(false);
+        });
+    }
+
+    $(document).ready(function () {
+        EnforceNumeric();
+        RemoveHighlightedCssOnFocus();
+        SearchBookings();
+        $("#txtSearchBookingDate").val(getLocalDate(new Date()));
+        BindSearchGrid(true);
+    });
+
+    $(document).on("click", "button#btnAssign", function () {
+        var quotationID = hdnQuotationID.prop("value");
+        var bookingVehicleID = hdnBookingVehicleID.prop("value");
+        if (CheckMandatoryFieldsInBlock(divSearchBooking, "div")) {
+            $.ajax({
+                async: false,
+                url: '@Url.Action("SaveAssignedBusAndTrailer", "Dispatch")',
+                type: 'Post',
+                data: JSON.stringify(getDispatcherFormValues()),
+                dataType: 'json',
+                contentType: 'application/json',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    BindSearchGrid(false);
+                    alert("Assigned Successfully..!!");
+                    divChecklistSurvey.show();
+                    divTimeAndSpeedo.show();
+                    divCustomerComments.show();
+                    divButtons.show();
+                    btnPrintDriverSheet.show();
+                    btnPrintMaps.show();
+                    if (url.indexOf("localhost") > 0) {
+                        btnPrintDriverSheet.attr("href", "/Dispatch/DownloadDriverWorkSheet?QuotationID=" + quotationID + "&BookingVehicleID=" + bookingVehicleID);
+                        btnPrintMaps.attr("href", "/Dispatch/ShowRouteMap?FromLocation=" + result.FromLocation + "&ToLocation=" + result.ToLocation);
+                    }
+                    else {
+                        btnPrintDriverSheet.attr("href", "/SpecialHire/Dispatch/DownloadDriverWorkSheet?QuotationID=" + quotationID + "&BookingVehicleID=" + bookingVehicleID);
+                        btnPrintMaps.attr("href", "/SpecialHire/Dispatch/ShowRouteMap?FromLocation=" + result.FromLocation + "&ToLocation=" + result.ToLocation);
+                    }
+                }
+            }).done(function (result) {
+                return false;
+            });
+        }
+    });
+
+    function ValidateSpeedoMeterReading() {
+        var status = true;
+        var before = txtSpeedoReadingBeforeLeavingFromDepot.val();
+        var after = txtSpeedoReadingReturnToDepot.val();
+        if ((after != "" && before != "") && parseInt(after) < parseInt(before)) {
+            status = false;
+            alert("Speedo Reading Return To Depot should be greater than Speedo Reading Before Leaving From Depot!!");
+        }
+        return status;
+    }
+
+    $(document).on("click", "button#btnSave", function () {
+        var quotationID = hdnQuotationID.prop("value");
+        var bookingVehicleID = hdnBookingVehicleID.prop("value");
+        if (CheckMandatoryFieldsInBlock(divDispatcherInfo, "div")) {
+            if (ValidateSpeedoMeterReading()) {
+                $.ajax({
+                    async: false,
+                    url: '@Url.Action("SaveDispatcherInformation", "Dispatch")',
+                    type: 'Post',
+                    data: JSON.stringify(getDispatcherFormValues()),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.statusText);
+                    },
+                    success: function (result) {
+                        BindSearchGrid(false);
+                        alert("Saved Successfully..!!");
+                    }
+                }).done(function (result) {
+                    return false;
+                });
+            }
+        }
+    });
+
+    $(document).on("click", "button#btnAddDispatcherInfo", function () {
+        var quotationID = $(this).attr("value");
+        var row = $(this).parent().parent();
+        var bookingVehicleID = row.find("input#hdnSearchBookingVehicleID").prop("value");
+        var IsTrailerAssigned = row.find("input#hdnSearchIsTrailerAssigned").prop("value");
+        var IsJobCompleted = row.find("input#hdnSearchIsJobCompleted").prop("value");
+        var IsVehicleAssigned = row.find("input#hdnSearchIsVehicleAssigned").prop("value");
+        var NoOfTrailers = row.find("input#hdnNoOfTrailers").prop("value");
+        var NoOfBusses = row.find("input#hdnNoOfBusses").prop("value");
+
+        $.ajax({
+            async: false,
+            url: '@Url.Action("GetDispatcherVehicleInfo", "Dispatch")',
+            type: 'Post',
+            data: JSON.stringify({ QuotationID: quotationID, BookingVehicleID: bookingVehicleID }),
+            dataType: 'json',
+            contentType: 'application/json',
+            error: function (xhr) {
+                alert('Error: ' + xhr.statusText);
+            },
+            success: function (result) {
+                var NoTrailersAssigned = parseInt(NoOfTrailers);
+                var NoBussesAssigned = parseInt(NoOfBusses);
+                var url = window.location.href;
+
+                ClearPopupControls();
+                hdnQuotationID.prop("value", quotationID);
+                hdnBookingVehicleID.prop("value", bookingVehicleID);
+                hdnIsTrailerAssigned.prop("value", IsTrailerAssigned);
+                hdnIsJobCompleted.prop("value", IsJobCompleted);
+                hdnIsVehicleAssigned.prop("value", IsVehicleAssigned);
+
+                if (IsTrailerAssigned == "true") { NoTrailersAssigned = NoTrailersAssigned + 1; }
+                if (IsVehicleAssigned == "true") { NoBussesAssigned = NoBussesAssigned + 1; }
+
+                if (result.BusNumbers.length > 0) {
+                    $(result.BusNumbers).each(function (index) {
+                        item = result.BusNumbers[index];
+                        ddlBusFleetNumber.append($("<option></option>").val(item.Value).html(item.Text));
+                    });
+                    ddlBusFleetNumber.val(result.BusID).change();
+                }
+                if (result.Drivers.length > 0) {
+                    $(result.Drivers).each(function (index) {
+                        item = result.Drivers[index];
+                        ddlBusDriver.append($("<option></option>").val(item.Value).html(item.Text));
+                    });
+                    ddlBusDriver.val(result.DriverID).change();
+                }
+
+                if (parseInt(NoTrailersAssigned) > 0) {
+                    $("div#divTrailerInfo").show();
+                    if (result.TrailerNumbers.length > 0) {
+                        $(result.TrailerNumbers).each(function (index) {
+                            item = result.TrailerNumbers[index];
+                            ddlTrailerFleetNumber.append($("<option></option>").val(item.Value).html(item.Text));
+                        });
+                        ddlTrailerFleetNumber.val(result.TrailerID).change();
+                    }
+                    debugger;
+                    if (parseInt(NoBussesAssigned) > parseInt(NoTrailersAssigned)) {
+                        ddlTrailerFleetNumber.removeAttr("required");
+                    }
+                }
+                else { $("div#divTrailerInfo").hide(); ddlTrailerFleetNumber.removeAttr("required"); }
+
+                if (result.BusID > 0) {
+                    divChecklistSurvey.show();
+                    divTimeAndSpeedo.show();
+                    divCustomerComments.show();
+                    divButtons.show();
+                    btnPrintDriverSheet.show();
+                    btnPrintMaps.show();
+
+                    (result.FullUniform) ? chkFullUniform.prop("checked", true) : chkFullUniform.removeProp("checked");
+                    (result.BriefedPickUpPoint) ? chkBriefedPickUpPoint.prop("checked", true) : chkBriefedPickUpPoint.removeProp("checked");
+                    (result.BriefedFinalDestination) ? chkBriefedFinalDestination.prop("checked", true) : chkBriefedFinalDestination.removeProp("checked");
+                    (result.Permit) ? chkPermit.prop("checked", true) : chkPermit.removeProp("checked");
+                    (result.JobCardAndMaps) ? chkJobCardAndMaps.prop("checked", true) : chkJobCardAndMaps.removeProp("checked");
+                    (result.RadioFace) ? chkRadioFace.prop("checked", true) : chkRadioFace.removeProp("checked");
+                    (result.WasDrivingOnTime) ? chkWasDrivingOnTime.prop("checked", true) : chkWasDrivingOnTime.removeProp("checked");
+                    (result.WasDriverProperlyAttired) ? chkWasDriverProperlyAttired.prop("checked", true) : chkWasDriverProperlyAttired.removeProp("checked");
+                    (result.DidHeKnowTheRoute) ? chkDidHeKnowTheRoute.prop("checked", true) : chkDidHeKnowTheRoute.removeProp("checked");
+                    (result.DidHeAdhereToTrafficRules) ? chkDidHeAdhereToTrafficRules.prop("checked", true) : chkDidHeAdhereToTrafficRules.removeProp("checked");
+                    (result.AreMapsAvailable) ? chkAreMapsAvailable.prop("checked", true) : chkAreMapsAvailable.removeProp("checked");
+
+                    ddlTimeOfLeavingDepot.val(result.TimeOfLeavingDepot).change();
+                    ddlTimeOfReturnDepot.val(result.TimeOfReturnDepot).change();
+                    txtSpeedoReadingBeforeLeavingFromDepot.val(result.SpeedoReadingBeforeLeavingFromDepot);
+                    txtSpeedoReadingReturnToDepot.val(result.SpeedoReadingReturnToDepot);
+                    txtCustomerComments.val(result.CustomerComments);
+                    lblCustomerName.html(result.CustomerName);
+                }
+                if (url.indexOf("localhost") > 0) {
+                    btnPrintDriverSheet.attr("href", "/Dispatch/DownloadDriverWorkSheet?QuotationID=" + quotationID + "&BookingVehicleID=" + bookingVehicleID);
+                    btnPrintMaps.attr("href", "/Dispatch/ShowRouteMap?FromLocation=" + result.FromLocation + "&ToLocation=" + result.ToLocation);
+                }
+                else {
+                    btnPrintDriverSheet.attr("href", "/SpecialHire/Dispatch/DownloadDriverWorkSheet?QuotationID=" + quotationID + "&BookingVehicleID=" + bookingVehicleID);
+                    btnPrintMaps.attr("href", "/SpecialHire/Dispatch/ShowRouteMap?FromLocation=" + result.FromLocation + "&ToLocation=" + result.ToLocation);
+                }
+            }
+        }).done(function (result) {
+            return false;
+        });
+
+        divDispatcherInfo.modal('show');
+    });
+
+
+    function getDispatcherFormValues() {
+        debugger;
+        var DispatcherVehicleInfo = {
+            BusID: ddlBusFleetNumber.val(),
+            DriverID: ddlBusDriver.val(),
+            TrailerID: ddlTrailerFleetNumber.val(),
+            FullUniform: chkFullUniform.is(":checked"),
+            BriefedPickUpPoint: chkBriefedPickUpPoint.is(":checked"),
+            BriefedFinalDestination: chkBriefedFinalDestination.is(":checked"),
+            Permit: chkPermit.is(":checked"),
+            JobCardAndMaps: chkJobCardAndMaps.is(":checked"),
+            RadioFace: chkRadioFace.is(":checked"),
+            WasDrivingOnTime: chkWasDrivingOnTime.is(":checked"),
+            WasDriverProperlyAttired: chkWasDriverProperlyAttired.is(":checked"),
+            DidHeKnowTheRoute: chkDidHeKnowTheRoute.is(":checked"),
+            DidHeAdhereToTrafficRules: chkDidHeAdhereToTrafficRules.is(":checked"),
+            AreMapsAvailable: chkAreMapsAvailable.is(":checked"),
+            TimeOfLeavingDepot: ddlTimeOfLeavingDepot.val(),
+            SpeedoReadingBeforeLeavingFromDepot: txtSpeedoReadingBeforeLeavingFromDepot.val(),
+            TimeOfReturnDepot: ddlTimeOfReturnDepot.val(),
+            SpeedoReadingReturnToDepot: txtSpeedoReadingReturnToDepot.val(),
+            CustomerComments: txtCustomerComments.val(),
+            QuotationID: hdnQuotationID.prop("value"),
+            BookingVehicleID: hdnBookingVehicleID.prop("value"),
+            IsTrailerAssigned: hdnIsTrailerAssigned.prop("value"),
+            IsVehicleAssigned: hdnIsVehicleAssigned.prop("value"),
+            IsJobCompleted: hdnIsJobCompleted.prop("value")
+        }
+        return DispatcherVehicleInfo;
+    }
+
+    function ClearPopupControls() {
+        debugger;
+        ddlBusFleetNumber.html("").change();
+        ddlBusDriver.html("").change();
+        ddlTrailerFleetNumber.html("").change().attr("required", "true");
+        $("input[type='checkbox']").removeProp("checked");
+        divDispatcherInfo.find("input[type='text']").val("");
+        divDispatcherInfo.find("input[type='hidden']").val("");
+        divDispatcherInfo.find("textarea").val("");
+        divChecklistSurvey.hide();
+        divTimeAndSpeedo.hide();
+        divCustomerComments.hide();
+        divButtons.hide();
+        $("div#divTrailerInfo").hide();
+        btnPrintDriverSheet.attr("href", "#").hide();
+        btnPrintMaps.attr("href", "#").hide();
+    }
+</script>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cba2a571100c4e12bb1ce6ead686efda" Name="Diagram1">
+        <EntityTypeShape EntityType="EBusAdministrationModel.ApplicationUser" Width="1.5" PointX="3" PointY="2.625" />
+        <EntityTypeShape EntityType="EBusAdministrationModel.Company" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="EBusAdministrationModel.CompanyConfigurationInfo" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="EBusAdministrationModel.PublicHoliday" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EBusAdministrationModel.UserRole" Width="1.5" PointX="0.75" PointY="1.125" />
+        <AssociationConnector Association="EBusAdministrationModel.FK_ApplicationUsers_Company" />
+        <AssociationConnector Association="EBusAdministrationModel.FK_ApplicationUsers_UserRoles" />
+        <AssociationConnector Association="EBusAdministrationModel.FK_CompanyConfigurationInfo_CompanyConfigurationInfo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

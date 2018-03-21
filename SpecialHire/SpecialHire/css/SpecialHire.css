@@ -1,0 +1,122 @@
+﻿/* CSS used here will be applied after bootstrap.css */
+.modal-header-success {
+    color: #fff;
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #5cb85c;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-header-warning {
+    color: #fff;
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #f0ad4e;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-header-danger {
+    color: #fff;
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #d9534f;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-header-info {
+    color: #fff;
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #5bc0de;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-header-primary {
+    color: #fff;
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #428bca;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.Loader {
+    display: none;
+}
+
+    .Loader .BackDrop {
+        width: 100%;
+        height: 100%;
+        background-color: #fbfbfb;
+        opacity: 0.4;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        position: fixed;
+    }
+
+    .Loader .LoadingSign {
+        background: url(../Images/Spinner.gif) no-repeat;
+        background-position: center;
+        z-index: 1000;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        position: fixed;
+    }
+
+.ENQUIRY {
+    background-color: #FF9933;
+    border-color: #C0C0C0;
+    color: White;
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+    background-image: url(../Images/Bubble.png);
+    padding-left: 50px;
+}
+
+.BOOKED {
+    background-color: #33CCFF;
+    border-color: #C0C0C0;
+    color: White; /* text color */
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+    background-image: url(../Images/ok.png);
+    padding-left: 50px;
+}
+
+.CONFIRMED {
+    background-color: #33CC33;
+    border-color: #C0C0C0;
+    color: White; /* text color */
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+    /*background-image: url(../Images/Money.png);*/
+    padding-left: 50px;
+}

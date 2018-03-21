@@ -1,0 +1,207 @@
+﻿@model SpecialHire.Models.ReportModel
+@{
+    ViewBag.Title = "Quotations Report";
+    ViewBag.IsNavigationEnabled = "Yes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .thead-inverse th {
+        color: #fff;
+        background-color: #373a3c;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                Quotations
+                <small> Quotations Report</small>
+            </h2>
+        </div>
+    </div>
+    @using (Html.BeginForm("Quotations", "Report", FormMethod.Post, new { id = "frmQuotations" }))
+    {
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #5bc0de;">
+                    <a data-toggle="collapse" href="#pnlSearch" style="color:white;text-decoration:none;">Search Quotation</a>
+                </div>
+                <div id="pnlSearch" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon" style="min-width: 90px;">Report Type</div>
+                                        <select id="ddlReportType" class="form-control select2">
+                                            <option value="0">Select</option>
+                                            <option value="1">All Quotations</option>
+                                            <option value="2">Quotations Done Booking</option>
+                                            <option value="3">Quotations Not Booked</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Date From </div>
+                                        <input type="text" class="form-control date-control-enabled" placeholder="Date From " id="txtDateFrom" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Date To</div>
+                                        <input type="text" class="form-control date-control-enabled" placeholder="Date To" id="txtDateTo" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <button type="button" class="btn btn-info" id="btnSearch">Search&nbsp;<i class="fa fa-1x fa-search"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <button type="button" class="btn btn-danger" id="btnClear">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="divQuotations">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="tblSearchResults">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>QuotationNo.</th>
+                                    <th>BookingDone</th>
+                                    <th>InvoiceNo</th>
+                                    <th>Organiser</th>
+                                    <th>Company</th>
+                                    <th>QuotationDate</th>
+                                    <th>InvoicedDate</th>
+                                    <th>InvoiceTotal</th>
+                                    <th>Bus Type</th>
+                                    <th>FleetNo.</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <a id="lnkExportToPDF" href="#" target="_blank" class="btn btn-success">Export To PDF&nbsp;<i class="fa fa-1x fa-file-pdf-o"></i></a>&nbsp; &nbsp; &nbsp; &nbsp;
+                    <a id="lnkExportToExcel" href="#" target="_blank" class="btn btn-primary">Export To Exce&nbsp;<i class="fa fa-1x fa-file"></i></a>
+                </div>
+            </div>
+        </div>
+        <br /><br /><br /><br />
+    }
+</div>
+<script>
+    var btnExportToPDF = $("div#divQuotations").find("a#lnkExportToPDF");
+    var btnExportToExcel = $("div#divQuotations").find("a#lnkExportToExcel");
+    var url = window.location.href;
+
+    $(document).ready(function () {
+        SearchBookingsForTrackBookings();
+        ClearUI();
+        $("div#divQuotations").hide();
+    });
+
+    function ClearUI()
+    {
+        $("button#btnClear").click(function () {
+            ClearFormValues();
+            $("div#divQuotations").hide();
+        });
+    }
+    function SearchBookingsForTrackBookings() {
+        $("button#btnSearch").click(function () {
+            var ReportType = $("#ddlReportType").val();
+            var DateFrom = $("#txtDateFrom").val();
+            var DateTo = $("#txtDateTo").val();
+
+            var tableBody = $("table#tblSearchResults").find("tbody");
+            var rows = "";
+            if (ReportType == "0" && DateFrom == "" && DateTo == "") {
+                alert("Please enter search criteria!!");
+                $("#ddlReportType").focus();
+                return false;
+            }
+            else {
+                $.ajax({
+                    async: false,
+                    url: '@Url.Action("SearchBookingsForQuotations", "Report")',
+                    type: 'Post',
+                    data: JSON.stringify({
+                        ReportType: ReportType, DateFrom: DateFrom, DateTo: DateTo
+                    }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.statusText);
+                    },
+                    success: function (result) {
+                        //Now Process the data
+                        tableBody.html();
+                        if (result.length == 0) {
+                            alert("No records found for the selected criteria!!");
+                            $("div#divQuotations").hide();
+                        }
+                        else {
+                            $("div#divQuotations").show();
+                            $(result).each(function (index) {
+                                var CurrentItem = this;
+                                var CurrentItem = this;
+                                var quoteDate = getLocalDateFromJsonDate(CurrentItem.QuotationDate);
+                                var invoiceDate = getLocalDateFromJsonDate(CurrentItem.InvoiceDate);
+                                quoteDate = (quoteDate == "1-January-1900") ? "" : quoteDate;
+                                invoiceDate = (invoiceDate == "1-January-1900") ? "" : invoiceDate;
+                                rows = rows + "<tr><td>" + CurrentItem.QuotationNumber + "</td>";
+                                rows = rows + "<td>" + CurrentItem.IsBookingDone + "</td>";
+                                rows = rows + "<td>" + CurrentItem.InvoiceNumber + "</td>";
+                                rows = rows + "<td>" + CurrentItem.OrganiserName + "</td>";
+                                rows = rows + "<td>" + CurrentItem.CompanyName + "</td>";
+                                rows = rows + "<td>" + quoteDate + "</td>"
+                                rows = rows + "<td>" + invoiceDate + "</td>"
+                                rows = rows + "<td>" + CurrentItem.InvoiceTotal + "</td>";
+                                rows = rows + "<td>" + CurrentItem.BusType + "</td>";
+                                rows = rows + "<td>" + CurrentItem.FleetNumber + "</td></tr>";
+                            });
+
+                            tableBody.html("").html(rows);
+                            if (url.indexOf("localhost") > 0) {
+                                btnExportToPDF.attr("href", "/Report/ExportQuotationsReportToPDF");
+                                btnExportToExcel.attr("href", "/Report/ExportQuotationsToExcel");
+                            }
+                            else {
+                                btnExportToPDF.attr("href", "/SpecialHire/Report/ExportQuotationsReportToPDF");
+                                btnExportToExcel.attr("href", "/SpecialHire/Report/ExportQuotationsToExcel");
+                            }
+                        }
+                    }
+                }).done(function (result) {
+                    return false;
+                });
+            }
+        });
+    }
+</script>

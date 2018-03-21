@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>eBus Special Hire - @ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Images/favIcon.ico" />
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/css/bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/simple-sidebar.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/font-awesome.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/select2.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/select2-bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/jquery-ui.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/SpecialHire.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/fullcalendar.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/jquery.qtip.min.css")" rel="stylesheet" />
+    <style>
+        .input-group-addon:first-child {
+            border-right: 0;
+            min-width: 150px;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            margin: 0px;
+            line-height: normal;
+            height: 30px;
+        }
+    </style>
+    <script src="@Url.Content("~/js/jquery-1.11.2.js")"></script>
+    <script src="@Url.Content("~/js/jquery-ui.min.js")"></script>
+    <script src="@Url.Content("~/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/js/common.js")"></script>
+    <script src="@Url.Content("~/js/fullcalendar.js")"></script>
+    <script src="@Url.Content("~/js/jquery.qtip.min.js")"></script>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    @{
+        var UserName = "";
+        if (Session["USER"] != null)
+        { UserName = ((EbusDataProvider.ApplicationUser)Session["USER"]).UserName.ToUpper(); }
+    }
+
+    <div class="Loader">
+        <div class="BackDrop"></div>
+        <div class="LoadingSign">
+            <img style="display:none;" />
+        </div>
+    </div>
+    @if (ViewBag.IsNavigationEnabled != "No")
+    {
+
+        <nav class="navbar navbar-default no-margin">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header fixed-brand">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
+                    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                </button>
+                <a class="navbar-brand" style="padding: 10px 15px;" href=@Url.Action("Index", "BookingQuote")><img style="height: 35px;width: 40px;" src="~/Images/logo_comp1.png"> EBus Special Hire</a>
+            </div><!-- navbar-header-->
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" style="min-width: 160px;" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-user topIcons" style="font-size: 17px;" aria-hidden="true"> @UserName</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href=@Url.Action("Logout", "Home")><span class="glyphicon glyphicon-off" aria-hidden="true"> Logout</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- bs-example-navbar-collapse-1 -->
+        </nav>
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper" style="overflow: hidden;max-height:650px">
+                <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+
+                    <li @*class="active"*@ id="liQuotation">
+                        <a href=@Url.Action("Index", "BookingQuote")><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text fa-stack-1x "></i></span> Quotation</a>
+                    </li>
+                    <li @*class="active"*@ id="liBookingApproval">
+                        <a href=@Url.Action("Index", "Approval")><span class="fa-stack fa-lg pull-left"><i class="fa fa-check-square-o fa-stack-1x "></i></span> Booking Approval</a>
+                    </li>
+                    <li id="liAvailability">
+                        <a href=@Url.Action("Index", "Availability")><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar-check-o fa-stack-1x "></i></span>Availability</a>
+                    </li>
+                    @*<li id="liBooking">
+                        <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book fa-stack-1x "></i></span>Booking</a>
+                    </li>*@
+                    <li id="liDispatcher">
+                        <a href=@Url.Action("Index", "Dispatch")><span class="fa-stack fa-lg pull-left"><i class="fa fa-road fa-stack-1x "></i></span>Dispatcher</a>
+                    </li>
+                    <li id="liReport">
+                        <a href="#">
+                            <span class="fa-stack fa-lg pull-left"><i class="fa fa-newspaper-o fa-stack-1x "></i></span> Reports
+                            <span class="fa-stack fa-lg fa-pull-right" style="margin-right:20px;"><i id="childIcon" class="fa fa-angle-left"></i></span>
+                        </a>
+                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                            <li id="liBus"><a href=@Url.Action("TrackBookings", "Report")><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text-o fa-stack-1x "></i></span>Track Booking</a></li>
+                            <li id="liBusType"><a href=@Url.Action("Quotations", "Report")><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text-o fa-stack-1x "></i></span>Quotations</a></li>
+                            <li id="liTrailer"><a href=@Url.Action("Invoices", "Report")><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text-o fa-stack-1x "></i></span>Invoice</a></li>
+                            <li id="liTrailerTypes"><a href=@Url.Action("Revenue", "Report")><span class="fa-stack fa-lg pull-left"><i class="fa fa-bar-chart fa-stack-1x "></i></span>Monthly Revenue</a></li>
+                            <li id="liTrailerTypes"><a href=@Url.Action("ScheduledWorked", "Report")><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text-o fa-stack-1x "></i></span>Scheduled vs Worked</a></li>
+                        </ul>
+                    </li>
+                    <li id="liDocuments">
+                        <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-word-o fa-stack-1x "></i></span>Documents</a>
+                    </li>
+                    <li id="liAdmin">
+                        <a href="#">
+                            <span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Admin
+                            <span class="fa-stack fa-lg fa-pull-right" style="margin-right:20px;"><i id="childIcon" class="fa fa-angle-left"></i></span>
+                        </a>
+                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                            <li id="liBus"><a href=@Url.Action("Index", "Bus")><span class="fa-stack fa-lg pull-left"><i class="fa fa-bus fa-stack-1x "></i></span>Bus</a></li>
+                            <li id="liBusType"><a href=@Url.Action("Index", "BusType")><span class="fa-stack fa-lg pull-left"><i class="fa fa-tasks fa-stack-1x "></i></span>Bus Types</a></li>
+                            <li id="liTrailer"><a href=@Url.Action("Index", "Trailer")><span class="fa-stack fa-lg pull-left"><i class="fa fa-truck fa-stack-1x "></i></span>Trailer</a></li>
+                            <li id="liTrailerTypes"><a href=@Url.Action("Index", "TrailerType")><span class="fa-stack fa-lg pull-left"><i class="fa fa-tasks fa-stack-1x "></i></span>Trailer Types</a></li>
+                            <li id="liTrailerTypes"><a href=@Url.Action("Index", "Driver")><span class="fa-stack fa-lg pull-left"><i class="fa fa-chrome fa-stack-1x "></i></span>Driver</a></li>
+                        </ul>
+                    </li>
+                    <li class="hidden-lg hidden-md hidden-sm" style="background-color: whitesmoke;">
+                        <a href="#" style="color: black;">
+                            <span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span> @UserName
+                            <span class="fa-stack fa-lg fa-pull-right" style="margin-right:20px;"><i id="childIcon" class="fa fa-angle-left"></i></span>
+                        </a>
+                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                            <li><a href=@Url.Action("Logout", "Home") style="color: black;"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- Sidebar -->
+            <!-- Page Content -->
+            <div id="page-content-wrapper" style="padding:0px;">
+                <div class="container-fluid xyz">
+                    @{
+                        var MessageObj = (string[])(TempData["GlobalMessage"]);
+                        var Message = "";
+                        var MessageType = "";
+                        var MesageClass = "alert-info";
+
+                    }
+
+                    @if (MessageObj != null)
+                    {
+                        Message = MessageObj[0];
+                        MessageType = MessageObj[1];
+                        MesageClass = "alert-info";
+                    }
+
+                    @if (MessageType == "E") { MesageClass = "alert-danger"; }
+                    @if (MessageType == "W") { MesageClass = "alert-warning"; }
+                    @if (MessageType == "S") { MesageClass = "alert-success"; }
+
+                    @if (Message != "")
+                    {
+                    @:<div class="alert @MesageClass" role="alert">@Message</div>
+                    }
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- Page Content -->
+        </div>
+                        }
+                        else
+                        {
+                            <nav class="navbar navbar-default no-margin">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header fixed-brand">
+                                    <a class="navbar-brand" style="padding: 10px 15px;" href=@Url.Action("Index", "Home")><img style="height: 35px;width: 40px;" src="~/Images/logo_comp1.png"> EBus Special Hire</a>
+                                </div><!-- navbar-header-->
+                            </nav>
+                            @RenderBody()
+
+                        }
+
+    <!-- Footer -->
+    <div class="panel-footer navbar-fixed-bottom" style="padding:0px 50px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1">
+                    <a class="pull-left" href="#">Contact Us</a>
+                </div>
+                <div class="col-md-2">
+                    <a class="pull-left" href="#">Privacy Policy</a>
+                </div>
+                <div class="col-md-6">
+                    <a class="pull-left" href="#">Terms of Service</a>
+                </div>
+                <div class="col-md-3 pull-right">
+                    &copy; 2016 eBus Supplies. All rights reserved
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+
+    <script src="@Url.Content("~/js/sidebar_menu.js")"></script>
+    <script>
+        $(document).ajaxStart(function () {
+            Loader("show");
+        });
+
+        $(document).ajaxComplete(function () {
+            Loader("hide");
+        });
+
+        function Loader(action) {
+            if (action === undefined) {
+                $(".Loader").toggle();
+            }
+            else {
+                if (action == "hide") {
+                    setTimeout(function () { $(".Loader").hide(); }, 10);
+                }
+                else if (action == "show")
+                    $(".Loader").show();
+            }
+
+        }
+
+        $(document).ready(function () {
+            $("#wrapper").toggleClass("toggled-2");
+            $('#menu ul').hide();
+            //Select 2 plugin for dropdowns add select2 class to it
+            $("select.select2").select2();
+            //Datepicker plugin for textboxes add date-control class to it
+            $(".date-control").val("").datepicker({ dateFormat: "dd-MM-yy", minDate: 0 });
+            $(".date-control-enabled").val("").datepicker({ dateFormat: "dd-MM-yy" });
+        });
+    </script>
+</body>
+</html>

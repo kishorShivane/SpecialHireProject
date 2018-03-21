@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EBusAdministrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApplicationUsers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserRoleID" Type="int" Nullable="false" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CompanyConfigurationInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="ConnectionKey" Type="nvarchar" MaxLength="100" />
+          <Property Name="MinimumDistance" Type="int" />
+          <Property Name="DistanceCalculation" Type="int" />
+          <Property Name="DefaultEventDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="QuotationValidityPeriod" Type="int" />
+          <Property Name="QuotationMinimumValue" Type="int" />
+          <Property Name="EnforcePassengerCount" Type="bit" />
+          <Property Name="DefaultCompanyDetails" Type="nvarchar" MaxLength="100" />
+          <Property Name="DefaultPaymentTerms" Type="nvarchar" MaxLength="100" />
+          <Property Name="PDFPaymentTerms" Type="nvarchar(max)" />
+          <Property Name="DefaultPaymentMode" Type="nvarchar" MaxLength="100" />
+          <Property Name="QuotationEmailTemplate" Type="nvarchar(max)" />
+          <Property Name="InvoiceEmailTemplate" Type="nvarchar(max)" />
+          <Property Name="QuotationPDFPath" Type="nvarchar" MaxLength="500" />
+          <Property Name="InvoicePDFPath" Type="nvarchar" MaxLength="500" />
+          <Property Name="EmailUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailSMTP" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailPort" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="ModifiedBy" Type="nchar" MaxLength="10" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PublicHolidays">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HolidayDate" Type="datetime" Nullable="false" />
+          <Property Name="HolidayDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="ModifiedBy" Type="nchar" MaxLength="10" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_ApplicationUsers_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="ApplicationUsers" Type="Self.ApplicationUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ApplicationUsers">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationUsers_UserRoles">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
+          <End Role="ApplicationUsers" Type="Self.ApplicationUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ApplicationUsers">
+              <PropertyRef Name="UserRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyConfigurationInfo_CompanyConfigurationInfo">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="CompanyConfigurationInfo" Type="Self.CompanyConfigurationInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CompanyConfigurationInfo">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EBusAdministrationModelStoreContainer">
+          <EntitySet Name="ApplicationUsers" EntityType="Self.ApplicationUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyConfigurationInfo" EntityType="Self.CompanyConfigurationInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PublicHolidays" EntityType="Self.PublicHolidays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ApplicationUsers_Company" Association="Self.FK_ApplicationUsers_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ApplicationUsers" EntitySet="ApplicationUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationUsers_UserRoles" Association="Self.FK_ApplicationUsers_UserRoles">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="ApplicationUsers" EntitySet="ApplicationUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyConfigurationInfo_CompanyConfigurationInfo" Association="Self.FK_CompanyConfigurationInfo_CompanyConfigurationInfo">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyConfigurationInfo" EntitySet="CompanyConfigurationInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EBusAdministrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EBusAdministrationContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ApplicationUsers" EntityType="EBusAdministrationModel.ApplicationUser" />
+          <EntitySet Name="Companies" EntityType="EBusAdministrationModel.Company" />
+          <EntitySet Name="CompanyConfigurationInfoes" EntityType="EBusAdministrationModel.CompanyConfigurationInfo" />
+          <EntitySet Name="PublicHolidays" EntityType="EBusAdministrationModel.PublicHoliday" />
+          <EntitySet Name="UserRoles" EntityType="EBusAdministrationModel.UserRole" />
+          <AssociationSet Name="FK_ApplicationUsers_Company" Association="EBusAdministrationModel.FK_ApplicationUsers_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationUsers_UserRoles" Association="EBusAdministrationModel.FK_ApplicationUsers_UserRoles">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyConfigurationInfo_CompanyConfigurationInfo" Association="EBusAdministrationModel.FK_CompanyConfigurationInfo_CompanyConfigurationInfo">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyConfigurationInfo" EntitySet="CompanyConfigurationInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ApplicationUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="EBusAdministrationModel.FK_ApplicationUsers_Company" FromRole="ApplicationUser" ToRole="Company" />
+          <NavigationProperty Name="UserRole" Relationship="EBusAdministrationModel.FK_ApplicationUsers_UserRoles" FromRole="ApplicationUser" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ApplicationUsers" Relationship="EBusAdministrationModel.FK_ApplicationUsers_Company" FromRole="Company" ToRole="ApplicationUser" />
+          <NavigationProperty Name="CompanyConfigurationInfoes" Relationship="EBusAdministrationModel.FK_CompanyConfigurationInfo_CompanyConfigurationInfo" FromRole="Company" ToRole="CompanyConfigurationInfo" />
+        </EntityType>
+        <EntityType Name="CompanyConfigurationInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="ConnectionKey" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MinimumDistance" Type="Int32" />
+          <Property Name="DistanceCalculation" Type="Int32" />
+          <Property Name="DefaultEventDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="QuotationValidityPeriod" Type="Int32" />
+          <Property Name="QuotationMinimumValue" Type="Int32" />
+          <Property Name="EnforcePassengerCount" Type="Boolean" />
+          <Property Name="DefaultCompanyDetails" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultPaymentTerms" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PDFPaymentTerms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultPaymentMode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="QuotationEmailTemplate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceEmailTemplate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QuotationPDFPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="InvoicePDFPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmailUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailSMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailPort" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="EBusAdministrationModel.FK_CompanyConfigurationInfo_CompanyConfigurationInfo" FromRole="CompanyConfigurationInfo" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="PublicHoliday">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HolidayDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HolidayDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ApplicationUsers" Relationship="EBusAdministrationModel.FK_ApplicationUsers_UserRoles" FromRole="UserRole" ToRole="ApplicationUser" />
+        </EntityType>
+        <Association Name="FK_ApplicationUsers_Company">
+          <End Type="EBusAdministrationModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="EBusAdministrationModel.ApplicationUser" Role="ApplicationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ApplicationUser">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationUsers_UserRoles">
+          <End Type="EBusAdministrationModel.UserRole" Role="UserRole" Multiplicity="1" />
+          <End Type="EBusAdministrationModel.ApplicationUser" Role="ApplicationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ApplicationUser">
+              <PropertyRef Name="UserRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyConfigurationInfo_CompanyConfigurationInfo">
+          <End Type="EBusAdministrationModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="EBusAdministrationModel.CompanyConfigurationInfo" Role="CompanyConfigurationInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CompanyConfigurationInfo">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EBusAdministrationModelStoreContainer" CdmEntityContainer="EBusAdministrationContext">
+          <EntitySetMapping Name="ApplicationUsers">
+            <EntityTypeMapping TypeName="EBusAdministrationModel.ApplicationUser">
+              <MappingFragment StoreEntitySet="ApplicationUsers">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="EBusAdministrationModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Company1" ColumnName="Company" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyConfigurationInfoes">
+            <EntityTypeMapping TypeName="EBusAdministrationModel.CompanyConfigurationInfo">
+              <MappingFragment StoreEntitySet="CompanyConfigurationInfo">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EmailPort" ColumnName="EmailPort" />
+                <ScalarProperty Name="EmailSMTP" ColumnName="EmailSMTP" />
+                <ScalarProperty Name="EmailPassword" ColumnName="EmailPassword" />
+                <ScalarProperty Name="EmailUserName" ColumnName="EmailUserName" />
+                <ScalarProperty Name="InvoicePDFPath" ColumnName="InvoicePDFPath" />
+                <ScalarProperty Name="QuotationPDFPath" ColumnName="QuotationPDFPath" />
+                <ScalarProperty Name="InvoiceEmailTemplate" ColumnName="InvoiceEmailTemplate" />
+                <ScalarProperty Name="QuotationEmailTemplate" ColumnName="QuotationEmailTemplate" />
+                <ScalarProperty Name="DefaultPaymentMode" ColumnName="DefaultPaymentMode" />
+                <ScalarProperty Name="PDFPaymentTerms" ColumnName="PDFPaymentTerms" />
+                <ScalarProperty Name="DefaultPaymentTerms" ColumnName="DefaultPaymentTerms" />
+                <ScalarProperty Name="DefaultCompanyDetails" ColumnName="DefaultCompanyDetails" />
+                <ScalarProperty Name="EnforcePassengerCount" ColumnName="EnforcePassengerCount" />
+                <ScalarProperty Name="QuotationMinimumValue" ColumnName="QuotationMinimumValue" />
+                <ScalarProperty Name="QuotationValidityPeriod" ColumnName="QuotationValidityPeriod" />
+                <ScalarProperty Name="DefaultEventDescription" ColumnName="DefaultEventDescription" />
+                <ScalarProperty Name="DistanceCalculation" ColumnName="DistanceCalculation" />
+                <ScalarProperty Name="MinimumDistance" ColumnName="MinimumDistance" />
+                <ScalarProperty Name="ConnectionKey" ColumnName="ConnectionKey" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PublicHolidays">
+            <EntityTypeMapping TypeName="EBusAdministrationModel.PublicHoliday">
+              <MappingFragment StoreEntitySet="PublicHolidays">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="HolidayDescription" ColumnName="HolidayDescription" />
+                <ScalarProperty Name="HolidayDate" ColumnName="HolidayDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="EBusAdministrationModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

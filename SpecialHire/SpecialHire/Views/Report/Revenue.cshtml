@@ -1,0 +1,136 @@
+﻿@model SpecialHire.Models.ReportModel
+@{
+    ViewBag.Title = "Revenue Report";
+    ViewBag.IsNavigationEnabled = "Yes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Revenue</title>
+    <script type="text/javascript" src="~/js/jquery.jqplot.js"></script>
+    <script language="javascript" type="text/javascript" src="~/js/jqplot.barRenderer.js"></script>
+    <script language="javascript" type="text/javascript" src="~/js/jqplot.categoryAxisRenderer.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/css/jquery.jqplot.css" />
+    <script>
+
+        var revenue = [];
+        var monthNames = [
+"January", "February", "March",
+"April", "May", "June", "July",
+"August", "September", "October",
+"November", "December"
+        ];
+
+        function BindGraph() {
+            $.ajax({
+                async: false,
+                url: '@Url.Action("GetMonthlyRevenue", "Report")',
+                type: 'Post',
+                data: JSON.stringify({
+                    year: $("select#ddlYear").val()
+                }),
+                dataType: 'json',
+                contentType: 'application/json',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    debugger;
+                    if (result == "NoRecordsFound" || result.length == 0) {
+                        $("div#divGraph").hide();
+                        alert("No records found for the selected criteria!!");
+                    }
+                    else {
+                        $("div#divGraph").show();
+                        for (index = 0; index < monthNames.length; ++index) {
+                            var notFound = true;
+                            var cur = monthNames[index];
+                            $(result).each(function (index) {
+                                var CurrentItem = this;
+                                if (cur == CurrentItem.Month)
+                                {
+                                    notFound = false;
+                                    revenue.push([CurrentItem.Month, CurrentItem.Revenue]);
+                                }
+                            });
+                            if (notFound)
+                            {
+                                revenue.push([cur, 0]);
+                            }
+                        }
+
+                        $('#chart2').jqplot([revenue], {
+                            title: 'Monthly Revenue',
+                            seriesDefaults: {
+                                renderer: $.jqplot.BarRenderer,
+                                rendererOptions: {
+                                    varyBarColor: true
+                                }
+                            },
+                            axes: {
+                                xaxis: {
+                                    label: 'Months',
+                                    renderer: $.jqplot.CategoryAxisRenderer
+                                },
+                                yaxis: {
+                                    label: 'Revenue'
+                                }
+                            }
+                        });
+                    }
+                }
+            }).done(function (result) {
+                return false;
+            });
+        }
+        $(document).ready(function () {
+            //var line1 = [['Jan', 4], ['Feb', 6], ['Mar', 2], ['Apr', 5], ['May', 6], ['Jun', 6], ['Jul', 6], ['Aug', 6], ['Sept', 6], ['Oct', 6], ['Nov', 6], ['Dec', 6]];
+
+            $("select#ddlYear").change(function () {
+                if ($("select#ddlYear").val() != "0") {
+                    BindGraph();
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #5bc0de;">
+                    <a data-toggle="collapse" href="#pnlSearch" style="color:white;text-decoration:none;">Search Revenue</a>
+                </div>
+                <div id="pnlSearch" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon" style="min-width: 90px;">Year</div>
+                                        <select id="ddlYear" class="form-control select2">
+                                            <option value="0">Select</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="divGraph">
+            <div id="chart2" class="example-chart" style="height:550px;width:1000px"></div>
+        </div>
+        <br /><br /><br /><br />
+    </div>
+</body>
+</html>

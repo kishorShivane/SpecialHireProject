@@ -1,0 +1,216 @@
+﻿@model SpecialHire.Models.DriverWorkSheetModel
+@{
+    ViewBag.IsNavigationEnabled = "No";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        input[type="checkbox"] {
+            width: 20px; /*Desired width*/
+            height: 20px; /*Desired height*/
+        }
+    </style>
+</head>
+<body>
+    <div style="min-width:900px;max-width:930px;margin:10px auto;font-family:Calibri;font-weight:normal;">
+        <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
+            <tbody>
+                <tr style="font-size:15px;">
+                    <td colspan="1" align="right" style="vertical-align:middle;padding:10px;padding-left:0px;float:left;">
+                        <table>
+                            <tr>
+                                <td><img style="width:250px;" src="~/Images/EbusLogo.png" alt="Gauteng Coaches Logo" class="CToWUd"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td colspan="3" style="vertical-align:top;padding:30px 30px;width:65%;text-align:center;">
+                        <table cellpadding="3" cellspacing="5">
+                            <tr><td style="font-size:50px;">Gauteng Coaches</td></tr>
+                            <tr><td>Cnr of Clifton & Bartlett Street, Queenspark, Mayfair</td></tr>
+                            <tr><td>P.O. Box 1821, Florida 1710</td></tr>
+                            <tr><td>  011 837 9934 / 011 837 9701</td></tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr><td colspan="4" style="font-size: 24px;text-align:left;padding-left: 25px;"><b>Invoice No.:@Model.BookingID</b></td></tr>
+                <tr><td colspan="4" style="border-top:solid 5px black;font-size: 24px;text-align:center;"><b>Driver Work Sheet</b></td></tr>
+                <tr>
+                    <td colspan="4" style="padding:10px 25px;vertical-align:middle">
+                        <table>
+                            <tr>
+                                <td style="width: 100px;"><b>Driver:</b></td>
+                                <td style="width: 100px;">@Model.DriverNumber</td>
+                                <td style="width: 300px;"></td>
+                                <td style="width: 100px;"><b>Driver Signature:</b></td>
+                                <td style="width: 100px;"></td>
+                            </tr>
+                            <tr><td style="height:5px;"></td></tr>
+                            <tr>
+                                <td style="width: 120px;"><b>Dispatcher:</b></td>
+                                <td style="width: 100px;">@Model.DispatcherName</td>
+                                <td style="width: 300px;"></td>
+                                <td style="width: 150px;"><b>Dispatcher Signature:</b></td>
+                                <td style="width: 100px;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0" style="width:100%;padding:10px 25px;vertical-align:middle">
+            <tbody>
+                <tr>
+                    <td colspan="4" style="padding-bottom: 5px;border-top:solid 5px black;"></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Date:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.PickUpDate.ToString("dd-MMMM-yyyy")</td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Group Name:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.CompanyName</td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Organiser Name:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.OrganiserName</td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Organiser Number:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.OrganiserNumber</td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Pick Up Point:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.PickUpPoint</td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Pick UPTime:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.PickUpTime</td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Destination:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.Destination</td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Return Time:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.ReturnTime</td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Bus:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.BusNumber</td>
+                    @if (Model.TrailerNumber != "")
+                    {
+                        <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">Trailer:</td>
+                        <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.TrailerNumber</td>
+                    }
+                    else
+                    {
+                        <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                        <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                    }
+                </tr>
+                <tr>
+                    <td  colspan="4" style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Extra Information:</b>@Model.ExtraInformation</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="padding-bottom: 5px;border-top:solid 5px black;"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;text-align:center"><b>Dispatcher Checklist</b></td>
+                    <td colspan="2" style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;text-align:center"><b>Customer Survey</b></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Full Uniform:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Was Driving On Time:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Briefed Pick Up Point:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Was Driver Properly Attired:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Briefed Final Destination:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Did He Know the route:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Permit:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Did He Adhere To Traffic Rules:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Job Card And Maps:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Are Maps Available:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Radio Face:</b></td>
+                    <td align="center" style="border-bottom: thin solid;padding-top:5px;"><input type="checkbox" id="" style="margin:0px;padding:0px;" /></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="padding-bottom: 5px;border-top:solid 5px black;"></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Time of Leaving Depot:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Speedo Reading Before Leaving:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                </tr>
+                <tr>
+                    <td style="padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="padding-bottom: 5px;padding-top:5px;"></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Time of Return Depot:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Speedo Reading on Return:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="padding-bottom: 5px;border-top:solid 5px black;"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"><b>Customer Name:</b></td>
+                    <td colspan="2" style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;">@Model.OrganiserName</td>
+                </tr>
+                <tr>
+                    <td style="padding-bottom: 5px;padding-top:5px;"><b>Comments:</b></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"> </td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;height: 17px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"> </td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;height: 17px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"> </td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;height: 17px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"> </td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;height: 17px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"> </td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                    <td style="border-bottom: thin solid;padding-bottom: 5px;padding-top:5px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="padding-bottom: 5px;border-top:solid 5px black;"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

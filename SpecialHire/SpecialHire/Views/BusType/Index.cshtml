@@ -1,0 +1,319 @@
+﻿@model SpecialHire.Models.BusTypeModel
+@{
+    ViewBag.Title = "Bus Type";
+    ViewBag.IsNavigationEnabled = "Yes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                Bus Type
+                <small> Create Bus Types</small>
+            </h2>
+            @*<ol class="breadcrumb">
+                    <li>
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li class="active">BookingQuote</li>
+                </ol>*@
+        </div>
+    </div>
+    @using (Html.BeginForm("Index", "BusType", FormMethod.Post, new { id = "frmBusTypeInformation", encType = "multipart/form-data" }))
+    {
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #5bc0de;">
+                    <a data-toggle="collapse" href="#pnlSearch" style="color:white;text-decoration:none;">Search Bus Types</a>
+                </div>
+                <div id="pnlSearch" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Bus Type</div>
+                                        <input type="text" class="form-control" placeholder="Bus Type" id="txtSearchBusType" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <button type="button" class="btn btn-info" id="btnSearch">Search&nbsp;<i class="fa fa-1x fa-search"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button type="button" class="btn btn-danger" id="btnClear">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Bus Type<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.Type, new
+                       {
+                           id = "txtBusType", @*name = "Type",*@ @class = "form-control",
+                           maxlength = "200",
+                           placeholder = "Bus Type",
+                           required = "true"
+                       })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Capacity<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.Capacity, new
+                       {
+                           id = "txtCapacity", @*name = "Capacity",*@ @class = "form-control",
+                           maxlength = "200",
+                           placeholder = "Capacity",
+                           required = "true",
+                           Numeric = "true"
+                       })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Standing<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.Standing, new
+                       {
+                           id = "txtStanding", @*name = "Standing",*@ @class = "form-control",
+                           maxlength = "200",
+                           placeholder = "Standing",
+                           required = "true",
+                           Numeric = "true"
+                       })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Sitting<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.Sitting, new
+                       {
+                           id = "txtSitting", @*name = "Sitting",*@ @class = "form-control",
+                           maxlength = "200",
+                           placeholder = "Sitting",
+                           required = "true",
+                           Numeric = "true"
+                       })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">AC<font style="color:red">*</font></div>
+                            @Html.CheckBoxFor(m => m.AC, new { id = "chkAC", @class = "form-control", placeholder = "AC" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">TV<font style="color:red">*</font></div>
+                            @Html.CheckBoxFor(m => m.TV, new { id = "chkTV", @class = "form-control", placeholder = "TV" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Toilet<font style="color:red">*</font></div>
+                            @Html.CheckBoxFor(m => m.Toilet, new { id = "chkToilet", @class = "form-control", placeholder = "Toilet" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Curtains<font style="color:red">*</font></div>
+                            @Html.CheckBoxFor(m => m.Curtains, new { id = "chkCurtains", @class = "form-control", placeholder = "Curtains" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Description<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.Description, new
+                       {
+                           id = "txtDescription", @*name = "Description",*@ @class = "form-control",
+                           maxlength = "500",
+                           placeholder = "Description",
+                           required = "true"
+                       })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" id="divBusTypeStatus" style="display:none">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Active</div>
+                            @Html.CheckBoxFor(m => m.Status, new
+                       {
+                           id = "chkStatus", @*name = "Status",*@ @class = "form-control"
+                       })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    @Html.HiddenFor(m => m.ID, new { ID = "hdnBusTypeID" })
+                    <button type="submit" class="btn btn-info" id="btnSave"><i class="fa fa-1x fa-save"></i>&nbsp;Save</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger" id="btnClear"><i class="fa fa-1x fa-close"></i>&nbsp;Clear</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@Html.Partial("_SearchResults")
+<script type="text/javascript">
+    $(document).ready(function () {
+        EnforceNumeric();
+        ClearFormValues();
+        SearchBusTypes();
+        $("button#btnClear").click(function () { ClearFormValues(); $("div#divBusTypeStatus").hide(); });
+        $("button#btnSave").click(function () { return CheckMandatoryFields("frmBusTypeInformation", "div") });
+
+        $("input#chkStatus").change(function () {
+            if (checkDependency()) {
+                $("input#chkStatus").prop("checked", "checked");
+                alert("Cannot be In-Active as it is being used in a Job");
+                return false;
+            }
+        });
+    });
+
+    function checkDependency() {
+        var busTypeID = $("#hdnBusTypeID").val();
+        var response = false;
+        if (!$("input#chkStatus").is(":checked")) {
+            $.ajax({
+                async: false,
+                url: '@Url.Action("CheckDependency", "BusType")',
+                type: 'Post',
+                data: JSON.stringify({ BusTypeID: busTypeID }),
+                dataType: 'json',
+                contentType: 'application/json',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    response = result;
+                }
+            }).done(function (result) {
+            });
+        }
+        return response;
+    }
+
+
+    function SearchBusTypes() {
+        $("button#btnSearch").click(function () {
+            var BusType = $("#txtSearchBusType").val();
+            var tableBody = $("table#tblSearchResults").find("tbody");
+            var rows = "";
+            if (BusType == "") {
+                alert("Please enter search criteria!!");
+                $("#txtSearchBusType").focus();
+                return false;
+            }
+            else {
+                $.ajax({
+                    async: false,
+                    url: '@Url.Action("SearchBusTypes", "BusType")',
+                    type: 'Post',
+                    data: JSON.stringify({ BusType: BusType }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.statusText);
+                    },
+                    success: function (result) {
+                        //Now Process the data
+                        tableBody.html();
+                        if (result.length == 0) {
+                            alert("No records found for the selected criteria!!");
+                        }
+                        else {
+                            $(result).each(function (index) {
+                                var CurrentItem = this;
+                                rows = rows + "<tr><td><a id='lnkEditBusType' href='javascript:void(0);' value=" + CurrentItem.ID + " style='text-decoration: none;cursor: pointer;'><span><i class='fa fa-pencil-square-o'></i> </span>Edit</a></td>";
+                                rows = rows + "<td><span id='lblType'>" + CurrentItem.Type + "</span><input type='hidden' id='hdnStatus' value='" + CurrentItem.Status + "'/></td>"
+                                rows = rows + "<td><span id='lblCapacity'>" + CurrentItem.Capacity + "</span><input type='hidden' id='hdnDescription' value='" + CurrentItem.Description + "'/></td>"
+                                rows = rows + "<td><span id='lblSitting'>" + CurrentItem.Sitting + "</span><input type='hidden' id='hdnAC' value='" + CurrentItem.AC + "'/><input type='hidden' id='hdnToilet' value='" + CurrentItem.Toilet + "'/></td>"
+                                rows = rows + "<td><span id='lblStanding'>" + CurrentItem.Standing + "</span><input type='hidden' id='hdnTV' value='" + CurrentItem.TV + "'/><input type='hidden' id='hdnCurtains' value='" + CurrentItem.Curtains + "'/></td>";
+                            });
+
+                            tableBody.html("").html(rows);
+
+                            $('div#searchResults').modal('show');
+                        }
+                    }
+                }).done(function (result) {
+                    return false;
+                });
+            }
+        });
+    }
+
+
+    $(document).on("click", "a#lnkEditBusType", function () {
+        debugger;
+        var busTypeID = $(this).attr("value");
+        var row = $(this).parent().parent();
+        //ClearFormValues("frmBusInformation");
+
+        $("#hdnBusTypeID").val(busTypeID);
+        $("#txtBusType").val(row.find("#lblType").text()).change();
+        $("#txtCapacity").val(row.find("#lblCapacity").text());
+        $("#txtStanding").val(row.find("#lblStanding").text());
+        $("#txtSitting").val(row.find("#lblSitting").text());
+        $("#txtDescription").val(row.find("#hdnDescription").val());
+
+        if (row.find("#hdnAC").val() == "true") {
+            $("#chkAC").prop("checked", "true");
+        } else { $("#chkAC").removeProp("checked"); }
+
+        if (row.find("#hdnTV").val() == "true") {
+            $("#chkTV").prop("checked", "true");
+        } else { $("#chkTV").removeProp("checked"); }
+
+        if (row.find("#hdnToilet").val() == "true") {
+            $("#chkToilet").prop("checked", "true");
+        } else { $("#chkToilet").removeProp("checked"); }
+
+        if (row.find("#hdnCurtains").val() == "true") {
+            $("#chkCurtains").prop("checked", "true");
+        } else { $("#chkCurtains").removeProp("checked"); }
+
+        if (row.find("#hdnStatus").val() == "true") {
+            $("#chkStatus").prop("checked", "true");
+        } else { $("#chkStatus").removeProp("checked"); }
+
+        $("div#divBusTypeStatus").show();
+        $('div#searchResults').modal('hide');
+    });
+</script>
+

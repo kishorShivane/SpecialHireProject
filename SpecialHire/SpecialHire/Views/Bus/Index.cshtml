@@ -1,0 +1,244 @@
+﻿@model SpecialHire.Models.BusModel
+@{
+    ViewBag.Title = "Bus Information";
+    ViewBag.IsNavigationEnabled = "Yes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                Bus
+                <small> Create Bus</small>
+            </h2>
+            @*<ol class="breadcrumb">
+                    <li>
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li class="active">BookingQuote</li>
+                </ol>*@
+        </div>
+    </div>
+    @using (Html.BeginForm("Index", "Bus", FormMethod.Post, new { id = "frmBusInformation" }))
+    {
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #5bc0de;">
+                    <a data-toggle="collapse" href="#pnlSearch" style="color:white;text-decoration:none;">Search Busses</a>
+                </div>
+                <div id="pnlSearch" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Bus Type</div>
+                                        @Html.DropDownList("Bus Type", Model.BusTypes, new { id = "ddlSearchBusType", @class = "form-control select2" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">Fleet Number</div>
+                                        <input type="text" class="form-control" placeholder="Fleet Number" id="txtSearchFleetNumber" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-addon">VIN Number</div>
+                                        <input type="text" class="form-control" placeholder="VIN Number" id="txtSearchVINNumber" />
+                                    </div>
+                                </div>
+                            </div>        
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <button type="button" class="btn btn-info" id="btnSearch">Search&nbsp;<i class="fa fa-1x fa-search"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button type="button" class="btn btn-danger" id="btnClear">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Bus Type<font style="color:red">*</font></div>
+                            @Html.DropDownListFor(m => m.BusTypeID, Model.BusTypes, new { id = "ddlBusType", @class = "form-control select2", placeholder = "Bus Type", required = "true" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Fleet Number<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.FleetNumber, new { id = "txtFleetNumber", @class = "form-control", maxlength = "200", placeholder = "Fleet Number", required = "true" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">VIN Number<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.VINNumber, new { id = "txtVINNumber", @class = "form-control", maxlength = "200", required = "true", placeholder = "VIN Number" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Registration<font style="color:red">*</font></div>
+                            @Html.TextBoxFor(m => m.Registration, new { id = "txtRegistration", @class = "form-control", maxlength = "500", placeholder = "Registration", required = "true" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="display:none" id="divBusStatus">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">Active</div>
+                            @Html.CheckBoxFor(m => m.Status, new { id = "chkStatus", @class = "form-control"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    @Html.HiddenFor(m => m.ID, new { ID="hdnBusID"})
+                    <button type="submit" class="btn btn-info" id="btnSave"><i class="fa fa-1x fa-save"></i>&nbsp;Save</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger" id="btnClear"><i class="fa fa-1x fa-close"></i>&nbsp;Clear</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@Html.Partial("_SearchResults")
+<script type="text/javascript">
+    $(document).ready(function () {
+        RemoveHighlightedCssOnFocus();
+        ClearFormValues();
+        SearchBusses();
+        $("button#btnClear").click(function () {
+            ClearFormValues();
+            $("div#divBusStatus").hide();
+        });
+        $("button#btnSave").click(function () { return CheckMandatoryFields("frmBusInformation", "div") });
+
+        $("input#chkStatus").change(function () {
+            if (checkDependency()) {
+                $("input#chkStatus").prop("checked", "checked");
+                alert("Cannot be In-Active as it is being used in a Job");
+                return false;
+            }
+        });
+    });
+    
+    function checkDependency()
+    {
+        var busID = $("#hdnBusID").val();
+        var response = false;
+        if (!$("input#chkStatus").is(":checked"))
+        {
+            $.ajax({
+                async: false,
+                url: '@Url.Action("CheckDependency", "Bus")',
+                type: 'Post',
+                data: JSON.stringify({ BusID: busID}),
+                dataType: 'json',
+                contentType: 'application/json',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    response = result;
+                }
+            }).done(function (result) {
+            });
+        }
+        return response;
+    }
+
+    function SearchBusses() {
+        $("button#btnSearch").click(function () {
+            var FleetNumber = $("#txtSearchFleetNumber").val();
+            var VINNumber = $("#txtSearchVINNumber").val();
+            var BusType = $("#ddlSearchBusType").val();
+            var tableBody = $("table#tblSearchResults").find("tbody");
+            var rows = "";
+            if (FleetNumber == "" && VINNumber == "" && BusType == "0") {
+                alert("Please enter search criteria!!");
+                $("#ddlSearchBusType").focus();
+                return false;
+            }
+            else {
+                $.ajax({
+                    async: false,
+                    url: '@Url.Action("SearchBusses", "Bus")',
+                    type: 'Post',
+                    data: JSON.stringify({ FleetNumber: FleetNumber, VINNumber: VINNumber, BusTypeID: BusType }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.statusText);
+                    },
+                    success: function (result) {
+                        //Now Process the data
+                        tableBody.html();
+                        if (result.length == 0) {
+                            alert("No records found for the selected criteria!!");
+                        }
+                        else {
+                            $(result).each(function (index) {
+                                var CurrentItem = this;
+                                rows = rows + "<tr><td><a id='lnkEditBus' href='javascript:void(0);' value=" + CurrentItem.ID + " style='text-decoration: none;cursor: pointer;'><span><i class='fa fa-pencil-square-o'></i> </span>Edit</a></td>";
+                                rows = rows + "<td><span id='lblBusType'>" + CurrentItem.BusType + "</span></td>";
+                                rows = rows + "<td><span id='lblFleetNumber'>" + CurrentItem.FleetNumber + "</span><input type='hidden' id='hdnStatus' value='" + CurrentItem.Status + "'/></td>";
+                                rows = rows + "<td><span id='lblVINNumber'>" + CurrentItem.VINNumber + "</span><input type='hidden' id='hdnBusTypeID' value='" + CurrentItem.BusTypeID + "'/></td>";
+                                rows = rows + "<td><span id='lblRegistration'>" + CurrentItem.Registration + "</span></td>";
+                            });
+
+                            tableBody.html("").html(rows);
+
+                            $('div#searchResults').modal('show');
+                        }
+                    }
+                }).done(function (result) {
+                    return false;
+                });
+            }
+        });
+    }
+
+
+    $(document).on("click", "a#lnkEditBus", function () {
+        debugger;
+        var busID = $(this).attr("value");
+        var row = $(this).parent().parent();
+        //ClearFormValues("frmBusInformation");
+        
+        $("#hdnBusID").val(busID);
+        $("#ddlBusType").val(row.find("#hdnBusTypeID").val()).change();
+        $("#txtFleetNumber").val(row.find("#lblFleetNumber").text());
+        $("#txtVINNumber").val(row.find("#lblVINNumber").text());
+        $("#txtRegistration").val(row.find("#lblRegistration").text());
+        if (row.find("#hdnStatus").val() == "true") {
+            $("#chkStatus").prop("checked", "true");
+        } else { $("#chkStatus").removeProp("checked"); }
+
+        $("div#divBusStatus").show();
+        $('div#searchResults').modal('hide');
+    });
+</script>

@@ -1,0 +1,1762 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SpecialHireDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookingInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlternateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuotationID" Type="int" Nullable="false" />
+          <Property Name="OrderNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentModeID" Type="int" Nullable="false" />
+          <Property Name="PaymentReferenceNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="AmountPaid" Type="float" Nullable="false" />
+          <Property Name="IsApprovedByAdmin" Type="bit" Nullable="false" />
+          <Property Name="IsConfirmationEnabled" Type="bit" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="500" />
+          <Property Name="InvoiceFileName" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsBookingApproved" Type="bit" />
+          <Property Name="ApprovalComments" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BookingQuoteInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlternateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="10" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SurName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TelephoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompTelephoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompTelephoneExtension" Type="nvarchar" MaxLength="10" />
+          <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsReturnJourney" Type="bit" Nullable="false" />
+          <Property Name="IsSingleJourney" Type="bit" Nullable="false" />
+          <Property Name="IsQuoteValidTill" Type="bit" Nullable="false" />
+          <Property Name="IsTrailerAdded" Type="bit" Nullable="false" />
+          <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="PickUpTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FromLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ToLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Distance" Type="float" Nullable="false" />
+          <Property Name="Passengers" Type="int" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="ExtraInformation" Type="nvarchar" MaxLength="500" />
+          <Property Name="PaymentTermsID" Type="int" Nullable="false" />
+          <Property Name="QuoteValidTill" Type="datetime" Nullable="false" />
+          <Property Name="QuotationValue" Type="float" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="QuotationFileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BookingTrailerInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrailerTypeID" Type="int" Nullable="false" />
+          <Property Name="QuotationID" Type="int" Nullable="false" />
+          <Property Name="TrailerID" Type="int" />
+          <Property Name="BookingVehicleID" Type="int" />
+          <Property Name="IsTrailerAssigned" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BookingVehicleInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuotationID" Type="int" Nullable="false" />
+          <Property Name="BusTypeID" Type="int" Nullable="false" />
+          <Property Name="BusID" Type="int" />
+          <Property Name="DriverID" Type="int" />
+          <Property Name="TimeOfLeavingDepot" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpeedoReadingBefore" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeOfReturnDepot" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpeedoReadingReturn" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsVehicleAssigned" Type="bit" Nullable="false" />
+          <Property Name="IsJobCompleted" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusTypeID" Type="int" Nullable="false" />
+          <Property Name="FleetNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VINNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Registration" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BusType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Standing" Type="int" Nullable="false" />
+          <Property Name="Sitting" Type="int" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+          <Property Name="AC" Type="bit" Nullable="false" />
+          <Property Name="TV" Type="bit" Nullable="false" />
+          <Property Name="Toilet" Type="bit" Nullable="false" />
+          <Property Name="Curtains" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CompanyDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CompanyLogo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CompanyPrefix" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyNameAddress" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DispatcherVehicleChecklist">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuotationID" Type="int" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="int" Nullable="false" />
+          <Property Name="FullUniform" Type="bit" Nullable="false" />
+          <Property Name="BriefedPickUpPoint" Type="bit" Nullable="false" />
+          <Property Name="BriefedFinalDestination" Type="bit" Nullable="false" />
+          <Property Name="Permit" Type="bit" Nullable="false" />
+          <Property Name="JobCardAndMaps" Type="bit" Nullable="false" />
+          <Property Name="RadioFace" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DispatcherVehicleCustomerSurvey">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuotationID" Type="int" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="int" Nullable="false" />
+          <Property Name="WasDrivingOnTime" Type="bit" Nullable="false" />
+          <Property Name="WasDriverProperlyAttired" Type="bit" Nullable="false" />
+          <Property Name="DidHeKnowTheRoute" Type="bit" Nullable="false" />
+          <Property Name="DidHeAdhereToTrafficRules" Type="bit" Nullable="false" />
+          <Property Name="AreMapsAvailable" Type="bit" Nullable="false" />
+          <Property Name="CustomerComments" Type="nvarchar" MaxLength="500" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DriverName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DriverNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeeNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsSpecialHireDriver" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MonthNames">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentMode">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PaymentTerms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Terms" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Trailer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrailerTypeID" Type="int" Nullable="false" />
+          <Property Name="VINNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FleetNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Registration" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TrailerType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaxWeight" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SHGautengCoaches.dbo.BookingApprovalInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BookingApprovalInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="Contact" />
+            <PropertyRef Name="PickUpTime" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnTime" />
+            <PropertyRef Name="FromLocation" />
+            <PropertyRef Name="ToLocation" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PickUpTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FromLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ToLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SHGautengCoaches.dbo.BookingAvailabilityInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BookingAvailabilityInfo">
+          <Key>
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
+            <PropertyRef Name="NoOfBussesConfirmed" />
+            <PropertyRef Name="NoOfTrailersConfirmed" />
+          </Key>
+          <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
+          <Property Name="NoOfBooking" Type="int" />
+          <Property Name="NoOfBusses" Type="int" />
+          <Property Name="NoOfTrailers" Type="int" />
+          <Property Name="TotalBusses" Type="int" />
+          <Property Name="TotalTrailer" Type="int" />
+          <Property Name="NoOfBussesConfirmed" Type="int" Nullable="false" />
+          <Property Name="NoOfTrailersConfirmed" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SHGautengCoaches.dbo.BookingReporting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BookingReporting">
+          <Key>
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="QuotationNumber" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="QuotationDate" />
+            <PropertyRef Name="InvoiceDate" />
+            <PropertyRef Name="QuotationValue" />
+            <PropertyRef Name="BusType" />
+            <PropertyRef Name="FleetNumber" />
+            <PropertyRef Name="DriverName" />
+            <PropertyRef Name="DriverNumber" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
+            <PropertyRef Name="IsBookingDone" />
+            <PropertyRef Name="Distance" />
+            <PropertyRef Name="InvoiceTotal" />
+            <PropertyRef Name="PaymentDifference" />
+          </Key>
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuotationNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuotationDate" Type="datetime" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+          <Property Name="QuotationValue" Type="float" Nullable="false" />
+          <Property Name="BusType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FleetNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DriverName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DriverNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
+          <Property Name="IsBookingDone" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Distance" Type="float" Nullable="false" />
+          <Property Name="OperatedKms" Type="float" />
+          <Property Name="DifferenceKms" Type="float" />
+          <Property Name="IsJobCompleted" Type="bit" />
+          <Property Name="InvoiceTotal" Type="float" Nullable="false" />
+          <Property Name="PaymentDifference" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SHGautengCoaches.dbo.DispatcherBookingInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DispatcherBookingInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="CellNumber" />
+            <PropertyRef Name="PickUpTime" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnTime" />
+            <PropertyRef Name="FromLocation" />
+            <PropertyRef Name="ToLocation" />
+            <PropertyRef Name="BusType" />
+            <PropertyRef Name="FleetNumber" />
+            <PropertyRef Name="DriverName" />
+            <PropertyRef Name="IsVehicleAssigned" />
+            <PropertyRef Name="IsTrailerAssigned" />
+            <PropertyRef Name="IsJobCompleted" />
+            <PropertyRef Name="BookingID" />
+            <PropertyRef Name="BookingVehicleID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="AlternateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CellNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PickUpTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FromLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ToLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NumberOfTrailers" Type="int" />
+          <Property Name="NumberOfBusses" Type="int" />
+          <Property Name="BusType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FleetNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DriverName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsVehicleAssigned" Type="bit" Nullable="false" />
+          <Property Name="IsTrailerAssigned" Type="bit" Nullable="false" />
+          <Property Name="IsJobCompleted" Type="bit" Nullable="false" />
+          <Property Name="BookingID" Type="int" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Revenue">
+          <Key>
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="OrderYear" />
+          </Key>
+          <Property Name="Total" Type="float" Nullable="false" />
+          <Property Name="OrderMonth" Type="nvarchar" MaxLength="30" />
+          <Property Name="OrderYear" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Booking_PaymentMode">
+          <End Role="PaymentMode" Type="Self.PaymentMode" Multiplicity="1" />
+          <End Role="BookingInfo" Type="Self.BookingInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMode">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingInfo">
+              <PropertyRef Name="PaymentModeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Quotation">
+          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
+          <End Role="BookingInfo" Type="Self.BookingInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingInfo">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingQuoteInfo_CompanyDetails1">
+          <End Role="CompanyDetails" Type="Self.CompanyDetails" Multiplicity="1" />
+          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingQuoteInfo">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingTrailerInfo_BookingQuote">
+          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
+          <End Role="BookingTrailerInfo" Type="Self.BookingTrailerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingTrailerInfo">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingTrailerInfo_TrialerType">
+          <End Role="TrailerType" Type="Self.TrailerType" Multiplicity="1" />
+          <End Role="BookingTrailerInfo" Type="Self.BookingTrailerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrailerType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingTrailerInfo">
+              <PropertyRef Name="TrailerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bus_BusType">
+          <End Role="BusType" Type="Self.BusType" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="BusTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DispatcherVehicleChecklist_BookingQuoteInfo">
+          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
+          <End Role="DispatcherVehicleChecklist" Type="Self.DispatcherVehicleChecklist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DispatcherVehicleChecklist">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DispatcherVehicleChecklist_BookingVehicleInfo">
+          <End Role="BookingVehicleInfo" Type="Self.BookingVehicleInfo" Multiplicity="1" />
+          <End Role="DispatcherVehicleChecklist" Type="Self.DispatcherVehicleChecklist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingVehicleInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DispatcherVehicleChecklist">
+              <PropertyRef Name="BookingVehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotation_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingQuoteInfo">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trailer_TrailerType">
+          <End Role="TrailerType" Type="Self.TrailerType" Multiplicity="1" />
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrailerType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="TrailerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleCustomerSurvey_BookingQuoteInfo">
+          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
+          <End Role="DispatcherVehicleCustomerSurvey" Type="Self.DispatcherVehicleCustomerSurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DispatcherVehicleCustomerSurvey">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleCustomerSurvey_BookingVehicleInfo">
+          <End Role="BookingVehicleInfo" Type="Self.BookingVehicleInfo" Multiplicity="1" />
+          <End Role="DispatcherVehicleCustomerSurvey" Type="Self.DispatcherVehicleCustomerSurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingVehicleInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DispatcherVehicleCustomerSurvey">
+              <PropertyRef Name="BookingVehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleDetails_BusType">
+          <End Role="BusType" Type="Self.BusType" Multiplicity="1" />
+          <End Role="BookingVehicleInfo" Type="Self.BookingVehicleInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingVehicleInfo">
+              <PropertyRef Name="BusTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleDetails_Quotation">
+          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
+          <End Role="BookingVehicleInfo" Type="Self.BookingVehicleInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingVehicleInfo">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpecialHireDBModelStoreContainer">
+          <EntitySet Name="BookingInfo" EntityType="Self.BookingInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingQuoteInfo" EntityType="Self.BookingQuoteInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingTrailerInfo" EntityType="Self.BookingTrailerInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingVehicleInfo" EntityType="Self.BookingVehicleInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusType" EntityType="Self.BusType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDetails" EntityType="Self.CompanyDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DispatcherVehicleChecklist" EntityType="Self.DispatcherVehicleChecklist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DispatcherVehicleCustomerSurvey" EntityType="Self.DispatcherVehicleCustomerSurvey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthNames" EntityType="Self.MonthNames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTerms" EntityType="Self.PaymentTerms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrailerType" EntityType="Self.TrailerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingApprovalInfo" EntityType="Self.BookingApprovalInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BookingApprovalInfo].[ID] AS [ID], 
+    [BookingApprovalInfo].[InvoiceNumber] AS [InvoiceNumber], 
+    [BookingApprovalInfo].[InvoiceDate] AS [InvoiceDate], 
+    [BookingApprovalInfo].[OrganiserName] AS [OrganiserName], 
+    [BookingApprovalInfo].[Contact] AS [Contact], 
+    [BookingApprovalInfo].[PickUpTime] AS [PickUpTime], 
+    [BookingApprovalInfo].[PickUpDate] AS [PickUpDate], 
+    [BookingApprovalInfo].[ReturnTime] AS [ReturnTime], 
+    [BookingApprovalInfo].[FromLocation] AS [FromLocation], 
+    [BookingApprovalInfo].[ToLocation] AS [ToLocation]
+    FROM [dbo].[BookingApprovalInfo] AS [BookingApprovalInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BookingAvailabilityInfo" EntityType="Self.BookingAvailabilityInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BookingAvailabilityInfo].[PickUpDate] AS [PickUpDate], 
+    [BookingAvailabilityInfo].[ReturnDate] AS [ReturnDate], 
+    [BookingAvailabilityInfo].[NoOfBooking] AS [NoOfBooking], 
+    [BookingAvailabilityInfo].[NoOfBusses] AS [NoOfBusses], 
+    [BookingAvailabilityInfo].[NoOfTrailers] AS [NoOfTrailers], 
+    [BookingAvailabilityInfo].[TotalBusses] AS [TotalBusses], 
+    [BookingAvailabilityInfo].[TotalTrailer] AS [TotalTrailer], 
+    [BookingAvailabilityInfo].[NoOfBussesConfirmed] AS [NoOfBussesConfirmed], 
+    [BookingAvailabilityInfo].[NoOfTrailersConfirmed] AS [NoOfTrailersConfirmed]
+    FROM [dbo].[BookingAvailabilityInfo] AS [BookingAvailabilityInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BookingReporting" EntityType="Self.BookingReporting" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BookingReporting].[OrganiserName] AS [OrganiserName], 
+    [BookingReporting].[QuotationNumber] AS [QuotationNumber], 
+    [BookingReporting].[InvoiceNumber] AS [InvoiceNumber], 
+    [BookingReporting].[CompanyName] AS [CompanyName], 
+    [BookingReporting].[QuotationDate] AS [QuotationDate], 
+    [BookingReporting].[InvoiceDate] AS [InvoiceDate], 
+    [BookingReporting].[QuotationValue] AS [QuotationValue], 
+    [BookingReporting].[BusType] AS [BusType], 
+    [BookingReporting].[FleetNumber] AS [FleetNumber], 
+    [BookingReporting].[DriverName] AS [DriverName], 
+    [BookingReporting].[DriverNumber] AS [DriverNumber], 
+    [BookingReporting].[PickUpDate] AS [PickUpDate], 
+    [BookingReporting].[ReturnDate] AS [ReturnDate], 
+    [BookingReporting].[IsBookingDone] AS [IsBookingDone], 
+    [BookingReporting].[Distance] AS [Distance], 
+    [BookingReporting].[OperatedKms] AS [OperatedKms], 
+    [BookingReporting].[DifferenceKms] AS [DifferenceKms], 
+    [BookingReporting].[IsJobCompleted] AS [IsJobCompleted], 
+    [BookingReporting].[InvoiceTotal] AS [InvoiceTotal], 
+    [BookingReporting].[PaymentDifference] AS [PaymentDifference]
+    FROM [dbo].[BookingReporting] AS [BookingReporting]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DispatcherBookingInfo" EntityType="Self.DispatcherBookingInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DispatcherBookingInfo].[ID] AS [ID], 
+    [DispatcherBookingInfo].[AlternateID] AS [AlternateID], 
+    [DispatcherBookingInfo].[CompanyName] AS [CompanyName], 
+    [DispatcherBookingInfo].[OrganiserName] AS [OrganiserName], 
+    [DispatcherBookingInfo].[CellNumber] AS [CellNumber], 
+    [DispatcherBookingInfo].[PickUpTime] AS [PickUpTime], 
+    [DispatcherBookingInfo].[PickUpDate] AS [PickUpDate], 
+    [DispatcherBookingInfo].[ReturnTime] AS [ReturnTime], 
+    [DispatcherBookingInfo].[FromLocation] AS [FromLocation], 
+    [DispatcherBookingInfo].[ToLocation] AS [ToLocation], 
+    [DispatcherBookingInfo].[NumberOfTrailers] AS [NumberOfTrailers], 
+    [DispatcherBookingInfo].[NumberOfBusses] AS [NumberOfBusses], 
+    [DispatcherBookingInfo].[BusType] AS [BusType], 
+    [DispatcherBookingInfo].[FleetNumber] AS [FleetNumber], 
+    [DispatcherBookingInfo].[DriverName] AS [DriverName], 
+    [DispatcherBookingInfo].[IsVehicleAssigned] AS [IsVehicleAssigned], 
+    [DispatcherBookingInfo].[IsTrailerAssigned] AS [IsTrailerAssigned], 
+    [DispatcherBookingInfo].[IsJobCompleted] AS [IsJobCompleted], 
+    [DispatcherBookingInfo].[BookingID] AS [BookingID], 
+    [DispatcherBookingInfo].[BookingVehicleID] AS [BookingVehicleID]
+    FROM [dbo].[DispatcherBookingInfo] AS [DispatcherBookingInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Revenue" EntityType="Self.Revenue" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Revenue].[Total] AS [Total], 
+    [Revenue].[OrderMonth] AS [OrderMonth], 
+    [Revenue].[OrderYear] AS [OrderYear]
+    FROM [dbo].[Revenue] AS [Revenue]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Booking_PaymentMode" Association="Self.FK_Booking_PaymentMode">
+            <End Role="PaymentMode" EntitySet="PaymentMode" />
+            <End Role="BookingInfo" EntitySet="BookingInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Quotation" Association="Self.FK_Booking_Quotation">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="BookingInfo" EntitySet="BookingInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingQuoteInfo_CompanyDetails1" Association="Self.FK_BookingQuoteInfo_CompanyDetails1">
+            <End Role="CompanyDetails" EntitySet="CompanyDetails" />
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingTrailerInfo_BookingQuote" Association="Self.FK_BookingTrailerInfo_BookingQuote">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="BookingTrailerInfo" EntitySet="BookingTrailerInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingTrailerInfo_TrialerType" Association="Self.FK_BookingTrailerInfo_TrialerType">
+            <End Role="TrailerType" EntitySet="TrailerType" />
+            <End Role="BookingTrailerInfo" EntitySet="BookingTrailerInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bus_BusType" Association="Self.FK_Bus_BusType">
+            <End Role="BusType" EntitySet="BusType" />
+            <End Role="Bus" EntitySet="Bus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DispatcherVehicleChecklist_BookingQuoteInfo" Association="Self.FK_DispatcherVehicleChecklist_BookingQuoteInfo">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="DispatcherVehicleChecklist" EntitySet="DispatcherVehicleChecklist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DispatcherVehicleChecklist_BookingVehicleInfo" Association="Self.FK_DispatcherVehicleChecklist_BookingVehicleInfo">
+            <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfo" />
+            <End Role="DispatcherVehicleChecklist" EntitySet="DispatcherVehicleChecklist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotation_Event" Association="Self.FK_Quotation_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trailer_TrailerType" Association="Self.FK_Trailer_TrailerType">
+            <End Role="TrailerType" EntitySet="TrailerType" />
+            <End Role="Trailer" EntitySet="Trailer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleCustomerSurvey_BookingQuoteInfo" Association="Self.FK_VehicleCustomerSurvey_BookingQuoteInfo">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="DispatcherVehicleCustomerSurvey" EntitySet="DispatcherVehicleCustomerSurvey" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleCustomerSurvey_BookingVehicleInfo" Association="Self.FK_VehicleCustomerSurvey_BookingVehicleInfo">
+            <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfo" />
+            <End Role="DispatcherVehicleCustomerSurvey" EntitySet="DispatcherVehicleCustomerSurvey" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleDetails_BusType" Association="Self.FK_VehicleDetails_BusType">
+            <End Role="BusType" EntitySet="BusType" />
+            <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleDetails_Quotation" Association="Self.FK_VehicleDetails_Quotation">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpecialHireDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SpecialHireDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BookingInfoes" EntityType="SpecialHireDBModel.BookingInfo" />
+          <EntitySet Name="BookingQuoteInfoes" EntityType="SpecialHireDBModel.BookingQuoteInfo" />
+          <EntitySet Name="BookingTrailerInfoes" EntityType="SpecialHireDBModel.BookingTrailerInfo" />
+          <EntitySet Name="BookingVehicleInfoes" EntityType="SpecialHireDBModel.BookingVehicleInfo" />
+          <EntitySet Name="Buses" EntityType="SpecialHireDBModel.Bus" />
+          <EntitySet Name="BusTypes" EntityType="SpecialHireDBModel.BusType" />
+          <EntitySet Name="CompanyDetails" EntityType="SpecialHireDBModel.CompanyDetail" />
+          <EntitySet Name="DispatcherVehicleChecklists" EntityType="SpecialHireDBModel.DispatcherVehicleChecklist" />
+          <EntitySet Name="DispatcherVehicleCustomerSurveys" EntityType="SpecialHireDBModel.DispatcherVehicleCustomerSurvey" />
+          <EntitySet Name="Drivers" EntityType="SpecialHireDBModel.Driver" />
+          <EntitySet Name="Events" EntityType="SpecialHireDBModel.Event" />
+          <EntitySet Name="MonthNames" EntityType="SpecialHireDBModel.MonthName" />
+          <EntitySet Name="PaymentModes" EntityType="SpecialHireDBModel.PaymentMode" />
+          <EntitySet Name="PaymentTerms" EntityType="SpecialHireDBModel.PaymentTerm" />
+          <EntitySet Name="Trailers" EntityType="SpecialHireDBModel.Trailer" />
+          <EntitySet Name="TrailerTypes" EntityType="SpecialHireDBModel.TrailerType" />
+          <EntitySet Name="BookingApprovalInfoes" EntityType="SpecialHireDBModel.BookingApprovalInfo" />
+          <EntitySet Name="BookingAvailabilityInfoes" EntityType="SpecialHireDBModel.BookingAvailabilityInfo" />
+          <EntitySet Name="BookingReportings" EntityType="SpecialHireDBModel.BookingReporting" />
+          <EntitySet Name="DispatcherBookingInfoes" EntityType="SpecialHireDBModel.DispatcherBookingInfo" />
+          <EntitySet Name="Revenues" EntityType="SpecialHireDBModel.Revenue" />
+          <AssociationSet Name="FK_Booking_PaymentMode" Association="SpecialHireDBModel.FK_Booking_PaymentMode">
+            <End Role="PaymentMode" EntitySet="PaymentModes" />
+            <End Role="BookingInfo" EntitySet="BookingInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Quotation" Association="SpecialHireDBModel.FK_Booking_Quotation">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="BookingInfo" EntitySet="BookingInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingQuoteInfo_CompanyDetails1" Association="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetails1">
+            <End Role="CompanyDetail" EntitySet="CompanyDetails" />
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingTrailerInfo_BookingQuote" Association="SpecialHireDBModel.FK_BookingTrailerInfo_BookingQuote">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="BookingTrailerInfo" EntitySet="BookingTrailerInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DispatcherVehicleChecklist_BookingQuoteInfo" Association="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingQuoteInfo">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="DispatcherVehicleChecklist" EntitySet="DispatcherVehicleChecklists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotation_Event" Association="SpecialHireDBModel.FK_Quotation_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleCustomerSurvey_BookingQuoteInfo" Association="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingQuoteInfo">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="DispatcherVehicleCustomerSurvey" EntitySet="DispatcherVehicleCustomerSurveys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleDetails_Quotation" Association="SpecialHireDBModel.FK_VehicleDetails_Quotation">
+            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingTrailerInfo_TrialerType" Association="SpecialHireDBModel.FK_BookingTrailerInfo_TrialerType">
+            <End Role="TrailerType" EntitySet="TrailerTypes" />
+            <End Role="BookingTrailerInfo" EntitySet="BookingTrailerInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DispatcherVehicleChecklist_BookingVehicleInfo" Association="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingVehicleInfo">
+            <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfoes" />
+            <End Role="DispatcherVehicleChecklist" EntitySet="DispatcherVehicleChecklists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleCustomerSurvey_BookingVehicleInfo" Association="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingVehicleInfo">
+            <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfoes" />
+            <End Role="DispatcherVehicleCustomerSurvey" EntitySet="DispatcherVehicleCustomerSurveys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleDetails_BusType" Association="SpecialHireDBModel.FK_VehicleDetails_BusType">
+            <End Role="BusType" EntitySet="BusTypes" />
+            <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bus_BusType" Association="SpecialHireDBModel.FK_Bus_BusType">
+            <End Role="BusType" EntitySet="BusTypes" />
+            <End Role="Bus" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trailer_TrailerType" Association="SpecialHireDBModel.FK_Trailer_TrailerType">
+            <End Role="TrailerType" EntitySet="TrailerTypes" />
+            <End Role="Trailer" EntitySet="Trailers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BookingInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlternateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuotationID" Type="Int32" Nullable="false" />
+          <Property Name="OrderNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentModeID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentReferenceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AmountPaid" Type="Double" Nullable="false" />
+          <Property Name="IsApprovedByAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="IsConfirmationEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceFileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsBookingApproved" Type="Boolean" />
+          <Property Name="ApprovalComments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PaymentMode" Relationship="SpecialHireDBModel.FK_Booking_PaymentMode" FromRole="BookingInfo" ToRole="PaymentMode" />
+          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_Booking_Quotation" FromRole="BookingInfo" ToRole="BookingQuoteInfo" />
+        </EntityType>
+        <EntityType Name="BookingQuoteInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlternateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SurName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelephoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompTelephoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompTelephoneExtension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FaxNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsReturnJourney" Type="Boolean" Nullable="false" />
+          <Property Name="IsSingleJourney" Type="Boolean" Nullable="false" />
+          <Property Name="IsQuoteValidTill" Type="Boolean" Nullable="false" />
+          <Property Name="IsTrailerAdded" Type="Boolean" Nullable="false" />
+          <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PickUpTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FromLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ToLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Distance" Type="Double" Nullable="false" />
+          <Property Name="Passengers" Type="Int32" Nullable="false" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="ExtraInformation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentTermsID" Type="Int32" Nullable="false" />
+          <Property Name="QuoteValidTill" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuotationValue" Type="Double" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="QuotationFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingInfoes" Relationship="SpecialHireDBModel.FK_Booking_Quotation" FromRole="BookingQuoteInfo" ToRole="BookingInfo" />
+          <NavigationProperty Name="CompanyDetail" Relationship="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetails1" FromRole="BookingQuoteInfo" ToRole="CompanyDetail" />
+          <NavigationProperty Name="BookingTrailerInfoes" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_BookingQuote" FromRole="BookingQuoteInfo" ToRole="BookingTrailerInfo" />
+          <NavigationProperty Name="DispatcherVehicleChecklists" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingQuoteInfo" FromRole="BookingQuoteInfo" ToRole="DispatcherVehicleChecklist" />
+          <NavigationProperty Name="Event" Relationship="SpecialHireDBModel.FK_Quotation_Event" FromRole="BookingQuoteInfo" ToRole="Event" />
+          <NavigationProperty Name="DispatcherVehicleCustomerSurveys" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingQuoteInfo" FromRole="BookingQuoteInfo" ToRole="DispatcherVehicleCustomerSurvey" />
+          <NavigationProperty Name="BookingVehicleInfoes" Relationship="SpecialHireDBModel.FK_VehicleDetails_Quotation" FromRole="BookingQuoteInfo" ToRole="BookingVehicleInfo" />
+        </EntityType>
+        <EntityType Name="BookingTrailerInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrailerTypeID" Type="Int32" Nullable="false" />
+          <Property Name="QuotationID" Type="Int32" Nullable="false" />
+          <Property Name="TrailerID" Type="Int32" />
+          <Property Name="BookingVehicleID" Type="Int32" />
+          <Property Name="IsTrailerAssigned" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_BookingQuote" FromRole="BookingTrailerInfo" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="TrailerType" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_TrialerType" FromRole="BookingTrailerInfo" ToRole="TrailerType" />
+        </EntityType>
+        <EntityType Name="BookingVehicleInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuotationID" Type="Int32" Nullable="false" />
+          <Property Name="BusTypeID" Type="Int32" Nullable="false" />
+          <Property Name="BusID" Type="Int32" />
+          <Property Name="DriverID" Type="Int32" />
+          <Property Name="TimeOfLeavingDepot" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpeedoReadingBefore" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeOfReturnDepot" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpeedoReadingReturn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsVehicleAssigned" Type="Boolean" Nullable="false" />
+          <Property Name="IsJobCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_VehicleDetails_Quotation" FromRole="BookingVehicleInfo" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="DispatcherVehicleChecklists" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingVehicleInfo" FromRole="BookingVehicleInfo" ToRole="DispatcherVehicleChecklist" />
+          <NavigationProperty Name="DispatcherVehicleCustomerSurveys" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingVehicleInfo" FromRole="BookingVehicleInfo" ToRole="DispatcherVehicleCustomerSurvey" />
+          <NavigationProperty Name="BusType" Relationship="SpecialHireDBModel.FK_VehicleDetails_BusType" FromRole="BookingVehicleInfo" ToRole="BusType" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusTypeID" Type="Int32" Nullable="false" />
+          <Property Name="FleetNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VINNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Registration" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BusType" Relationship="SpecialHireDBModel.FK_Bus_BusType" FromRole="Bus" ToRole="BusType" />
+        </EntityType>
+        <EntityType Name="BusType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Standing" Type="Int32" Nullable="false" />
+          <Property Name="Sitting" Type="Int32" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="AC" Type="Boolean" Nullable="false" />
+          <Property Name="TV" Type="Boolean" Nullable="false" />
+          <Property Name="Toilet" Type="Boolean" Nullable="false" />
+          <Property Name="Curtains" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingVehicleInfoes" Relationship="SpecialHireDBModel.FK_VehicleDetails_BusType" FromRole="BusType" ToRole="BookingVehicleInfo" />
+          <NavigationProperty Name="Buses" Relationship="SpecialHireDBModel.FK_Bus_BusType" FromRole="BusType" ToRole="Bus" />
+        </EntityType>
+        <EntityType Name="CompanyDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyPrefix" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyNameAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingQuoteInfoes" Relationship="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetails1" FromRole="CompanyDetail" ToRole="BookingQuoteInfo" />
+        </EntityType>
+        <EntityType Name="DispatcherVehicleChecklist">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuotationID" Type="Int32" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="Int32" Nullable="false" />
+          <Property Name="FullUniform" Type="Boolean" Nullable="false" />
+          <Property Name="BriefedPickUpPoint" Type="Boolean" Nullable="false" />
+          <Property Name="BriefedFinalDestination" Type="Boolean" Nullable="false" />
+          <Property Name="Permit" Type="Boolean" Nullable="false" />
+          <Property Name="JobCardAndMaps" Type="Boolean" Nullable="false" />
+          <Property Name="RadioFace" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingQuoteInfo" FromRole="DispatcherVehicleChecklist" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="BookingVehicleInfo" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingVehicleInfo" FromRole="DispatcherVehicleChecklist" ToRole="BookingVehicleInfo" />
+        </EntityType>
+        <EntityType Name="DispatcherVehicleCustomerSurvey">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuotationID" Type="Int32" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="Int32" Nullable="false" />
+          <Property Name="WasDrivingOnTime" Type="Boolean" Nullable="false" />
+          <Property Name="WasDriverProperlyAttired" Type="Boolean" Nullable="false" />
+          <Property Name="DidHeKnowTheRoute" Type="Boolean" Nullable="false" />
+          <Property Name="DidHeAdhereToTrafficRules" Type="Boolean" Nullable="false" />
+          <Property Name="AreMapsAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="CustomerComments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingQuoteInfo" FromRole="DispatcherVehicleCustomerSurvey" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="BookingVehicleInfo" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingVehicleInfo" FromRole="DispatcherVehicleCustomerSurvey" ToRole="BookingVehicleInfo" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DriverNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsSpecialHireDriver" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingQuoteInfoes" Relationship="SpecialHireDBModel.FK_Quotation_Event" FromRole="Event" ToRole="BookingQuoteInfo" />
+        </EntityType>
+        <EntityType Name="MonthName">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PaymentMode">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingInfoes" Relationship="SpecialHireDBModel.FK_Booking_PaymentMode" FromRole="PaymentMode" ToRole="BookingInfo" />
+        </EntityType>
+        <EntityType Name="PaymentTerm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Terms" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Trailer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrailerTypeID" Type="Int32" Nullable="false" />
+          <Property Name="VINNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FleetNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Registration" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TrailerType" Relationship="SpecialHireDBModel.FK_Trailer_TrailerType" FromRole="Trailer" ToRole="TrailerType" />
+        </EntityType>
+        <EntityType Name="TrailerType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaxWeight" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BookingTrailerInfoes" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_TrialerType" FromRole="TrailerType" ToRole="BookingTrailerInfo" />
+          <NavigationProperty Name="Trailers" Relationship="SpecialHireDBModel.FK_Trailer_TrailerType" FromRole="TrailerType" ToRole="Trailer" />
+        </EntityType>
+        <EntityType Name="BookingApprovalInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="Contact" />
+            <PropertyRef Name="PickUpTime" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnTime" />
+            <PropertyRef Name="FromLocation" />
+            <PropertyRef Name="ToLocation" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FromLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ToLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BookingAvailabilityInfo">
+          <Key>
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
+            <PropertyRef Name="NoOfBussesConfirmed" />
+            <PropertyRef Name="NoOfTrailersConfirmed" />
+          </Key>
+          <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NoOfBooking" Type="Int32" />
+          <Property Name="NoOfBusses" Type="Int32" />
+          <Property Name="NoOfTrailers" Type="Int32" />
+          <Property Name="TotalBusses" Type="Int32" />
+          <Property Name="TotalTrailer" Type="Int32" />
+          <Property Name="NoOfBussesConfirmed" Type="Int32" Nullable="false" />
+          <Property Name="NoOfTrailersConfirmed" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingReporting">
+          <Key>
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="QuotationNumber" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="QuotationDate" />
+            <PropertyRef Name="InvoiceDate" />
+            <PropertyRef Name="QuotationValue" />
+            <PropertyRef Name="BusType" />
+            <PropertyRef Name="FleetNumber" />
+            <PropertyRef Name="DriverName" />
+            <PropertyRef Name="DriverNumber" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
+            <PropertyRef Name="IsBookingDone" />
+            <PropertyRef Name="Distance" />
+            <PropertyRef Name="InvoiceTotal" />
+            <PropertyRef Name="PaymentDifference" />
+          </Key>
+          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuotationNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuotationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuotationValue" Type="Double" Nullable="false" />
+          <Property Name="BusType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FleetNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DriverName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DriverNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsBookingDone" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Distance" Type="Double" Nullable="false" />
+          <Property Name="OperatedKms" Type="Double" />
+          <Property Name="DifferenceKms" Type="Double" />
+          <Property Name="IsJobCompleted" Type="Boolean" />
+          <Property Name="InvoiceTotal" Type="Double" Nullable="false" />
+          <Property Name="PaymentDifference" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DispatcherBookingInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="CellNumber" />
+            <PropertyRef Name="PickUpTime" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnTime" />
+            <PropertyRef Name="FromLocation" />
+            <PropertyRef Name="ToLocation" />
+            <PropertyRef Name="BusType" />
+            <PropertyRef Name="FleetNumber" />
+            <PropertyRef Name="DriverName" />
+            <PropertyRef Name="IsVehicleAssigned" />
+            <PropertyRef Name="IsTrailerAssigned" />
+            <PropertyRef Name="IsJobCompleted" />
+            <PropertyRef Name="BookingID" />
+            <PropertyRef Name="BookingVehicleID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="AlternateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FromLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ToLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfTrailers" Type="Int32" />
+          <Property Name="NumberOfBusses" Type="Int32" />
+          <Property Name="BusType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FleetNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DriverName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsVehicleAssigned" Type="Boolean" Nullable="false" />
+          <Property Name="IsTrailerAssigned" Type="Boolean" Nullable="false" />
+          <Property Name="IsJobCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="BookingID" Type="Int32" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Revenue">
+          <Key>
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="OrderYear" />
+          </Key>
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="OrderMonth" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="OrderYear" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Booking_PaymentMode">
+          <End Type="SpecialHireDBModel.PaymentMode" Role="PaymentMode" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingInfo" Role="BookingInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMode">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingInfo">
+              <PropertyRef Name="PaymentModeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Quotation">
+          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingInfo" Role="BookingInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingInfo">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingQuoteInfo_CompanyDetails1">
+          <End Type="SpecialHireDBModel.CompanyDetail" Role="CompanyDetail" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingQuoteInfo">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingTrailerInfo_BookingQuote">
+          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingTrailerInfo" Role="BookingTrailerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingTrailerInfo">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DispatcherVehicleChecklist_BookingQuoteInfo">
+          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.DispatcherVehicleChecklist" Role="DispatcherVehicleChecklist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DispatcherVehicleChecklist">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotation_Event">
+          <End Type="SpecialHireDBModel.Event" Role="Event" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingQuoteInfo">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleCustomerSurvey_BookingQuoteInfo">
+          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.DispatcherVehicleCustomerSurvey" Role="DispatcherVehicleCustomerSurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DispatcherVehicleCustomerSurvey">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleDetails_Quotation">
+          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingVehicleInfo" Role="BookingVehicleInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingQuoteInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingVehicleInfo">
+              <PropertyRef Name="QuotationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingTrailerInfo_TrialerType">
+          <End Type="SpecialHireDBModel.TrailerType" Role="TrailerType" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingTrailerInfo" Role="BookingTrailerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrailerType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingTrailerInfo">
+              <PropertyRef Name="TrailerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DispatcherVehicleChecklist_BookingVehicleInfo">
+          <End Type="SpecialHireDBModel.BookingVehicleInfo" Role="BookingVehicleInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.DispatcherVehicleChecklist" Role="DispatcherVehicleChecklist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingVehicleInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DispatcherVehicleChecklist">
+              <PropertyRef Name="BookingVehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleCustomerSurvey_BookingVehicleInfo">
+          <End Type="SpecialHireDBModel.BookingVehicleInfo" Role="BookingVehicleInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.DispatcherVehicleCustomerSurvey" Role="DispatcherVehicleCustomerSurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingVehicleInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DispatcherVehicleCustomerSurvey">
+              <PropertyRef Name="BookingVehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleDetails_BusType">
+          <End Type="SpecialHireDBModel.BusType" Role="BusType" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingVehicleInfo" Role="BookingVehicleInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookingVehicleInfo">
+              <PropertyRef Name="BusTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bus_BusType">
+          <End Type="SpecialHireDBModel.BusType" Role="BusType" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.Bus" Role="Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="BusTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trailer_TrailerType">
+          <End Type="SpecialHireDBModel.TrailerType" Role="TrailerType" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.Trailer" Role="Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrailerType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="TrailerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SpecialHireDBModelStoreContainer" CdmEntityContainer="SpecialHireDBContext">
+          <EntitySetMapping Name="BookingInfoes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingInfo">
+              <MappingFragment StoreEntitySet="BookingInfo">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApprovalComments" ColumnName="ApprovalComments" />
+                <ScalarProperty Name="IsBookingApproved" ColumnName="IsBookingApproved" />
+                <ScalarProperty Name="InvoiceFileName" ColumnName="InvoiceFileName" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="IsConfirmationEnabled" ColumnName="IsConfirmationEnabled" />
+                <ScalarProperty Name="IsApprovedByAdmin" ColumnName="IsApprovedByAdmin" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="PaymentReferenceNumber" ColumnName="PaymentReferenceNumber" />
+                <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="QuotationID" ColumnName="QuotationID" />
+                <ScalarProperty Name="AlternateID" ColumnName="AlternateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingQuoteInfoes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingQuoteInfo">
+              <MappingFragment StoreEntitySet="BookingQuoteInfo">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="QuotationFileName" ColumnName="QuotationFileName" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="QuotationValue" ColumnName="QuotationValue" />
+                <ScalarProperty Name="QuoteValidTill" ColumnName="QuoteValidTill" />
+                <ScalarProperty Name="PaymentTermsID" ColumnName="PaymentTermsID" />
+                <ScalarProperty Name="ExtraInformation" ColumnName="ExtraInformation" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Passengers" ColumnName="Passengers" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ReturnTime" ColumnName="ReturnTime" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="PickUpTime" ColumnName="PickUpTime" />
+                <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
+                <ScalarProperty Name="IsTrailerAdded" ColumnName="IsTrailerAdded" />
+                <ScalarProperty Name="IsQuoteValidTill" ColumnName="IsQuoteValidTill" />
+                <ScalarProperty Name="IsSingleJourney" ColumnName="IsSingleJourney" />
+                <ScalarProperty Name="IsReturnJourney" ColumnName="IsReturnJourney" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="CompTelephoneExtension" ColumnName="CompTelephoneExtension" />
+                <ScalarProperty Name="CompTelephoneNumber" ColumnName="CompTelephoneNumber" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="CellNumber" ColumnName="CellNumber" />
+                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+                <ScalarProperty Name="SurName" ColumnName="SurName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AlternateID" ColumnName="AlternateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingTrailerInfoes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingTrailerInfo">
+              <MappingFragment StoreEntitySet="BookingTrailerInfo">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="IsTrailerAssigned" ColumnName="IsTrailerAssigned" />
+                <ScalarProperty Name="BookingVehicleID" ColumnName="BookingVehicleID" />
+                <ScalarProperty Name="TrailerID" ColumnName="TrailerID" />
+                <ScalarProperty Name="QuotationID" ColumnName="QuotationID" />
+                <ScalarProperty Name="TrailerTypeID" ColumnName="TrailerTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingVehicleInfoes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingVehicleInfo">
+              <MappingFragment StoreEntitySet="BookingVehicleInfo">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="IsJobCompleted" ColumnName="IsJobCompleted" />
+                <ScalarProperty Name="IsVehicleAssigned" ColumnName="IsVehicleAssigned" />
+                <ScalarProperty Name="SpeedoReadingReturn" ColumnName="SpeedoReadingReturn" />
+                <ScalarProperty Name="TimeOfReturnDepot" ColumnName="TimeOfReturnDepot" />
+                <ScalarProperty Name="SpeedoReadingBefore" ColumnName="SpeedoReadingBefore" />
+                <ScalarProperty Name="TimeOfLeavingDepot" ColumnName="TimeOfLeavingDepot" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="BusID" ColumnName="BusID" />
+                <ScalarProperty Name="BusTypeID" ColumnName="BusTypeID" />
+                <ScalarProperty Name="QuotationID" ColumnName="QuotationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.Bus">
+              <MappingFragment StoreEntitySet="Bus">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="VINNumber" ColumnName="VINNumber" />
+                <ScalarProperty Name="FleetNumber" ColumnName="FleetNumber" />
+                <ScalarProperty Name="BusTypeID" ColumnName="BusTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusTypes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BusType">
+              <MappingFragment StoreEntitySet="BusType">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Curtains" ColumnName="Curtains" />
+                <ScalarProperty Name="Toilet" ColumnName="Toilet" />
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="AC" ColumnName="AC" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Sitting" ColumnName="Sitting" />
+                <ScalarProperty Name="Standing" ColumnName="Standing" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDetails">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.CompanyDetail">
+              <MappingFragment StoreEntitySet="CompanyDetails">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CompanyNameAddress" ColumnName="CompanyNameAddress" />
+                <ScalarProperty Name="CompanyPrefix" ColumnName="CompanyPrefix" />
+                <ScalarProperty Name="CompanyLogo" ColumnName="CompanyLogo" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DispatcherVehicleChecklists">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.DispatcherVehicleChecklist">
+              <MappingFragment StoreEntitySet="DispatcherVehicleChecklist">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="RadioFace" ColumnName="RadioFace" />
+                <ScalarProperty Name="JobCardAndMaps" ColumnName="JobCardAndMaps" />
+                <ScalarProperty Name="Permit" ColumnName="Permit" />
+                <ScalarProperty Name="BriefedFinalDestination" ColumnName="BriefedFinalDestination" />
+                <ScalarProperty Name="BriefedPickUpPoint" ColumnName="BriefedPickUpPoint" />
+                <ScalarProperty Name="FullUniform" ColumnName="FullUniform" />
+                <ScalarProperty Name="BookingVehicleID" ColumnName="BookingVehicleID" />
+                <ScalarProperty Name="QuotationID" ColumnName="QuotationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DispatcherVehicleCustomerSurveys">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.DispatcherVehicleCustomerSurvey">
+              <MappingFragment StoreEntitySet="DispatcherVehicleCustomerSurvey">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CustomerComments" ColumnName="CustomerComments" />
+                <ScalarProperty Name="AreMapsAvailable" ColumnName="AreMapsAvailable" />
+                <ScalarProperty Name="DidHeAdhereToTrafficRules" ColumnName="DidHeAdhereToTrafficRules" />
+                <ScalarProperty Name="DidHeKnowTheRoute" ColumnName="DidHeKnowTheRoute" />
+                <ScalarProperty Name="WasDriverProperlyAttired" ColumnName="WasDriverProperlyAttired" />
+                <ScalarProperty Name="WasDrivingOnTime" ColumnName="WasDrivingOnTime" />
+                <ScalarProperty Name="BookingVehicleID" ColumnName="BookingVehicleID" />
+                <ScalarProperty Name="QuotationID" ColumnName="QuotationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsSpecialHireDriver" ColumnName="IsSpecialHireDriver" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="EmployeeNumber" ColumnName="EmployeeNumber" />
+                <ScalarProperty Name="DriverNumber" ColumnName="DriverNumber" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthNames">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.MonthName">
+              <MappingFragment StoreEntitySet="MonthNames">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentModes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.PaymentMode">
+              <MappingFragment StoreEntitySet="PaymentMode">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTerms">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.PaymentTerm">
+              <MappingFragment StoreEntitySet="PaymentTerms">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Terms" ColumnName="Terms" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trailers">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.Trailer">
+              <MappingFragment StoreEntitySet="Trailer">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="FleetNumber" ColumnName="FleetNumber" />
+                <ScalarProperty Name="VINNumber" ColumnName="VINNumber" />
+                <ScalarProperty Name="TrailerTypeID" ColumnName="TrailerTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrailerTypes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.TrailerType">
+              <MappingFragment StoreEntitySet="TrailerType">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MaxWeight" ColumnName="MaxWeight" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingApprovalInfoes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingApprovalInfo">
+              <MappingFragment StoreEntitySet="BookingApprovalInfo">
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ReturnTime" ColumnName="ReturnTime" />
+                <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
+                <ScalarProperty Name="PickUpTime" ColumnName="PickUpTime" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="OrganiserName" ColumnName="OrganiserName" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingAvailabilityInfoes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingAvailabilityInfo">
+              <MappingFragment StoreEntitySet="BookingAvailabilityInfo">
+                <ScalarProperty Name="NoOfTrailersConfirmed" ColumnName="NoOfTrailersConfirmed" />
+                <ScalarProperty Name="NoOfBussesConfirmed" ColumnName="NoOfBussesConfirmed" />
+                <ScalarProperty Name="TotalTrailer" ColumnName="TotalTrailer" />
+                <ScalarProperty Name="TotalBusses" ColumnName="TotalBusses" />
+                <ScalarProperty Name="NoOfTrailers" ColumnName="NoOfTrailers" />
+                <ScalarProperty Name="NoOfBusses" ColumnName="NoOfBusses" />
+                <ScalarProperty Name="NoOfBooking" ColumnName="NoOfBooking" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingReportings">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingReporting">
+              <MappingFragment StoreEntitySet="BookingReporting">
+                <ScalarProperty Name="PaymentDifference" ColumnName="PaymentDifference" />
+                <ScalarProperty Name="InvoiceTotal" ColumnName="InvoiceTotal" />
+                <ScalarProperty Name="IsJobCompleted" ColumnName="IsJobCompleted" />
+                <ScalarProperty Name="DifferenceKms" ColumnName="DifferenceKms" />
+                <ScalarProperty Name="OperatedKms" ColumnName="OperatedKms" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="IsBookingDone" ColumnName="IsBookingDone" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
+                <ScalarProperty Name="DriverNumber" ColumnName="DriverNumber" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="FleetNumber" ColumnName="FleetNumber" />
+                <ScalarProperty Name="BusType" ColumnName="BusType" />
+                <ScalarProperty Name="QuotationValue" ColumnName="QuotationValue" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="QuotationNumber" ColumnName="QuotationNumber" />
+                <ScalarProperty Name="OrganiserName" ColumnName="OrganiserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DispatcherBookingInfoes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.DispatcherBookingInfo">
+              <MappingFragment StoreEntitySet="DispatcherBookingInfo">
+                <ScalarProperty Name="BookingVehicleID" ColumnName="BookingVehicleID" />
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="IsJobCompleted" ColumnName="IsJobCompleted" />
+                <ScalarProperty Name="IsTrailerAssigned" ColumnName="IsTrailerAssigned" />
+                <ScalarProperty Name="IsVehicleAssigned" ColumnName="IsVehicleAssigned" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="FleetNumber" ColumnName="FleetNumber" />
+                <ScalarProperty Name="BusType" ColumnName="BusType" />
+                <ScalarProperty Name="NumberOfBusses" ColumnName="NumberOfBusses" />
+                <ScalarProperty Name="NumberOfTrailers" ColumnName="NumberOfTrailers" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ReturnTime" ColumnName="ReturnTime" />
+                <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
+                <ScalarProperty Name="PickUpTime" ColumnName="PickUpTime" />
+                <ScalarProperty Name="CellNumber" ColumnName="CellNumber" />
+                <ScalarProperty Name="OrganiserName" ColumnName="OrganiserName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="AlternateID" ColumnName="AlternateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Revenues">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.Revenue">
+              <MappingFragment StoreEntitySet="Revenue">
+                <ScalarProperty Name="OrderYear" ColumnName="OrderYear" />
+                <ScalarProperty Name="OrderMonth" ColumnName="OrderMonth" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
