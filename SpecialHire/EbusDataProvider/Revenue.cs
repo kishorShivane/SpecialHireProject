@@ -14,7 +14,8 @@ namespace EbusDataProvider
     
     public partial class Revenue
     {
-        public double Total { get; set; }
+        public int Id { get; set; }
+        public Nullable<double> Total { get; set; }
         public string OrderMonth { get; set; }
         public string OrderYear { get; set; }
     }

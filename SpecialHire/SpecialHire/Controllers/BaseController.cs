@@ -20,8 +20,9 @@ namespace SpecialHire.Controllers
         public DBHelper DBHelper { get; set; }
         public CommonHelper commonHelper { get; set; }
         public EmailHelper EmailHelper { get; set; }
-        public CompanyConfigurationInfo ConfigurationSettings { get{
-            return (HttpContext.Session["CONFIGURATION"] != null)?(CompanyConfigurationInfo)(CompanyConfigurationInfo)HttpContext.Session["CONFIGURATION"]:new CompanyConfigurationInfo();}
-        }
+        public Models.CompanyConfigurationInfo ConfigurationSettings { get{
+            return (HttpContext.Session["CONFIGURATION"] != null)?(Models.CompanyConfigurationInfo)(Models.CompanyConfigurationInfo)HttpContext.Session["CONFIGURATION"]:new Models.CompanyConfigurationInfo();}
+            //return DBHelper.LoadConfigurationSettings(applicationUser.CompanyID.Value);
+            }
     }
 }

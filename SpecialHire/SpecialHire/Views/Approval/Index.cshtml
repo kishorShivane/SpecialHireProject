@@ -140,7 +140,7 @@
                         rows = rows + "<td>" + CurrentItem.Contact + "</td>"
                         rows = rows + "<td>" + CurrentItem.FromLocation+ "</td>"
                         rows = rows + "<td>" + CurrentItem.PickUpTime + "</td>"
-                        rows = rows + "<td>" + CurrentItem.FromLocation + "</td>"
+                        rows = rows + "<td>" + CurrentItem.ToLocation + "</td>"
                         rows = rows + "<td>" + CurrentItem.ReturnTime + "</td>"
                         rows = rows + "<td><textarea class='form-control' rows='1' id='txtComment'></textarea></td>"
                         rows = rows + "<td><button type='button' class='btn btn-success' id='btnApproveBooking' value='" + CurrentItem.ID + "'>Approve&nbsp;<i class='fa fa-thumbs-o-up fa-1x'></i></button></td></tr>";
@@ -188,7 +188,7 @@
             return false;
         });
 
-        divDispatcherInfo.modal('show');
+        //divDispatcherInfo.modal('show');
     });
 
 </script>

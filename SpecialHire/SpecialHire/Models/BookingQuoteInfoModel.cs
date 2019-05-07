@@ -4,18 +4,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace SpecialHire.Models
 {
-    public class BookingQuoteInfoModel
+    public class BookingQuoteInfoModel: BookingQuoteInfoBase
     {
         public BookingQuoteInfoModel()
         {
-            BookingInfo = new BookingInfo();
+            BookingInfo = new BookinginfoModel();
+        }
+
+        public BookinginfoModel BookingInfo { get; set; }
+        public List<SelectListItem> Titles { get; set; }
+        public List<SelectListItem> Time { get; set; }
+        public List<SelectListItem> Events { get; set; }
+        public List<SelectListItem> PaymentTerms { get; set; }
+        public List<SelectListItem> PaymentModes { get; set; }
+        public List<SelectListItem> BusTypes { get; set; }
+        public List<SelectListItem> TrailerTypes { get; set; }
+        public List<SelectListItem> CompanyDetails { get; set; }        
+    }
+
+    public class BookingQuoteInfoBase
+    {
+
+        public BookingQuoteInfoBase()
+        {
             BookingVehicleInfo = new List<BookingVehicleInfoModel>();
             BookingTrailerInfo = new List<BookingTrailerInfoModel>();
         }
-
         public int ID { get; set; }
         public string AlternateID { get; set; }
         public string Title { get; set; }
@@ -59,16 +77,57 @@ namespace SpecialHire.Models
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
 
-        public BookingInfo BookingInfo { get; set; }
         public List<BookingVehicleInfoModel> BookingVehicleInfo { get; set; }
         public List<BookingTrailerInfoModel> BookingTrailerInfo { get; set; }
-        public List<SelectListItem> Titles { get; set; }
-        public List<SelectListItem> Time { get; set; }
-        public List<SelectListItem> Events { get; set; }
-        public List<SelectListItem> PaymentTerms { get; set; }
-        public List<SelectListItem> PaymentModes { get; set; }
-        public List<SelectListItem> BusTypes { get; set; }
-        public List<SelectListItem> TrailerTypes { get; set; }
-        public List<SelectListItem> CompanyDetails { get; set; }        
+    }
+
+
+    public class CompanyConfigurationInfo
+    {
+        public int ID { get; set; }
+        public int CompanyID { get; set; }
+        public string CompanyName { get; set; }
+        public string ConnectionKey { get; set; }
+        public Nullable<int> MinimumDistance { get; set; }
+        public Nullable<int> DistanceCalculation { get; set; }
+        public string DefaultEventDescription { get; set; }
+        public Nullable<int> QuotationValidityPeriod { get; set; }
+        public Nullable<int> QuotationMinimumValue { get; set; }
+        public Nullable<bool> EnforcePassengerCount { get; set; }
+        public string DefaultCompanyDetails { get; set; }
+        public string DefaultPaymentTerms { get; set; }
+        public string PDFPaymentTerms { get; set; }
+        public string DefaultPaymentMode { get; set; }
+        public string QuotationEmailTemplate { get; set; }
+        public string InvoiceEmailTemplate { get; set; }
+        public string QuotationPDFPath { get; set; }
+        public string InvoicePDFPath { get; set; }
+        public string EmailUserName { get; set; }
+        public string EmailPassword { get; set; }
+        public string EmailSMTP { get; set; }
+        public string EmailPort { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
+    }
+
+    public class BookinginfoModel
+    {
+        public int ID { get; set; }
+        public string AlternateID { get; set; }
+        public int QuotationID { get; set; }
+        public string OrderNumber { get; set; }
+        public int PaymentModeID { get; set; }
+        public string PaymentReferenceNumber { get; set; }
+        public double AmountPaid { get; set; }
+        public bool IsApprovedByAdmin { get; set; }
+        public bool IsConfirmationEnabled { get; set; }
+        public string Comments { get; set; }
+        public string InvoiceFileName { get; set; }
+        public Nullable<bool> IsBookingApproved { get; set; }
+        public string ApprovalComments { get; set; }
+        public bool Status { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     }
 }

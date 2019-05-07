@@ -19,9 +19,9 @@ namespace EbusDataProvider
         public Nullable<int> NoOfBooking { get; set; }
         public Nullable<int> NoOfBusses { get; set; }
         public Nullable<int> NoOfTrailers { get; set; }
-        public Nullable<int> TotalBusses { get; set; }
-        public Nullable<int> TotalTrailer { get; set; }
-        public int NoOfBussesConfirmed { get; set; }
-        public int NoOfTrailersConfirmed { get; set; }
+        public int TotalBusses { get; set; }
+        public int TotalTrailer { get; set; }
+        public Nullable<int> NoOfBussesConfirmed { get; set; }
+        public Nullable<int> NoOfTrailersConfirmed { get; set; }
     }
 }

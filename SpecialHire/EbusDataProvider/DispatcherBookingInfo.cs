@@ -29,10 +29,10 @@ namespace EbusDataProvider
         public string BusType { get; set; }
         public string FleetNumber { get; set; }
         public string DriverName { get; set; }
-        public bool IsVehicleAssigned { get; set; }
+        public Nullable<bool> IsVehicleAssigned { get; set; }
         public bool IsTrailerAssigned { get; set; }
-        public bool IsJobCompleted { get; set; }
+        public Nullable<bool> IsJobCompleted { get; set; }
         public int BookingID { get; set; }
-        public int BookingVehicleID { get; set; }
+        public Nullable<int> BookingVehicleID { get; set; }
     }
 }

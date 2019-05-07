@@ -190,8 +190,8 @@
                         rows = rows + "<td><span id='lblToLocation'>" + CurrentItem.ToLocation + "</span><input type='hidden' id='hdnSearchBookingID' value='" + CurrentItem.BookingID + "'/></td>"
                         rows = rows + "<td><span id='lblReturnTime'>" + CurrentItem.ReturnTime + "</span><input type='hidden' id='hdnSearchBookingVehicleID' value='" + CurrentItem.BookingVehicleID + "'/></td>"
                         rows = rows + "<td><span id='lblBusType'>" + CurrentItem.BusType + "</span><input type='hidden' id='hdnSearchIsTrailerAssigned' value='" + CurrentItem.IsTrailerAssigned + "'/></td>";
-                        rows = rows + "<td><span id='lblFleetNumber'>" + CurrentItem.FleetNumber + "</span></td>";
-                        rows = rows + "<td><span id='lblDriverName'>" + CurrentItem.DriverName + "</span></td>";
+                        rows = rows + "<td><span id='lblFleetNumber'>" + CurrentItem.FleetNumber + "</span><input type='hidden' id='hdnNumberOfBussesAssigned' value='" + CurrentItem.NumberOfBussesAssigned + "'/></td>";
+                        rows = rows + "<td><span id='lblDriverName'>" + CurrentItem.DriverName + "</span><input type='hidden' id='hdnNumberOfTrailersAssigned' value='" + CurrentItem.NumberOfTrailersAssigned + "'/></td>";
                         if (CurrentItem.IsVehicleAssigned) {
                             if (CurrentItem.IsJobCompleted) buttonClass = "btn-success"; else buttonClass = "btn-warning";
                         } else { buttonClass = "btn-info"; }
@@ -295,6 +295,7 @@
     });
 
     $(document).on("click", "button#btnAddDispatcherInfo", function () {
+        debugger;
         var quotationID = $(this).attr("value");
         var row = $(this).parent().parent();
         var bookingVehicleID = row.find("input#hdnSearchBookingVehicleID").prop("value");
@@ -303,6 +304,8 @@
         var IsVehicleAssigned = row.find("input#hdnSearchIsVehicleAssigned").prop("value");
         var NoOfTrailers = row.find("input#hdnNoOfTrailers").prop("value");
         var NoOfBusses = row.find("input#hdnNoOfBusses").prop("value");
+        var NoOfTrailersAssigned = row.find("input#hdnNumberOfTrailersAssigned").prop("value");
+        var NoOfBussesAssigned = row.find("input#hdnNumberOfBussesAssigned").prop("value");
 
         $.ajax({
             async: false,
@@ -315,8 +318,7 @@
                 alert('Error: ' + xhr.statusText);
             },
             success: function (result) {
-                var NoTrailersAssigned = parseInt(NoOfTrailers);
-                var NoBussesAssigned = parseInt(NoOfBusses);
+                debugger;
                 var url = window.location.href;
 
                 ClearPopupControls();
@@ -326,8 +328,8 @@
                 hdnIsJobCompleted.prop("value", IsJobCompleted);
                 hdnIsVehicleAssigned.prop("value", IsVehicleAssigned);
 
-                if (IsTrailerAssigned == "true") { NoTrailersAssigned = NoTrailersAssigned + 1; }
-                if (IsVehicleAssigned == "true") { NoBussesAssigned = NoBussesAssigned + 1; }
+                //if (IsTrailerAssigned == "true") { NoTrailersAssigned = NoTrailersAssigned + 1; }
+                //if (IsVehicleAssigned == "true") { NoBussesAssigned = NoBussesAssigned + 1; }
 
                 if (result.BusNumbers.length > 0) {
                     $(result.BusNumbers).each(function (index) {
@@ -344,7 +346,7 @@
                     ddlBusDriver.val(result.DriverID).change();
                 }
 
-                if (parseInt(NoTrailersAssigned) > 0) {
+                if (parseInt(NoOfTrailers) > 0 && parseInt(NoOfTrailersAssigned) <= parseInt(NoOfTrailers)) {
                     $("div#divTrailerInfo").show();
                     if (result.TrailerNumbers.length > 0) {
                         $(result.TrailerNumbers).each(function (index) {
@@ -354,7 +356,7 @@
                         ddlTrailerFleetNumber.val(result.TrailerID).change();
                     }
                     debugger;
-                    if (parseInt(NoBussesAssigned) > parseInt(NoTrailersAssigned)) {
+                    if (result.TrailerID == 0 && parseInt(NoOfTrailersAssigned) >= parseInt(NoOfTrailers) ) {
                         ddlTrailerFleetNumber.removeAttr("required");
                     }
                 }

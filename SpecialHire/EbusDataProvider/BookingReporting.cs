@@ -18,8 +18,8 @@ namespace EbusDataProvider
         public string QuotationNumber { get; set; }
         public string InvoiceNumber { get; set; }
         public string CompanyName { get; set; }
-        public System.DateTime QuotationDate { get; set; }
-        public System.DateTime InvoiceDate { get; set; }
+        public Nullable<System.DateTime> QuotationDate { get; set; }
+        public Nullable<System.DateTime> InvoiceDate { get; set; }
         public double QuotationValue { get; set; }
         public string BusType { get; set; }
         public string FleetNumber { get; set; }
@@ -29,7 +29,7 @@ namespace EbusDataProvider
         public System.DateTime ReturnDate { get; set; }
         public string IsBookingDone { get; set; }
         public double Distance { get; set; }
-        public Nullable<double> OperatedKms { get; set; }
+        public Nullable<int> OperatedKms { get; set; }
         public Nullable<double> DifferenceKms { get; set; }
         public Nullable<bool> IsJobCompleted { get; set; }
         public double InvoiceTotal { get; set; }

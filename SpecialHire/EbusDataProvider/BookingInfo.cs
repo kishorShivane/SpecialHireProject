@@ -12,7 +12,7 @@ namespace EbusDataProvider
     using System;
     using System.Collections.Generic;
     
-    public partial class BookingInfo
+    public partial class Bookinginfo
     {
         public int ID { get; set; }
         public string AlternateID { get; set; }
@@ -32,6 +32,6 @@ namespace EbusDataProvider
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         public virtual PaymentMode PaymentMode { get; set; }
-        public virtual BookingQuoteInfo BookingQuoteInfo { get; set; }
+        public virtual BookingQuoteinfo BookingQuoteinfo { get; set; }
     }
 }

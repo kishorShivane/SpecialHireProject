@@ -23,17 +23,12 @@ namespace SpecialHire
         {
             if (Context.Handler is IRequiresSessionState || Context.Handler is IReadOnlySessionState)
             {
-
                 HttpContext context = HttpContext.Current;
                 if (context.Session["USER"] == null) //If Session object is  null
                 {
-                    HttpContext.Current.RewritePath("Home/Index");
+                    HttpContext.Current.RewritePath("~/Home/Index");
                 }
-
-
             }
-
-
         }
     }
 }

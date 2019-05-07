@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SpecialHireDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BookingInfo">
+        <EntityType Name="Bookinginfo">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -26,7 +26,7 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <EntityType Name="BookingQuoteInfo">
+        <EntityType Name="BookingQuoteinfo">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -199,7 +199,7 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <EntityType Name="MonthNames">
+        <EntityType Name="MonthName">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -254,11 +254,10 @@
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SHGautengCoaches.dbo.BookingApprovalInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SpecialHire.dbo.BookingApprovalInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BookingApprovalInfo">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="InvoiceNumber" />
             <PropertyRef Name="OrganiserName" />
             <PropertyRef Name="Contact" />
             <PropertyRef Name="PickUpTime" />
@@ -266,47 +265,44 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.BookingApprovalInfo' does not
             <PropertyRef Name="ReturnTime" />
             <PropertyRef Name="FromLocation" />
             <PropertyRef Name="ToLocation" />
+            <PropertyRef Name="Company" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="InvoiceDate" Type="datetime" />
-          <Property Name="OrganiserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PickUpTime" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="PickUpDate" Type="datetime" Nullable="false" />
           <Property Name="ReturnTime" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="FromLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ToLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SHGautengCoaches.dbo.BookingAvailabilityInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SpecialHire.dbo.BookingAvailabilityInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BookingAvailabilityInfo">
           <Key>
             <PropertyRef Name="PickUpDate" />
             <PropertyRef Name="ReturnDate" />
-            <PropertyRef Name="NoOfBussesConfirmed" />
-            <PropertyRef Name="NoOfTrailersConfirmed" />
+            <PropertyRef Name="TotalBusses" />
+            <PropertyRef Name="TotalTrailer" />
           </Key>
           <Property Name="PickUpDate" Type="datetime" Nullable="false" />
           <Property Name="ReturnDate" Type="datetime" Nullable="false" />
           <Property Name="NoOfBooking" Type="int" />
           <Property Name="NoOfBusses" Type="int" />
           <Property Name="NoOfTrailers" Type="int" />
-          <Property Name="TotalBusses" Type="int" />
-          <Property Name="TotalTrailer" Type="int" />
-          <Property Name="NoOfBussesConfirmed" Type="int" Nullable="false" />
-          <Property Name="NoOfTrailersConfirmed" Type="int" Nullable="false" />
+          <Property Name="TotalBusses" Type="int" Nullable="false" />
+          <Property Name="TotalTrailer" Type="int" Nullable="false" />
+          <Property Name="NoOfBussesConfirmed" Type="int" />
+          <Property Name="NoOfTrailersConfirmed" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SHGautengCoaches.dbo.BookingReporting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SpecialHire.dbo.BookingReporting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BookingReporting">
           <Key>
-            <PropertyRef Name="OrganiserName" />
-            <PropertyRef Name="QuotationNumber" />
-            <PropertyRef Name="InvoiceNumber" />
             <PropertyRef Name="CompanyName" />
-            <PropertyRef Name="QuotationDate" />
-            <PropertyRef Name="InvoiceDate" />
             <PropertyRef Name="QuotationValue" />
             <PropertyRef Name="BusType" />
             <PropertyRef Name="FleetNumber" />
@@ -314,17 +310,16 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.BookingReporting' does not ha
             <PropertyRef Name="DriverNumber" />
             <PropertyRef Name="PickUpDate" />
             <PropertyRef Name="ReturnDate" />
-            <PropertyRef Name="IsBookingDone" />
             <PropertyRef Name="Distance" />
             <PropertyRef Name="InvoiceTotal" />
             <PropertyRef Name="PaymentDifference" />
           </Key>
-          <Property Name="OrganiserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="QuotationNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="200" />
+          <Property Name="QuotationNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="QuotationDate" Type="datetime" Nullable="false" />
-          <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+          <Property Name="QuotationDate" Type="datetime" />
+          <Property Name="InvoiceDate" Type="datetime" />
           <Property Name="QuotationValue" Type="float" Nullable="false" />
           <Property Name="BusType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FleetNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -332,20 +327,20 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.BookingReporting' does not ha
           <Property Name="DriverNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PickUpDate" Type="datetime" Nullable="false" />
           <Property Name="ReturnDate" Type="datetime" Nullable="false" />
-          <Property Name="IsBookingDone" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="IsBookingDone" Type="nvarchar" MaxLength="30" />
           <Property Name="Distance" Type="float" Nullable="false" />
-          <Property Name="OperatedKms" Type="float" />
+          <Property Name="OperatedKms" Type="int" />
           <Property Name="DifferenceKms" Type="float" />
           <Property Name="IsJobCompleted" Type="bit" />
           <Property Name="InvoiceTotal" Type="float" Nullable="false" />
           <Property Name="PaymentDifference" Type="float" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SHGautengCoaches.dbo.DispatcherBookingInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SpecialHire.dbo.DispatcherBookingInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DispatcherBookingInfo">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="CompanyName" />
             <PropertyRef Name="CellNumber" />
             <PropertyRef Name="PickUpTime" />
             <PropertyRef Name="PickUpDate" />
@@ -355,16 +350,13 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.DispatcherBookingInfo' does n
             <PropertyRef Name="BusType" />
             <PropertyRef Name="FleetNumber" />
             <PropertyRef Name="DriverName" />
-            <PropertyRef Name="IsVehicleAssigned" />
             <PropertyRef Name="IsTrailerAssigned" />
-            <PropertyRef Name="IsJobCompleted" />
             <PropertyRef Name="BookingID" />
-            <PropertyRef Name="BookingVehicleID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="AlternateID" Type="nvarchar" MaxLength="50" />
-          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
-          <Property Name="OrganiserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="200" />
           <Property Name="CellNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PickUpTime" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="PickUpDate" Type="datetime" Nullable="false" />
@@ -376,64 +368,64 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.DispatcherBookingInfo' does n
           <Property Name="BusType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FleetNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DriverName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsVehicleAssigned" Type="bit" Nullable="false" />
+          <Property Name="IsVehicleAssigned" Type="bit" />
           <Property Name="IsTrailerAssigned" Type="bit" Nullable="false" />
-          <Property Name="IsJobCompleted" Type="bit" Nullable="false" />
+          <Property Name="IsJobCompleted" Type="bit" />
           <Property Name="BookingID" Type="int" Nullable="false" />
-          <Property Name="BookingVehicleID" Type="int" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Revenue">
           <Key>
-            <PropertyRef Name="Total" />
-            <PropertyRef Name="OrderYear" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Total" Type="float" Nullable="false" />
-          <Property Name="OrderMonth" Type="nvarchar" MaxLength="30" />
-          <Property Name="OrderYear" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Total" Type="float" />
+          <Property Name="OrderMonth" Type="char" MaxLength="3" />
+          <Property Name="OrderYear" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <Association Name="FK_Booking_PaymentMode">
           <End Role="PaymentMode" Type="Self.PaymentMode" Multiplicity="1" />
-          <End Role="BookingInfo" Type="Self.BookingInfo" Multiplicity="*" />
+          <End Role="Bookinginfo" Type="Self.Bookinginfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PaymentMode">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BookingInfo">
+            <Dependent Role="Bookinginfo">
               <PropertyRef Name="PaymentModeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Booking_Quotation">
-          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
-          <End Role="BookingInfo" Type="Self.BookingInfo" Multiplicity="*" />
+          <End Role="BookingQuoteinfo" Type="Self.BookingQuoteinfo" Multiplicity="1" />
+          <End Role="Bookinginfo" Type="Self.Bookinginfo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BookingInfo">
+            <Dependent Role="Bookinginfo">
               <PropertyRef Name="QuotationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BookingQuoteInfo_CompanyDetails1">
+        <Association Name="FK_BookingQuoteInfo_CompanyDetail">
           <End Role="CompanyDetails" Type="Self.CompanyDetails" Multiplicity="1" />
-          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="*" />
+          <End Role="BookingQuoteinfo" Type="Self.BookingQuoteinfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CompanyDetails">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BookingQuoteInfo">
+            <Dependent Role="BookingQuoteinfo">
               <PropertyRef Name="CompanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BookingTrailerInfo_BookingQuote">
-          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
+          <End Role="BookingQuoteinfo" Type="Self.BookingQuoteinfo" Multiplicity="1" />
           <End Role="BookingTrailerInfo" Type="Self.BookingTrailerInfo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="BookingTrailerInfo">
@@ -466,10 +458,10 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DispatcherVehicleChecklist_BookingQuoteInfo">
-          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
+          <End Role="BookingQuoteinfo" Type="Self.BookingQuoteinfo" Multiplicity="1" />
           <End Role="DispatcherVehicleChecklist" Type="Self.DispatcherVehicleChecklist" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DispatcherVehicleChecklist">
@@ -491,12 +483,12 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
         </Association>
         <Association Name="FK_Quotation_Event">
           <End Role="Event" Type="Self.Event" Multiplicity="1" />
-          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="*" />
+          <End Role="BookingQuoteinfo" Type="Self.BookingQuoteinfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Event">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BookingQuoteInfo">
+            <Dependent Role="BookingQuoteinfo">
               <PropertyRef Name="EventID" />
             </Dependent>
           </ReferentialConstraint>
@@ -514,10 +506,10 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VehicleCustomerSurvey_BookingQuoteInfo">
-          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
+          <End Role="BookingQuoteinfo" Type="Self.BookingQuoteinfo" Multiplicity="1" />
           <End Role="DispatcherVehicleCustomerSurvey" Type="Self.DispatcherVehicleCustomerSurvey" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DispatcherVehicleCustomerSurvey">
@@ -550,10 +542,10 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VehicleDetails_Quotation">
-          <End Role="BookingQuoteInfo" Type="Self.BookingQuoteInfo" Multiplicity="1" />
+          <End Role="BookingQuoteinfo" Type="Self.BookingQuoteinfo" Multiplicity="1" />
           <End Role="BookingVehicleInfo" Type="Self.BookingVehicleInfo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="BookingVehicleInfo">
@@ -562,8 +554,8 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SpecialHireDBModelStoreContainer">
-          <EntitySet Name="BookingInfo" EntityType="Self.BookingInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BookingQuoteInfo" EntityType="Self.BookingQuoteInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bookinginfo" EntityType="Self.Bookinginfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingQuoteinfo" EntityType="Self.BookingQuoteinfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingTrailerInfo" EntityType="Self.BookingTrailerInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingVehicleInfo" EntityType="Self.BookingVehicleInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
@@ -573,7 +565,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <EntitySet Name="DispatcherVehicleCustomerSurvey" EntityType="Self.DispatcherVehicleCustomerSurvey" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MonthNames" EntityType="Self.MonthNames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthName" EntityType="Self.MonthName" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentTerms" EntityType="Self.PaymentTerms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
@@ -589,7 +581,8 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
     [BookingApprovalInfo].[PickUpDate] AS [PickUpDate], 
     [BookingApprovalInfo].[ReturnTime] AS [ReturnTime], 
     [BookingApprovalInfo].[FromLocation] AS [FromLocation], 
-    [BookingApprovalInfo].[ToLocation] AS [ToLocation]
+    [BookingApprovalInfo].[ToLocation] AS [ToLocation], 
+    [BookingApprovalInfo].[Company] AS [Company]
     FROM [dbo].[BookingApprovalInfo] AS [BookingApprovalInfo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="BookingAvailabilityInfo" EntityType="Self.BookingAvailabilityInfo" store:Type="Views" store:Schema="dbo">
@@ -655,6 +648,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </EntitySet>
           <EntitySet Name="Revenue" EntityType="Self.Revenue" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [Revenue].[Id] AS [Id], 
     [Revenue].[Total] AS [Total], 
     [Revenue].[OrderMonth] AS [OrderMonth], 
     [Revenue].[OrderYear] AS [OrderYear]
@@ -662,18 +656,18 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </EntitySet>
           <AssociationSet Name="FK_Booking_PaymentMode" Association="Self.FK_Booking_PaymentMode">
             <End Role="PaymentMode" EntitySet="PaymentMode" />
-            <End Role="BookingInfo" EntitySet="BookingInfo" />
+            <End Role="Bookinginfo" EntitySet="Bookinginfo" />
           </AssociationSet>
           <AssociationSet Name="FK_Booking_Quotation" Association="Self.FK_Booking_Quotation">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
-            <End Role="BookingInfo" EntitySet="BookingInfo" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfo" />
+            <End Role="Bookinginfo" EntitySet="Bookinginfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_BookingQuoteInfo_CompanyDetails1" Association="Self.FK_BookingQuoteInfo_CompanyDetails1">
+          <AssociationSet Name="FK_BookingQuoteInfo_CompanyDetail" Association="Self.FK_BookingQuoteInfo_CompanyDetail">
             <End Role="CompanyDetails" EntitySet="CompanyDetails" />
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfo" />
           </AssociationSet>
           <AssociationSet Name="FK_BookingTrailerInfo_BookingQuote" Association="Self.FK_BookingTrailerInfo_BookingQuote">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfo" />
             <End Role="BookingTrailerInfo" EntitySet="BookingTrailerInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_BookingTrailerInfo_TrialerType" Association="Self.FK_BookingTrailerInfo_TrialerType">
@@ -685,7 +679,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
             <End Role="Bus" EntitySet="Bus" />
           </AssociationSet>
           <AssociationSet Name="FK_DispatcherVehicleChecklist_BookingQuoteInfo" Association="Self.FK_DispatcherVehicleChecklist_BookingQuoteInfo">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfo" />
             <End Role="DispatcherVehicleChecklist" EntitySet="DispatcherVehicleChecklist" />
           </AssociationSet>
           <AssociationSet Name="FK_DispatcherVehicleChecklist_BookingVehicleInfo" Association="Self.FK_DispatcherVehicleChecklist_BookingVehicleInfo">
@@ -694,14 +688,14 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </AssociationSet>
           <AssociationSet Name="FK_Quotation_Event" Association="Self.FK_Quotation_Event">
             <End Role="Event" EntitySet="Event" />
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfo" />
           </AssociationSet>
           <AssociationSet Name="FK_Trailer_TrailerType" Association="Self.FK_Trailer_TrailerType">
             <End Role="TrailerType" EntitySet="TrailerType" />
             <End Role="Trailer" EntitySet="Trailer" />
           </AssociationSet>
           <AssociationSet Name="FK_VehicleCustomerSurvey_BookingQuoteInfo" Association="Self.FK_VehicleCustomerSurvey_BookingQuoteInfo">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfo" />
             <End Role="DispatcherVehicleCustomerSurvey" EntitySet="DispatcherVehicleCustomerSurvey" />
           </AssociationSet>
           <AssociationSet Name="FK_VehicleCustomerSurvey_BookingVehicleInfo" Association="Self.FK_VehicleCustomerSurvey_BookingVehicleInfo">
@@ -713,7 +707,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
             <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_VehicleDetails_Quotation" Association="Self.FK_VehicleDetails_Quotation">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfo" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfo" />
             <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfo" />
           </AssociationSet>
         </EntityContainer>
@@ -722,8 +716,8 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
     <edmx:ConceptualModels>
       <Schema Namespace="SpecialHireDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SpecialHireDBContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BookingInfoes" EntityType="SpecialHireDBModel.BookingInfo" />
-          <EntitySet Name="BookingQuoteInfoes" EntityType="SpecialHireDBModel.BookingQuoteInfo" />
+          <EntitySet Name="Bookinginfoes" EntityType="SpecialHireDBModel.Bookinginfo" />
+          <EntitySet Name="BookingQuoteinfoes" EntityType="SpecialHireDBModel.BookingQuoteinfo" />
           <EntitySet Name="BookingTrailerInfoes" EntityType="SpecialHireDBModel.BookingTrailerInfo" />
           <EntitySet Name="BookingVehicleInfoes" EntityType="SpecialHireDBModel.BookingVehicleInfo" />
           <EntitySet Name="Buses" EntityType="SpecialHireDBModel.Bus" />
@@ -745,34 +739,34 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <EntitySet Name="Revenues" EntityType="SpecialHireDBModel.Revenue" />
           <AssociationSet Name="FK_Booking_PaymentMode" Association="SpecialHireDBModel.FK_Booking_PaymentMode">
             <End Role="PaymentMode" EntitySet="PaymentModes" />
-            <End Role="BookingInfo" EntitySet="BookingInfoes" />
+            <End Role="Bookinginfo" EntitySet="Bookinginfoes" />
           </AssociationSet>
           <AssociationSet Name="FK_Booking_Quotation" Association="SpecialHireDBModel.FK_Booking_Quotation">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
-            <End Role="BookingInfo" EntitySet="BookingInfoes" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfoes" />
+            <End Role="Bookinginfo" EntitySet="Bookinginfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_BookingQuoteInfo_CompanyDetails1" Association="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetails1">
+          <AssociationSet Name="FK_BookingQuoteInfo_CompanyDetail" Association="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetail">
             <End Role="CompanyDetail" EntitySet="CompanyDetails" />
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfoes" />
           </AssociationSet>
           <AssociationSet Name="FK_BookingTrailerInfo_BookingQuote" Association="SpecialHireDBModel.FK_BookingTrailerInfo_BookingQuote">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfoes" />
             <End Role="BookingTrailerInfo" EntitySet="BookingTrailerInfoes" />
           </AssociationSet>
           <AssociationSet Name="FK_DispatcherVehicleChecklist_BookingQuoteInfo" Association="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingQuoteInfo">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfoes" />
             <End Role="DispatcherVehicleChecklist" EntitySet="DispatcherVehicleChecklists" />
           </AssociationSet>
           <AssociationSet Name="FK_Quotation_Event" Association="SpecialHireDBModel.FK_Quotation_Event">
             <End Role="Event" EntitySet="Events" />
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfoes" />
           </AssociationSet>
           <AssociationSet Name="FK_VehicleCustomerSurvey_BookingQuoteInfo" Association="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingQuoteInfo">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfoes" />
             <End Role="DispatcherVehicleCustomerSurvey" EntitySet="DispatcherVehicleCustomerSurveys" />
           </AssociationSet>
           <AssociationSet Name="FK_VehicleDetails_Quotation" Association="SpecialHireDBModel.FK_VehicleDetails_Quotation">
-            <End Role="BookingQuoteInfo" EntitySet="BookingQuoteInfoes" />
+            <End Role="BookingQuoteinfo" EntitySet="BookingQuoteinfoes" />
             <End Role="BookingVehicleInfo" EntitySet="BookingVehicleInfoes" />
           </AssociationSet>
           <AssociationSet Name="FK_BookingTrailerInfo_TrialerType" Association="SpecialHireDBModel.FK_BookingTrailerInfo_TrialerType">
@@ -800,7 +794,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
             <End Role="Trailer" EntitySet="Trailers" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="BookingInfo">
+        <EntityType Name="Bookinginfo">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -820,10 +814,10 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="PaymentMode" Relationship="SpecialHireDBModel.FK_Booking_PaymentMode" FromRole="BookingInfo" ToRole="PaymentMode" />
-          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_Booking_Quotation" FromRole="BookingInfo" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="PaymentMode" Relationship="SpecialHireDBModel.FK_Booking_PaymentMode" FromRole="Bookinginfo" ToRole="PaymentMode" />
+          <NavigationProperty Name="BookingQuoteinfo" Relationship="SpecialHireDBModel.FK_Booking_Quotation" FromRole="Bookinginfo" ToRole="BookingQuoteinfo" />
         </EntityType>
-        <EntityType Name="BookingQuoteInfo">
+        <EntityType Name="BookingQuoteinfo">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -863,13 +857,13 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BookingInfoes" Relationship="SpecialHireDBModel.FK_Booking_Quotation" FromRole="BookingQuoteInfo" ToRole="BookingInfo" />
-          <NavigationProperty Name="CompanyDetail" Relationship="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetails1" FromRole="BookingQuoteInfo" ToRole="CompanyDetail" />
-          <NavigationProperty Name="BookingTrailerInfoes" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_BookingQuote" FromRole="BookingQuoteInfo" ToRole="BookingTrailerInfo" />
-          <NavigationProperty Name="DispatcherVehicleChecklists" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingQuoteInfo" FromRole="BookingQuoteInfo" ToRole="DispatcherVehicleChecklist" />
-          <NavigationProperty Name="Event" Relationship="SpecialHireDBModel.FK_Quotation_Event" FromRole="BookingQuoteInfo" ToRole="Event" />
-          <NavigationProperty Name="DispatcherVehicleCustomerSurveys" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingQuoteInfo" FromRole="BookingQuoteInfo" ToRole="DispatcherVehicleCustomerSurvey" />
-          <NavigationProperty Name="BookingVehicleInfoes" Relationship="SpecialHireDBModel.FK_VehicleDetails_Quotation" FromRole="BookingQuoteInfo" ToRole="BookingVehicleInfo" />
+          <NavigationProperty Name="Bookinginfoes" Relationship="SpecialHireDBModel.FK_Booking_Quotation" FromRole="BookingQuoteinfo" ToRole="Bookinginfo" />
+          <NavigationProperty Name="CompanyDetail" Relationship="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetail" FromRole="BookingQuoteinfo" ToRole="CompanyDetail" />
+          <NavigationProperty Name="BookingTrailerInfoes" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_BookingQuote" FromRole="BookingQuoteinfo" ToRole="BookingTrailerInfo" />
+          <NavigationProperty Name="DispatcherVehicleChecklists" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingQuoteInfo" FromRole="BookingQuoteinfo" ToRole="DispatcherVehicleChecklist" />
+          <NavigationProperty Name="Event" Relationship="SpecialHireDBModel.FK_Quotation_Event" FromRole="BookingQuoteinfo" ToRole="Event" />
+          <NavigationProperty Name="DispatcherVehicleCustomerSurveys" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingQuoteInfo" FromRole="BookingQuoteinfo" ToRole="DispatcherVehicleCustomerSurvey" />
+          <NavigationProperty Name="BookingVehicleInfoes" Relationship="SpecialHireDBModel.FK_VehicleDetails_Quotation" FromRole="BookingQuoteinfo" ToRole="BookingVehicleInfo" />
         </EntityType>
         <EntityType Name="BookingTrailerInfo">
           <Key>
@@ -883,7 +877,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="IsTrailerAssigned" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_BookingQuote" FromRole="BookingTrailerInfo" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="BookingQuoteinfo" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_BookingQuote" FromRole="BookingTrailerInfo" ToRole="BookingQuoteinfo" />
           <NavigationProperty Name="TrailerType" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_TrialerType" FromRole="BookingTrailerInfo" ToRole="TrailerType" />
         </EntityType>
         <EntityType Name="BookingVehicleInfo">
@@ -903,7 +897,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="IsJobCompleted" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_VehicleDetails_Quotation" FromRole="BookingVehicleInfo" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="BookingQuoteinfo" Relationship="SpecialHireDBModel.FK_VehicleDetails_Quotation" FromRole="BookingVehicleInfo" ToRole="BookingQuoteinfo" />
           <NavigationProperty Name="DispatcherVehicleChecklists" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingVehicleInfo" FromRole="BookingVehicleInfo" ToRole="DispatcherVehicleChecklist" />
           <NavigationProperty Name="DispatcherVehicleCustomerSurveys" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingVehicleInfo" FromRole="BookingVehicleInfo" ToRole="DispatcherVehicleCustomerSurvey" />
           <NavigationProperty Name="BusType" Relationship="SpecialHireDBModel.FK_VehicleDetails_BusType" FromRole="BookingVehicleInfo" ToRole="BusType" />
@@ -954,7 +948,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BookingQuoteInfoes" Relationship="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetails1" FromRole="CompanyDetail" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="BookingQuoteinfoes" Relationship="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetail" FromRole="CompanyDetail" ToRole="BookingQuoteinfo" />
         </EntityType>
         <EntityType Name="DispatcherVehicleChecklist">
           <Key>
@@ -971,7 +965,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="RadioFace" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingQuoteInfo" FromRole="DispatcherVehicleChecklist" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="BookingQuoteinfo" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingQuoteInfo" FromRole="DispatcherVehicleChecklist" ToRole="BookingQuoteinfo" />
           <NavigationProperty Name="BookingVehicleInfo" Relationship="SpecialHireDBModel.FK_DispatcherVehicleChecklist_BookingVehicleInfo" FromRole="DispatcherVehicleChecklist" ToRole="BookingVehicleInfo" />
         </EntityType>
         <EntityType Name="DispatcherVehicleCustomerSurvey">
@@ -989,7 +983,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="CustomerComments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BookingQuoteInfo" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingQuoteInfo" FromRole="DispatcherVehicleCustomerSurvey" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="BookingQuoteinfo" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingQuoteInfo" FromRole="DispatcherVehicleCustomerSurvey" ToRole="BookingQuoteinfo" />
           <NavigationProperty Name="BookingVehicleInfo" Relationship="SpecialHireDBModel.FK_VehicleCustomerSurvey_BookingVehicleInfo" FromRole="DispatcherVehicleCustomerSurvey" ToRole="BookingVehicleInfo" />
         </EntityType>
         <EntityType Name="Driver">
@@ -1016,7 +1010,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BookingQuoteInfoes" Relationship="SpecialHireDBModel.FK_Quotation_Event" FromRole="Event" ToRole="BookingQuoteInfo" />
+          <NavigationProperty Name="BookingQuoteinfoes" Relationship="SpecialHireDBModel.FK_Quotation_Event" FromRole="Event" ToRole="BookingQuoteinfo" />
         </EntityType>
         <EntityType Name="MonthName">
           <Key>
@@ -1035,7 +1029,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BookingInfoes" Relationship="SpecialHireDBModel.FK_Booking_PaymentMode" FromRole="PaymentMode" ToRole="BookingInfo" />
+          <NavigationProperty Name="Bookinginfoes" Relationship="SpecialHireDBModel.FK_Booking_PaymentMode" FromRole="PaymentMode" ToRole="Bookinginfo" />
         </EntityType>
         <EntityType Name="PaymentTerm">
           <Key>
@@ -1079,7 +1073,6 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
         <EntityType Name="BookingApprovalInfo">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="InvoiceNumber" />
             <PropertyRef Name="OrganiserName" />
             <PropertyRef Name="Contact" />
             <PropertyRef Name="PickUpTime" />
@@ -1087,43 +1080,40 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
             <PropertyRef Name="ReturnTime" />
             <PropertyRef Name="FromLocation" />
             <PropertyRef Name="ToLocation" />
+            <PropertyRef Name="Company" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
-          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PickUpTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ReturnTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="FromLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ToLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="BookingAvailabilityInfo">
           <Key>
             <PropertyRef Name="PickUpDate" />
             <PropertyRef Name="ReturnDate" />
-            <PropertyRef Name="NoOfBussesConfirmed" />
-            <PropertyRef Name="NoOfTrailersConfirmed" />
+            <PropertyRef Name="TotalBusses" />
+            <PropertyRef Name="TotalTrailer" />
           </Key>
           <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NoOfBooking" Type="Int32" />
           <Property Name="NoOfBusses" Type="Int32" />
           <Property Name="NoOfTrailers" Type="Int32" />
-          <Property Name="TotalBusses" Type="Int32" />
-          <Property Name="TotalTrailer" Type="Int32" />
-          <Property Name="NoOfBussesConfirmed" Type="Int32" Nullable="false" />
-          <Property Name="NoOfTrailersConfirmed" Type="Int32" Nullable="false" />
+          <Property Name="TotalBusses" Type="Int32" Nullable="false" />
+          <Property Name="TotalTrailer" Type="Int32" Nullable="false" />
+          <Property Name="NoOfBussesConfirmed" Type="Int32" />
+          <Property Name="NoOfTrailersConfirmed" Type="Int32" />
         </EntityType>
         <EntityType Name="BookingReporting">
           <Key>
-            <PropertyRef Name="OrganiserName" />
-            <PropertyRef Name="QuotationNumber" />
-            <PropertyRef Name="InvoiceNumber" />
             <PropertyRef Name="CompanyName" />
-            <PropertyRef Name="QuotationDate" />
-            <PropertyRef Name="InvoiceDate" />
             <PropertyRef Name="QuotationValue" />
             <PropertyRef Name="BusType" />
             <PropertyRef Name="FleetNumber" />
@@ -1131,17 +1121,16 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
             <PropertyRef Name="DriverNumber" />
             <PropertyRef Name="PickUpDate" />
             <PropertyRef Name="ReturnDate" />
-            <PropertyRef Name="IsBookingDone" />
             <PropertyRef Name="Distance" />
             <PropertyRef Name="InvoiceTotal" />
             <PropertyRef Name="PaymentDifference" />
           </Key>
-          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="QuotationNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrganiserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="QuotationNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="QuotationDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuotationDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
           <Property Name="QuotationValue" Type="Double" Nullable="false" />
           <Property Name="BusType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FleetNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1149,9 +1138,9 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="DriverNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsBookingDone" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IsBookingDone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Distance" Type="Double" Nullable="false" />
-          <Property Name="OperatedKms" Type="Double" />
+          <Property Name="OperatedKms" Type="Int32" />
           <Property Name="DifferenceKms" Type="Double" />
           <Property Name="IsJobCompleted" Type="Boolean" />
           <Property Name="InvoiceTotal" Type="Double" Nullable="false" />
@@ -1160,7 +1149,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
         <EntityType Name="DispatcherBookingInfo">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="CompanyName" />
             <PropertyRef Name="CellNumber" />
             <PropertyRef Name="PickUpTime" />
             <PropertyRef Name="PickUpDate" />
@@ -1170,16 +1159,13 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
             <PropertyRef Name="BusType" />
             <PropertyRef Name="FleetNumber" />
             <PropertyRef Name="DriverName" />
-            <PropertyRef Name="IsVehicleAssigned" />
             <PropertyRef Name="IsTrailerAssigned" />
-            <PropertyRef Name="IsJobCompleted" />
             <PropertyRef Name="BookingID" />
-            <PropertyRef Name="BookingVehicleID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="AlternateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrganiserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CellNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PickUpTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -1191,62 +1177,62 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <Property Name="BusType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FleetNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DriverName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsVehicleAssigned" Type="Boolean" Nullable="false" />
+          <Property Name="IsVehicleAssigned" Type="Boolean" />
           <Property Name="IsTrailerAssigned" Type="Boolean" Nullable="false" />
-          <Property Name="IsJobCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsJobCompleted" Type="Boolean" />
           <Property Name="BookingID" Type="Int32" Nullable="false" />
-          <Property Name="BookingVehicleID" Type="Int32" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="Int32" />
         </EntityType>
         <EntityType Name="Revenue">
           <Key>
-            <PropertyRef Name="Total" />
-            <PropertyRef Name="OrderYear" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Total" Type="Double" Nullable="false" />
-          <Property Name="OrderMonth" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="OrderYear" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="OrderMonth" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="OrderYear" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Booking_PaymentMode">
           <End Type="SpecialHireDBModel.PaymentMode" Role="PaymentMode" Multiplicity="1" />
-          <End Type="SpecialHireDBModel.BookingInfo" Role="BookingInfo" Multiplicity="*" />
+          <End Type="SpecialHireDBModel.Bookinginfo" Role="Bookinginfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PaymentMode">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BookingInfo">
+            <Dependent Role="Bookinginfo">
               <PropertyRef Name="PaymentModeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Booking_Quotation">
-          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
-          <End Type="SpecialHireDBModel.BookingInfo" Role="BookingInfo" Multiplicity="*" />
+          <End Type="SpecialHireDBModel.BookingQuoteinfo" Role="BookingQuoteinfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.Bookinginfo" Role="Bookinginfo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BookingInfo">
+            <Dependent Role="Bookinginfo">
               <PropertyRef Name="QuotationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BookingQuoteInfo_CompanyDetails1">
+        <Association Name="FK_BookingQuoteInfo_CompanyDetail">
           <End Type="SpecialHireDBModel.CompanyDetail" Role="CompanyDetail" Multiplicity="1" />
-          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="*" />
+          <End Type="SpecialHireDBModel.BookingQuoteinfo" Role="BookingQuoteinfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CompanyDetail">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BookingQuoteInfo">
+            <Dependent Role="BookingQuoteinfo">
               <PropertyRef Name="CompanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BookingTrailerInfo_BookingQuote">
-          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingQuoteinfo" Role="BookingQuoteinfo" Multiplicity="1" />
           <End Type="SpecialHireDBModel.BookingTrailerInfo" Role="BookingTrailerInfo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="BookingTrailerInfo">
@@ -1255,10 +1241,10 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DispatcherVehicleChecklist_BookingQuoteInfo">
-          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingQuoteinfo" Role="BookingQuoteinfo" Multiplicity="1" />
           <End Type="SpecialHireDBModel.DispatcherVehicleChecklist" Role="DispatcherVehicleChecklist" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DispatcherVehicleChecklist">
@@ -1268,21 +1254,21 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
         </Association>
         <Association Name="FK_Quotation_Event">
           <End Type="SpecialHireDBModel.Event" Role="Event" Multiplicity="1" />
-          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="*" />
+          <End Type="SpecialHireDBModel.BookingQuoteinfo" Role="BookingQuoteinfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Event">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BookingQuoteInfo">
+            <Dependent Role="BookingQuoteinfo">
               <PropertyRef Name="EventID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VehicleCustomerSurvey_BookingQuoteInfo">
-          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingQuoteinfo" Role="BookingQuoteinfo" Multiplicity="1" />
           <End Type="SpecialHireDBModel.DispatcherVehicleCustomerSurvey" Role="DispatcherVehicleCustomerSurvey" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DispatcherVehicleCustomerSurvey">
@@ -1291,10 +1277,10 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VehicleDetails_Quotation">
-          <End Type="SpecialHireDBModel.BookingQuoteInfo" Role="BookingQuoteInfo" Multiplicity="1" />
+          <End Type="SpecialHireDBModel.BookingQuoteinfo" Role="BookingQuoteinfo" Multiplicity="1" />
           <End Type="SpecialHireDBModel.BookingVehicleInfo" Role="BookingVehicleInfo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BookingQuoteInfo">
+            <Principal Role="BookingQuoteinfo">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="BookingVehicleInfo">
@@ -1380,9 +1366,9 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SpecialHireDBModelStoreContainer" CdmEntityContainer="SpecialHireDBContext">
-          <EntitySetMapping Name="BookingInfoes">
-            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingInfo">
-              <MappingFragment StoreEntitySet="BookingInfo">
+          <EntitySetMapping Name="Bookinginfoes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.Bookinginfo">
+              <MappingFragment StoreEntitySet="Bookinginfo">
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -1402,9 +1388,9 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BookingQuoteInfoes">
-            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingQuoteInfo">
-              <MappingFragment StoreEntitySet="BookingQuoteInfo">
+          <EntitySetMapping Name="BookingQuoteinfoes">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingQuoteinfo">
+              <MappingFragment StoreEntitySet="BookingQuoteinfo">
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -1587,7 +1573,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           </EntitySetMapping>
           <EntitySetMapping Name="MonthNames">
             <EntityTypeMapping TypeName="SpecialHireDBModel.MonthName">
-              <MappingFragment StoreEntitySet="MonthNames">
+              <MappingFragment StoreEntitySet="MonthName">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -1647,6 +1633,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
           <EntitySetMapping Name="BookingApprovalInfoes">
             <EntityTypeMapping TypeName="SpecialHireDBModel.BookingApprovalInfo">
               <MappingFragment StoreEntitySet="BookingApprovalInfo">
+                <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
                 <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
                 <ScalarProperty Name="ReturnTime" ColumnName="ReturnTime" />
@@ -1733,6 +1720,7 @@ warning 6002: The table/view 'SHGautengCoaches.dbo.Revenue' does not have a prim
                 <ScalarProperty Name="OrderYear" ColumnName="OrderYear" />
                 <ScalarProperty Name="OrderMonth" ColumnName="OrderMonth" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

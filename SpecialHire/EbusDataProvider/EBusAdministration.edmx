@@ -138,7 +138,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EBusAdministrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="EBusAdministrationContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EBusAdministrationContext" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="ApplicationUsers" EntityType="EBusAdministrationModel.ApplicationUser" />
           <EntitySet Name="Companies" EntityType="EBusAdministrationModel.Company" />
           <EntitySet Name="CompanyConfigurationInfoes" EntityType="EBusAdministrationModel.CompanyConfigurationInfo" />
@@ -376,6 +376,7 @@
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="SynchronizePropertyFacets" Value="False" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

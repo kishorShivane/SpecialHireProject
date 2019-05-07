@@ -207,6 +207,7 @@ function CheckSingleOrReturnJourney() {
             }
         }
     });
+    GetRoute();
 }
 
 function CheckTrailerRequired() {

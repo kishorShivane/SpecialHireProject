@@ -64,7 +64,7 @@
 
     $(document).on("click", "a#lnkEditBookingQuote", function () {
         var quotationID = $(this).attr("value");
-        ClearUI(true);
+        ClearUI(false);
         BindQuotationInformation(quotationID);
         MoveToDefaultTab();
         //GetRoute();
@@ -186,7 +186,7 @@
                 if (result != undefined) {
                     debugger;
                     var date = new Date();
-                    if (convertToJavascriptDate(result.PickUpDate) < date) {
+                    if (convertToJavascriptDate(result.PickUpDate) >= date) {
                         $("#hdnQuotationID").val(result.ID);
                         $("#hdnAlternateID").val(result.AlternateID);
                         $("#hdnModifiedBy").val(result.ModifiedBy);

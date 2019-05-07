@@ -638,9 +638,11 @@
     }
 </div>
 @Html.Partial("_SearchResults")
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhoTarETod-aF-dsn76ji-zFaz9vtj0VI&libraries=places&callback=initMap"></script>
+@*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSNyRnVstbqRytrl-DIGbZXQHZDyxcpHo&libraries=places&callback=angular.noop"></script>*@
+@*<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>*@
 @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyAn9sHZyNd-GtAYuXjt83VJTTCF9Tbf4u8"></script>*@
-        @*<script type="text/javascript" src="~/js/BookingQuote.js"></script>*@
+@*<script type="text/javascript" src="~/js/BookingQuote.js"></script>*@
 <script type="text/javascript">
     var frmQuotation = $("div#tabsJustifiedContent").children("div").not("div#tabBookingInformation");
     var minimumDistance = @ViewBag.ConfigurationSettings.MinimumDistance;
@@ -960,8 +962,9 @@
                     type: 'Post',
                     data: JSON.stringify(GetBookingQuoteFormValues()),
                     dataType: 'json',
-                    contentType: 'application/json',
+                    contentType: 'application/json charset=utf-8',
                     error: function (xhr) {
+                        debugger;
                         alert('Error: ' + xhr.statusText);
                     },
                     success: function (result) {
@@ -1073,7 +1076,9 @@
                     $("#chkReturnJourney").attr('checked', true);
                 }
             }
+            $("button#btnGetDistance").trigger("click");
         });
+
     }
 
     function ClearUI(enableBookingInfo) {
@@ -1191,12 +1196,22 @@
             avoidTolls: false
         }, function (response, status) {
             if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                debugger;
+                var isReturnJourney = false;
+                if ($("#chkReturnJourney").is(":checked")) { isReturnJourney = true; }
                 var distance = response.rows[0].elements[0].distance.text;
                 distance = distance.replace(" km", "");
-                if((parseInt(distance) * distanceCalculation) > minimumDistance)
-                {totalDistance.value = (parseInt(distance) * distanceCalculation);}
-                else
-                {totalDistance.value = minimumDistance;}
+                distance = distance.replace(",", "");
+
+                if (isReturnJourney) {
+                    totalDistance.value = parseInt(distance) * 2;
+                }
+                else {
+                    totalDistance.value = parseInt(distance) * distanceCalculation;
+                }
+
+                if (parseInt(totalDistance.value) < minimumDistance)
+                { totalDistance.value = minimumDistance; }
 
             } else {
                 alert("Unable to find the distance via road.");
@@ -1297,6 +1312,7 @@
             BookingVehicleInfo: GetVehicleDetails(),
             BookingTrailerInfo: GetTrailerDetails()
         }
+        debugger;
         return bookingQuote;
     }
 

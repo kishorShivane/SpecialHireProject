@@ -24,5 +24,7 @@ namespace SpecialHire.Models
         public int NumberOfTrailers { get; set; }
         public string FleetNumber { get; set; }
         public string DriverName { get; set; }
+        public int NumberOfBussesAssigned { get; set; }
+        public int NumberOfTrailersAssigned { get; set; }
     }
 }

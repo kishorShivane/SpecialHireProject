@@ -1,10 +1,6 @@
 ﻿using EbusDataProvider;
-using SpecialHire.Models;
 using SpecialHire.Utilities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SpecialHire.Controllers
@@ -25,8 +21,36 @@ namespace SpecialHire.Controllers
                 if (applicationUser != null)
                 {
                     HttpContext.Session["USER"] = applicationUser;
-                    var configurationSettings = DBHelper.LoadConfigurationSettings(applicationUser.CompanyID.Value);
-                    HttpContext.Session["CONFIGURATION"] = configurationSettings;
+                    CompanyConfigurationInfo configurationSettings = DBHelper.LoadConfigurationSettings(applicationUser.CompanyID.Value);
+                    Models.CompanyConfigurationInfo config = new Models.CompanyConfigurationInfo()
+                    {
+                        ID = configurationSettings.ID,
+                        CompanyID = configurationSettings.CompanyID,
+                        CompanyName = configurationSettings.Company.Company1,
+                        ConnectionKey = configurationSettings.ConnectionKey,
+                        DefaultCompanyDetails = configurationSettings.DefaultCompanyDetails,
+                        DefaultEventDescription = configurationSettings.DefaultEventDescription,
+                        DefaultPaymentMode = configurationSettings.DefaultPaymentMode,
+                        DefaultPaymentTerms = configurationSettings.DefaultPaymentTerms,
+                        DistanceCalculation = configurationSettings.DistanceCalculation,
+                        EmailPassword = configurationSettings.EmailPassword,
+                        EmailPort = configurationSettings.EmailPort,
+                        EmailSMTP = configurationSettings.EmailSMTP,
+                        EmailUserName = configurationSettings.EmailUserName,
+                        EnforcePassengerCount = configurationSettings.EnforcePassengerCount,
+                        InvoiceEmailTemplate = configurationSettings.InvoiceEmailTemplate,
+                           InvoicePDFPath = configurationSettings.InvoicePDFPath,
+                           MinimumDistance = configurationSettings.MinimumDistance,
+                           ModifiedBy = configurationSettings.ModifiedBy,
+                           ModifiedOn = configurationSettings.ModifiedOn,
+                           PDFPaymentTerms = configurationSettings.PDFPaymentTerms,
+                           QuotationEmailTemplate = configurationSettings.QuotationEmailTemplate,
+                           QuotationMinimumValue = configurationSettings.QuotationMinimumValue,
+                           QuotationPDFPath = configurationSettings.QuotationPDFPath,
+                           QuotationValidityPeriod = configurationSettings.QuotationValidityPeriod,
+                           Status = configurationSettings.Status
+                    };
+                    HttpContext.Session["CONFIGURATION"] = config;
                     if (applicationUser.UserRoleID == Convert.ToInt32(UserRoll.Dispatcher))
                     { return RedirectToAction("Index", "Dispatch"); }
                     else
@@ -52,5 +76,7 @@ namespace SpecialHire.Controllers
             TempData["GlobalMessage"] = commonHelper.SetMessage("Logged Out Successfully..!!", "S");
             return RedirectToAction("Index", "Home");
         }
+
+
     }
 }

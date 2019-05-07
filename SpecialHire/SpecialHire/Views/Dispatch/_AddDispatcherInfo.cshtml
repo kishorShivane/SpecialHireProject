@@ -51,7 +51,7 @@
                                         <div class="row text-center">
                                             <div class="col-md-12">
                                                 <button type="button" class="btn btn-info" id="btnAssign">Assign&nbsp;<i class="fa fa-1x fa-chain"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
-                                                <button type="button" class="btn btn-danger" id="btnClear">Clear</button>&nbsp; &nbsp; &nbsp; &nbsp;
+                                                <button type="button" class="btn btn-danger" id="btnClear" onclick="ClearFormValuesInBlock($('div#divSearchBooking'))">Clear</button>&nbsp; &nbsp; &nbsp; &nbsp;
                                                 <a id="lnkPrintDriverSheet" href="#" target="_blank" class="btn btn-success">Driver Sheet&nbsp;<i class="fa fa-1x fa-file-pdf-o"></i></a>&nbsp; &nbsp; &nbsp; &nbsp;
                                                 <a id="lnkPrintMaps" href="#" target="_blank" class="btn btn-primary">Print Maps&nbsp;<i class="fa fa-1x fa-map-marker"></i></a>
                                                 <input type="hidden" id="hdnQuotationID" value="" />
@@ -293,7 +293,7 @@
                 <div class="row text-center" id="divButtons" style="display:none">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-info" id="btnSave">Save&nbsp;<i class="fa fa-1x fa-save"></i></button> &nbsp; &nbsp; &nbsp; &nbsp;
-                        <button type="button" class="btn btn-danger" id="btnClear">Clear</button>
+                        <button type="button" class="btn btn-danger" id="btnClear" onclick="ClearFormValuesInBlock($('div#divChecklistSurvey , div#divTimeAndSpeedo, div#divCustomerComments '))">Clear</button>
                     </div>
                 </div>
             </div>

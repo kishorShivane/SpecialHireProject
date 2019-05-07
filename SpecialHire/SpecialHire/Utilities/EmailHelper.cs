@@ -13,15 +13,15 @@ namespace SpecialHire.Utilities
 {
     public class EmailHelper
     {
-        public CompanyConfigurationInfo ConfigurationSettings
+        public Models.CompanyConfigurationInfo ConfigurationSettings
         {
             get
             {
-                return (HttpContext.Current.Session["CONFIGURATION"] != null) ? (CompanyConfigurationInfo)(CompanyConfigurationInfo)HttpContext.Current.Session["CONFIGURATION"] : new CompanyConfigurationInfo();
+                return (HttpContext.Current.Session["CONFIGURATION"] != null) ? (Models.CompanyConfigurationInfo)(Models.CompanyConfigurationInfo)HttpContext.Current.Session["CONFIGURATION"] : new Models.CompanyConfigurationInfo();
             }
         }
 
-        public void SendQuotationConfirmation(BookingQuoteInfoModel bookingQuoteInfoModal, CompanyConfigurationInfo ConfigurationSettings)
+        public void SendQuotationConfirmation(BookingQuoteInfoModel bookingQuoteInfoModal, Models.CompanyConfigurationInfo ConfigurationSettings)
         {
             try
             {
@@ -59,11 +59,11 @@ namespace SpecialHire.Utilities
             }
             catch (Exception ex)
             {
-                ExceptionLogging.SendErrorToText(ex, ConfigurationManager.AppSettings["ExceptionLogPath"]);
+                Logging.SendErrorToText(ex);
             }
         }
 
-        public void SendInvoiceConfirmation(BookingQuoteInfoModel bookingQuoteInfoModal, CompanyConfigurationInfo ConfigurationSettings)
+        public void SendInvoiceConfirmation(BookingQuoteInfoModel bookingQuoteInfoModal, Models.CompanyConfigurationInfo ConfigurationSettings)
         {
             try
             {
@@ -102,11 +102,11 @@ namespace SpecialHire.Utilities
             }
             catch (Exception ex)
             {
-                ExceptionLogging.SendErrorToText(ex, ConfigurationManager.AppSettings["ExceptionLogPath"]);
+                Logging.SendErrorToText(ex);
             }
         }
 
-        public string GetQuotationEmailBody(BookingQuoteInfoModel bookingQuoteInfoModal, CompanyConfigurationInfo ConfigurationSettings)
+        public string GetQuotationEmailBody(BookingQuoteInfoModel bookingQuoteInfoModal, Models.CompanyConfigurationInfo ConfigurationSettings)
         {
             //string body = "<html><body style='color:black; font-size:15px;'><font face='Helvetica, Arial, sans-serif'><div style='padding:30px; margin-top:30px;'><p>Dear ##Username##,</p>Good Day, Thank you for booking with eBus Special Hire.<br>Please find the attachment for the Quotation write/call back to us for any clarification<br><br>Thank you,<br>Ebus Supplies C C<br>33 Judges Avenue,<br>Tel: 011 476 5400<br>Fax: 086 554 2482<br></div></body></html>";
             string body = ConfigurationSettings.QuotationEmailTemplate;
@@ -114,7 +114,7 @@ namespace SpecialHire.Utilities
             return body;
         }
 
-        public string GetInvoiceEmailBody(BookingQuoteInfoModel bookingQuoteInfoModal, CompanyConfigurationInfo ConfigurationSettings)
+        public string GetInvoiceEmailBody(BookingQuoteInfoModel bookingQuoteInfoModal, Models.CompanyConfigurationInfo ConfigurationSettings)
         {
             //string body = "<html><body style='color:black; font-size:15px;'><font face='Helvetica, Arial, sans-serif'><div style='padding:30px; margin-top:30px;'><p>Dear ##Username##,</p>Good Day, Thank you for booking with eBus Special Hire.<br>Please find the attachment for the Invoice write/call back to us for any clarification<br><br>Thank you,<br>Ebus Supplies C C<br>33 Judges Avenue,<br>Tel: 011 476 5400<br>Fax: 086 554 2482<br><p></p></div></body></html>";
             string body = ConfigurationSettings.InvoiceEmailTemplate;

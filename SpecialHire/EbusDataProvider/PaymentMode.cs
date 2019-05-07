@@ -17,7 +17,7 @@ namespace EbusDataProvider
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PaymentMode()
         {
-            this.BookingInfoes = new HashSet<BookingInfo>();
+            this.Bookinginfoes = new HashSet<Bookinginfo>();
         }
     
         public int ID { get; set; }
@@ -28,6 +28,6 @@ namespace EbusDataProvider
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BookingInfo> BookingInfoes { get; set; }
+        public virtual ICollection<Bookinginfo> Bookinginfoes { get; set; }
     }
 }

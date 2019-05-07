@@ -18,6 +18,7 @@ namespace EbusDataProvider
         public EBusAdministrationContext()
             : base("name=EBusAdministrationContext")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

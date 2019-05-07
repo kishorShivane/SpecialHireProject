@@ -50,8 +50,8 @@
                         <tbody>
                             @foreach (var row in Model)
                             {
-                                var invoiceDate = (row.InvoiceDate.ToString("dd-MMMM-yyyy") == "01-January-1900") ? "" : row.InvoiceDate.ToString("dd-MMMM-yyyy");
-                                var quoteDate = (row.QuotationDate.ToString("dd-MMMM-yyyy") == "01-January-1900") ? "" : row.QuotationDate.ToString("dd-MMMM-yyyy");
+                                var invoiceDate = (row.InvoiceDate.Value.ToString("dd-MMMM-yyyy") == "01-January-1900") ? "" : row.InvoiceDate.Value.ToString("dd-MMMM-yyyy");
+                                var quoteDate = (row.QuotationDate.Value.ToString("dd-MMMM-yyyy") == "01-January-1900") ? "" : row.QuotationDate.Value.ToString("dd-MMMM-yyyy");
                                 <tr>
                                     <td>@row.InvoiceNumber</td>
                                     <td>@row.OrganiserName</td>

@@ -25,8 +25,8 @@ namespace EbusDataProvider
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BookingInfo> BookingInfoes { get; set; }
-        public virtual DbSet<BookingQuoteInfo> BookingQuoteInfoes { get; set; }
+        public virtual DbSet<Bookinginfo> Bookinginfoes { get; set; }
+        public virtual DbSet<BookingQuoteinfo> BookingQuoteinfoes { get; set; }
         public virtual DbSet<BookingTrailerInfo> BookingTrailerInfoes { get; set; }
         public virtual DbSet<BookingVehicleInfo> BookingVehicleInfoes { get; set; }
         public virtual DbSet<Bus> Buses { get; set; }

@@ -59,10 +59,10 @@
     <Compile Include="BookingAvailabilityInfo.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="BookingInfo.cs">
+    <Compile Include="Bookinginfo.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="BookingQuoteInfo.cs">
+    <Compile Include="BookingQuoteinfo.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
     <Compile Include="BookingReporting.cs">

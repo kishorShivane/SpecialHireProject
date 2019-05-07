@@ -12,12 +12,12 @@ namespace EbusDataProvider
     using System;
     using System.Collections.Generic;
     
-    public partial class BookingQuoteInfo
+    public partial class BookingQuoteinfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BookingQuoteInfo()
+        public BookingQuoteinfo()
         {
-            this.BookingInfoes = new HashSet<BookingInfo>();
+            this.Bookinginfoes = new HashSet<Bookinginfo>();
             this.BookingTrailerInfoes = new HashSet<BookingTrailerInfo>();
             this.DispatcherVehicleChecklists = new HashSet<DispatcherVehicleChecklist>();
             this.DispatcherVehicleCustomerSurveys = new HashSet<DispatcherVehicleCustomerSurvey>();
@@ -62,7 +62,7 @@ namespace EbusDataProvider
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BookingInfo> BookingInfoes { get; set; }
+        public virtual ICollection<Bookinginfo> Bookinginfoes { get; set; }
         public virtual CompanyDetail CompanyDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookingTrailerInfo> BookingTrailerInfoes { get; set; }

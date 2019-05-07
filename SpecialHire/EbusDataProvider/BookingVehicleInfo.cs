@@ -35,7 +35,7 @@ namespace EbusDataProvider
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        public virtual BookingQuoteInfo BookingQuoteInfo { get; set; }
+        public virtual BookingQuoteinfo BookingQuoteinfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DispatcherVehicleChecklist> DispatcherVehicleChecklists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

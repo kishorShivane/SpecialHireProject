@@ -24,5 +24,6 @@ namespace EbusDataProvider
         public string ReturnTime { get; set; }
         public string FromLocation { get; set; }
         public string ToLocation { get; set; }
+        public string Company { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace EbusDataProvider
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        public virtual BookingQuoteInfo BookingQuoteInfo { get; set; }
+        public virtual BookingQuoteinfo BookingQuoteinfo { get; set; }
         public virtual TrailerType TrailerType { get; set; }
     }
 }
