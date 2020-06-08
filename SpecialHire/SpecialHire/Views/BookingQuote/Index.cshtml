@@ -632,13 +632,13 @@
                     </div>
                     <br /><br /><br /><br />
                 </div>
-            </div>
+            </div>bb
             <!--/tabs content-->
         </div>
     }
 </div>
 @Html.Partial("_SearchResults")
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhoTarETod-aF-dsn76ji-zFaz9vtj0VI&libraries=places&callback=initMap"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6RQvaWcxKwERdSXEBbTceQ0cKXYwkdX4&libraries=places&callback=initMap"></script>
 @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSNyRnVstbqRytrl-DIGbZXQHZDyxcpHo&libraries=places&callback=angular.noop"></script>*@
 @*<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>*@
 @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyAn9sHZyNd-GtAYuXjt83VJTTCF9Tbf4u8"></script>*@
@@ -1162,7 +1162,7 @@
         };
         map = new google.maps.Map(document.getElementById('divMap'), mapOptions);
         google.maps.event.trigger(map, 'resize');
-        map.setCenter(mapOptions);
+        //map.setCenter(mapOptions);
         getLocation();
         directionsDisplay.setMap(map);
 
@@ -1175,8 +1175,8 @@
         destination = document.getElementById("txtToLocation").value;
         totalDistance = document.getElementById("txtDistance");
         var request = {
-            origin: source,
-            destination: destination,
+            origin: parseFloat(source),
+            destination: parseFloat(destination),
             travelMode: google.maps.TravelMode.DRIVING
         };
         directionsService.route(request, function (response, status) {
@@ -1195,7 +1195,7 @@
             avoidHighways: false,
             avoidTolls: false
         }, function (response, status) {
-            if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS" && response.rows[0].elements[0].status != "NOT_FOUND") {
                 debugger;
                 var isReturnJourney = false;
                 if ($("#chkReturnJourney").is(":checked")) { isReturnJourney = true; }
