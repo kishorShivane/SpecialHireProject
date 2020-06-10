@@ -1937,8 +1937,8 @@ namespace SpecialHire.Utilities
             string driverNumber, string fleetNumber, string quotationNumber, string dateFrom, string dateTo)
         {
             List<BookingQuoteinfo> resp = new List<BookingQuoteinfo>();
-            DateTime fromDate = new DateTime();
-            DateTime toDate = new DateTime();
+            DateTime? fromDate = null;
+            DateTime? toDate = null;
             if (dateFrom != string.Empty)
             {
                 fromDate = Convert.ToDateTime(dateFrom);
@@ -1973,8 +1973,8 @@ namespace SpecialHire.Utilities
         public List<BookingReporting> SearchBookingsForQuotations(string ReportType, string dateFrom, string dateTo)
         {
             List<BookingQuoteinfo> resp = new List<BookingQuoteinfo>();
-            DateTime fromDate = new DateTime();
-            DateTime toDate = new DateTime();
+            DateTime? fromDate = null;
+            DateTime? toDate = null;
             if (dateFrom != string.Empty)
             {
                 fromDate = Convert.ToDateTime(dateFrom);
@@ -1991,7 +1991,7 @@ namespace SpecialHire.Utilities
 
                     return DBContext.BookingReportings.Where(x => (string.IsNullOrEmpty(dateFrom) || x.InvoiceDate >= fromDate)
                     && (string.IsNullOrEmpty(dateTo) || x.InvoiceDate <= toDate)
-                    && (ReportType.Equals("0") || ReportType.Equals("1") || (ReportType.Equals("2") && x.InvoiceNumber != string.Empty) || (ReportType.Equals("3") && x.InvoiceNumber == string.Empty))).ToList();
+                    && (ReportType.Equals("0") || ReportType.Equals("1") || (ReportType.Equals("2") && !string.IsNullOrEmpty(x.InvoiceNumber)) || (ReportType.Equals("3") && string.IsNullOrEmpty(x.InvoiceNumber)))).ToList();
                     //IQueryable <BookingReporting> query = (from record in DBContext.BookingReportings select record);
                     //if (dateFrom != string.Empty && dateTo != string.Empty)
                     //{ query = query.Where(q => DbFunctions.TruncateTime(q.QuotationDate) >= fromDate.Date && DbFunctions.TruncateTime(q.QuotationDate) <= toDate.Date); }
@@ -2025,8 +2025,8 @@ namespace SpecialHire.Utilities
         public List<BookingReporting> SearchBookingsForInvoices(string dateFrom, string dateTo)
         {
             List<BookingQuoteinfo> resp = new List<BookingQuoteinfo>();
-            DateTime fromDate = new DateTime();
-            DateTime toDate = new DateTime();
+            DateTime? fromDate = null;
+            DateTime? toDate = null;
             if (dateFrom != string.Empty)
             {
                 fromDate = Convert.ToDateTime(dateFrom);
@@ -2084,8 +2084,8 @@ namespace SpecialHire.Utilities
     string driverNumber, string fleetNumber, string quotationNumber, string dateFrom, string dateTo)
         {
             List<BookingQuoteinfo> resp = new List<BookingQuoteinfo>();
-            DateTime fromDate = new DateTime();
-            DateTime toDate = new DateTime();
+            DateTime? fromDate = null;
+            DateTime? toDate = null;
             if (dateFrom != string.Empty)
             {
                 fromDate = Convert.ToDateTime(dateFrom);

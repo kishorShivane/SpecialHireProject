@@ -313,22 +313,29 @@ function Loader(action) {
     }
 
 }
-function convertToJavascriptDate(date)
-{
-    return new Date(parseInt(date.replace('/Date(', '')));
+
+function convertToJavascriptDate(date) {
+    if (date != null || date != undefined) {
+        return new Date(parseInt(date.replace('/Date(', '')));
+    }
+    return "";
 }
+
 function getLocalDateFromJsonDate(date) {
     var date = convertToJavascriptDate(date);
-    return getLocalDate(date);
+    if (date != "")
+        return getLocalDate(date);
+    else
+        return "";
     //return new Date(parseInt(date.replace('/Date(', ''))).toLocaleDateString("dd-MMM-yyyy");
 }
 
 function getLocalDate(date) {
     var monthNames = [
-"January", "February", "March",
-"April", "May", "June", "July",
-"August", "September", "October",
-"November", "December"
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
     ];
     var day = date.getDate();
     var monthIndex = date.getMonth();
