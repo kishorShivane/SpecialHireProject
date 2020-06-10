@@ -12,7 +12,7 @@ namespace EbusDataProvider
     using System;
     using System.Collections.Generic;
     
-    public partial class BookingApprovalInfo
+    public partial class BookingApprovalInfo_BackUp
     {
         public int ID { get; set; }
         public string InvoiceNumber { get; set; }
@@ -24,7 +24,5 @@ namespace EbusDataProvider
         public string ReturnTime { get; set; }
         public string FromLocation { get; set; }
         public string ToLocation { get; set; }
-        public string Company { get; set; }
-        public bool IsBookingApproved { get; set; }
     }
 }

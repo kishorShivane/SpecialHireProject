@@ -5,27 +5,32 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4ca160f09d954e229ce0fb079a849b1e" Name="Diagram1">
-        <EntityTypeShape EntityType="SpecialHireDBModel.Bookinginfo" Width="1.5" PointX="8.25" PointY="15.375" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.BookingQuoteinfo" Width="1.5" PointX="3" PointY="8.125" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.BookingTrailerInfo" Width="1.5" PointX="8.25" PointY="11.125" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.BookingVehicleInfo" Width="1.5" PointX="5.25" PointY="10.5" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.Bus" Width="1.5" PointX="5.25" PointY="3.25" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.BusType" Width="1.5" PointX="3" PointY="2.75" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.CompanyDetail" Width="1.5" PointX="0.75" PointY="7.25" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.DispatcherVehicleChecklist" Width="1.5" PointX="10.5" PointY="10.875" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.DispatcherVehicleCustomerSurvey" Width="1.5" PointX="7.5" PointY="6.875" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.Driver" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.Event" Width="1.5" PointX="0.75" PointY="11.5" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.MonthName" Width="1.5" PointX="7.75" PointY="4.75" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.PaymentMode" Width="1.5" PointX="6" PointY="20.5" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.PaymentTerm" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.Trailer" Width="1.5" PointX="8.25" PointY="21.25" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.TrailerType" Width="1.5" PointX="6" PointY="16.25" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.BookingApprovalInfo" Width="1.5" PointX="9.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.BookingAvailabilityInfo" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.BookingReporting" Width="1.5" PointX="11.75" PointY="4.75" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.DispatcherBookingInfo" Width="1.5" PointX="12.75" PointY="10.75" />
-        <EntityTypeShape EntityType="SpecialHireDBModel.Revenue" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BookingApprovalInfo_BackUp" Width="1.5" PointX="8.75" PointY="2.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BookingAvailabilityInfo_BackUP" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.Bookinginfo" Width="1.5" PointX="8.25" PointY="6.875" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BookingQuoteinfo" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BookingTrailerInfo" Width="1.5" PointX="5.25" PointY="12.625" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BookingVehicleInfo" Width="1.5" PointX="5.25" PointY="17" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.Bus" Width="1.5" PointX="5.25" PointY="22.75" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BusType" Width="1.5" PointX="3" PointY="20.125" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.CompanyDetail" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.DispatcherBookingInfo_BackUP" Width="1.5" PointX="10.75" PointY="2.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.DispatcherVehicleChecklist" Width="1.5" PointX="8.25" PointY="12.375" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.DispatcherVehicleCustomerSurvey" Width="1.5" PointX="5.25" PointY="8.375" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.Driver" Width="1.5" PointX="10.75" PointY="8.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.Event" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.MonthName" Width="1.5" PointX="10.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.PaymentMode" Width="1.5" PointX="6" PointY="5" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.PaymentTerm" Width="1.5" PointX="12.75" PointY="2.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.Revenue_BackUp" Width="1.5" PointX="12.75" PointY="5.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.Trailer" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.TrailerType" Width="1.5" PointX="3" PointY="5.75" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BookingReporting_BackUP" Width="1.5" PointX="12.75" PointY="8.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BookingApprovalInfo" Width="1.5" PointX="12.75" PointY="14.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BookingAvailabilityInfo" Width="1.5" PointX="14.75" PointY="2.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.BookingReporting" Width="1.5" PointX="14.75" PointY="6.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.DispatcherBookingInfo" Width="1.5" PointX="14.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.Revenue" Width="1.5" PointX="7.75" PointY="17.25" />
         <AssociationConnector Association="SpecialHireDBModel.FK_Booking_PaymentMode" />
         <AssociationConnector Association="SpecialHireDBModel.FK_Booking_Quotation" />
         <AssociationConnector Association="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetail" />

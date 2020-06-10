@@ -29,7 +29,7 @@ namespace SpecialHire.Utilities
                 {
                     return (from item in DBContext.BookingApprovalInfoes.AsEnumerable()
                             where (item.InvoiceNumber.ToLower().Contains(bookingID.ToLower()) || bookingID == string.Empty) &&
-                                    (bookingDate == string.Empty || item.InvoiceDate.Value.Date.Equals(filterDate.Date))
+                                    (bookingDate == string.Empty || item.InvoiceDate.Value.Date.Equals(filterDate.Date)) && item.IsBookingApproved == false
                             orderby item.ID
                             select item).ToList();
                 }

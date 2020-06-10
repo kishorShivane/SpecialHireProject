@@ -18,6 +18,7 @@ namespace EbusDataProvider
         public SpecialHireDBContext()
             : base("name=SpecialHireDBContext")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -25,6 +26,8 @@ namespace EbusDataProvider
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BookingApprovalInfo_BackUp> BookingApprovalInfo_BackUp { get; set; }
+        public virtual DbSet<BookingAvailabilityInfo_BackUP> BookingAvailabilityInfo_BackUP { get; set; }
         public virtual DbSet<Bookinginfo> Bookinginfoes { get; set; }
         public virtual DbSet<BookingQuoteinfo> BookingQuoteinfoes { get; set; }
         public virtual DbSet<BookingTrailerInfo> BookingTrailerInfoes { get; set; }
@@ -32,6 +35,7 @@ namespace EbusDataProvider
         public virtual DbSet<Bus> Buses { get; set; }
         public virtual DbSet<BusType> BusTypes { get; set; }
         public virtual DbSet<CompanyDetail> CompanyDetails { get; set; }
+        public virtual DbSet<DispatcherBookingInfo_BackUP> DispatcherBookingInfo_BackUP { get; set; }
         public virtual DbSet<DispatcherVehicleChecklist> DispatcherVehicleChecklists { get; set; }
         public virtual DbSet<DispatcherVehicleCustomerSurvey> DispatcherVehicleCustomerSurveys { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
@@ -39,8 +43,10 @@ namespace EbusDataProvider
         public virtual DbSet<MonthName> MonthNames { get; set; }
         public virtual DbSet<PaymentMode> PaymentModes { get; set; }
         public virtual DbSet<PaymentTerm> PaymentTerms { get; set; }
+        public virtual DbSet<Revenue_BackUp> Revenue_BackUp { get; set; }
         public virtual DbSet<Trailer> Trailers { get; set; }
         public virtual DbSet<TrailerType> TrailerTypes { get; set; }
+        public virtual DbSet<BookingReporting_BackUP> BookingReporting_BackUP { get; set; }
         public virtual DbSet<BookingApprovalInfo> BookingApprovalInfoes { get; set; }
         public virtual DbSet<BookingAvailabilityInfo> BookingAvailabilityInfoes { get; set; }
         public virtual DbSet<BookingReporting> BookingReportings { get; set; }

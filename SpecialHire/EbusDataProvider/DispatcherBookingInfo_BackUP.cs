@@ -12,19 +12,27 @@ namespace EbusDataProvider
     using System;
     using System.Collections.Generic;
     
-    public partial class BookingApprovalInfo
+    public partial class DispatcherBookingInfo_BackUP
     {
         public int ID { get; set; }
-        public string InvoiceNumber { get; set; }
-        public Nullable<System.DateTime> InvoiceDate { get; set; }
+        public string AlternateID { get; set; }
+        public string CompanyName { get; set; }
         public string OrganiserName { get; set; }
-        public string Contact { get; set; }
+        public string CellNumber { get; set; }
         public string PickUpTime { get; set; }
         public System.DateTime PickUpDate { get; set; }
         public string ReturnTime { get; set; }
         public string FromLocation { get; set; }
         public string ToLocation { get; set; }
-        public string Company { get; set; }
-        public bool IsBookingApproved { get; set; }
+        public Nullable<int> NumberOfTrailers { get; set; }
+        public Nullable<int> NumberOfBusses { get; set; }
+        public string BusType { get; set; }
+        public string FleetNumber { get; set; }
+        public string DriverName { get; set; }
+        public bool IsVehicleAssigned { get; set; }
+        public bool IsTrailerAssigned { get; set; }
+        public bool IsJobCompleted { get; set; }
+        public int BookingID { get; set; }
+        public int BookingVehicleID { get; set; }
     }
 }

@@ -56,7 +56,13 @@
     <Compile Include="BookingApprovalInfo.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="BookingApprovalInfo_BackUp.cs">
+      <DependentUpon>SpecialHireDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="BookingAvailabilityInfo.cs">
+      <DependentUpon>SpecialHireDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BookingAvailabilityInfo_BackUP.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Bookinginfo.cs">
@@ -66,6 +72,9 @@
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
     <Compile Include="BookingReporting.cs">
+      <DependentUpon>SpecialHireDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BookingReporting_BackUP.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
     <Compile Include="BookingTrailerInfo.cs">
@@ -90,6 +99,9 @@
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DispatcherBookingInfo.cs">
+      <DependentUpon>SpecialHireDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DispatcherBookingInfo_BackUP.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DispatcherVehicleChecklist.cs">
@@ -133,6 +145,9 @@
       <DependentUpon>EBusAdministration.tt</DependentUpon>
     </Compile>
     <Compile Include="Revenue.cs">
+      <DependentUpon>SpecialHireDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Revenue_BackUp.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
     <Compile Include="SpecialHireDB.Context.cs">

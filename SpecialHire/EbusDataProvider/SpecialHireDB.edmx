@@ -4,7 +4,47 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SpecialHireDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SpecialHireDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookingApprovalInfo_BackUp">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="Contact" />
+            <PropertyRef Name="PickUpTime" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnTime" />
+            <PropertyRef Name="FromLocation" />
+            <PropertyRef Name="ToLocation" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PickUpTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FromLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ToLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingAvailabilityInfo_BackUP">
+          <Key>
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
+            <PropertyRef Name="NoOfBussesConfirmed" />
+            <PropertyRef Name="NoOfTrailerConfirmed" />
+          </Key>
+          <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
+          <Property Name="NoOfBooking" Type="int" />
+          <Property Name="NoOfBusses" Type="int" />
+          <Property Name="NoOfTrailers" Type="int" />
+          <Property Name="TotalBusses" Type="int" />
+          <Property Name="TotalTrailer" Type="int" />
+          <Property Name="NoOfBussesConfirmed" Type="int" Nullable="false" />
+          <Property Name="NoOfTrailerConfirmed" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Bookinginfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -66,6 +106,49 @@
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SpecialHire.dbo.BookingReporting_BackUP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BookingReporting_BackUP">
+          <Key>
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="QuotationNumber" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="QuotationDate" />
+            <PropertyRef Name="InvoiceDate" />
+            <PropertyRef Name="QuotationValue" />
+            <PropertyRef Name="BusType" />
+            <PropertyRef Name="FleetNumber" />
+            <PropertyRef Name="DriverName" />
+            <PropertyRef Name="DriverNumber" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
+            <PropertyRef Name="IsBookingDone" />
+            <PropertyRef Name="Distance" />
+            <PropertyRef Name="InvoiceTotal" />
+            <PropertyRef Name="PaymentDifference" />
+          </Key>
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuotationNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuotationDate" Type="datetime" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+          <Property Name="QuotationValue" Type="float" Nullable="false" />
+          <Property Name="BusType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FleetNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DriverName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DriverNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
+          <Property Name="IsBookingDone" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Distance" Type="float" Nullable="false" />
+          <Property Name="OperatedKms" Type="float" />
+          <Property Name="DifferenceKms" Type="float" />
+          <Property Name="IsJobCompleted" Type="bit" />
+          <Property Name="InvoiceTotal" Type="float" Nullable="false" />
+          <Property Name="PaymentDifference" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="BookingTrailerInfo">
           <Key>
@@ -141,6 +224,31 @@
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DispatcherBookingInfo_BackUP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="AlternateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CellNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PickUpTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FromLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ToLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NumberOfTrailers" Type="int" />
+          <Property Name="NumberOfBusses" Type="int" />
+          <Property Name="BusType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FleetNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DriverName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsVehicleAssigned" Type="bit" Nullable="false" />
+          <Property Name="IsTrailerAssigned" Type="bit" Nullable="false" />
+          <Property Name="IsJobCompleted" Type="bit" Nullable="false" />
+          <Property Name="BookingID" Type="int" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DispatcherVehicleChecklist">
           <Key>
@@ -228,6 +336,15 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="Revenue_BackUp">
+          <Key>
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="OrderYear" />
+          </Key>
+          <Property Name="Total" Type="float" Nullable="false" />
+          <Property Name="OrderMonth" Type="nvarchar" MaxLength="30" />
+          <Property Name="OrderYear" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="Trailer">
           <Key>
             <PropertyRef Name="ID" />
@@ -258,6 +375,7 @@ warning 6002: The table/view 'SpecialHire.dbo.BookingApprovalInfo' does not have
         <EntityType Name="BookingApprovalInfo">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="InvoiceNumber" />
             <PropertyRef Name="OrganiserName" />
             <PropertyRef Name="Contact" />
             <PropertyRef Name="PickUpTime" />
@@ -266,9 +384,10 @@ warning 6002: The table/view 'SpecialHire.dbo.BookingApprovalInfo' does not have
             <PropertyRef Name="FromLocation" />
             <PropertyRef Name="ToLocation" />
             <PropertyRef Name="Company" />
+            <PropertyRef Name="IsBookingApproved" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="InvoiceDate" Type="datetime" />
           <Property Name="OrganiserName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -278,6 +397,7 @@ warning 6002: The table/view 'SpecialHire.dbo.BookingApprovalInfo' does not have
           <Property Name="FromLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ToLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Company" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsBookingApproved" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SpecialHire.dbo.BookingAvailabilityInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -382,7 +502,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Total" Type="float" />
-          <Property Name="OrderMonth" Type="char" MaxLength="3" />
+          <Property Name="OrderMonth" Type="nvarchar" MaxLength="30" />
           <Property Name="OrderYear" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <Association Name="FK_Booking_PaymentMode">
@@ -554,6 +674,8 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SpecialHireDBModelStoreContainer">
+          <EntitySet Name="BookingApprovalInfo_BackUp" EntityType="Self.BookingApprovalInfo_BackUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingAvailabilityInfo_BackUP" EntityType="Self.BookingAvailabilityInfo_BackUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bookinginfo" EntityType="Self.Bookinginfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingQuoteinfo" EntityType="Self.BookingQuoteinfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingTrailerInfo" EntityType="Self.BookingTrailerInfo" Schema="dbo" store:Type="Tables" />
@@ -561,6 +683,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusType" EntityType="Self.BusType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyDetails" EntityType="Self.CompanyDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DispatcherBookingInfo_BackUP" EntityType="Self.DispatcherBookingInfo_BackUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DispatcherVehicleChecklist" EntityType="Self.DispatcherVehicleChecklist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DispatcherVehicleCustomerSurvey" EntityType="Self.DispatcherVehicleCustomerSurvey" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
@@ -568,8 +691,33 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <EntitySet Name="MonthName" EntityType="Self.MonthName" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentTerms" EntityType="Self.PaymentTerms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Revenue_BackUp" EntityType="Self.Revenue_BackUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrailerType" EntityType="Self.TrailerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingReporting_BackUP" EntityType="Self.BookingReporting_BackUP" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BookingReporting_BackUP].[OrganiserName] AS [OrganiserName], 
+    [BookingReporting_BackUP].[QuotationNumber] AS [QuotationNumber], 
+    [BookingReporting_BackUP].[InvoiceNumber] AS [InvoiceNumber], 
+    [BookingReporting_BackUP].[CompanyName] AS [CompanyName], 
+    [BookingReporting_BackUP].[QuotationDate] AS [QuotationDate], 
+    [BookingReporting_BackUP].[InvoiceDate] AS [InvoiceDate], 
+    [BookingReporting_BackUP].[QuotationValue] AS [QuotationValue], 
+    [BookingReporting_BackUP].[BusType] AS [BusType], 
+    [BookingReporting_BackUP].[FleetNumber] AS [FleetNumber], 
+    [BookingReporting_BackUP].[DriverName] AS [DriverName], 
+    [BookingReporting_BackUP].[DriverNumber] AS [DriverNumber], 
+    [BookingReporting_BackUP].[PickUpDate] AS [PickUpDate], 
+    [BookingReporting_BackUP].[ReturnDate] AS [ReturnDate], 
+    [BookingReporting_BackUP].[IsBookingDone] AS [IsBookingDone], 
+    [BookingReporting_BackUP].[Distance] AS [Distance], 
+    [BookingReporting_BackUP].[OperatedKms] AS [OperatedKms], 
+    [BookingReporting_BackUP].[DifferenceKms] AS [DifferenceKms], 
+    [BookingReporting_BackUP].[IsJobCompleted] AS [IsJobCompleted], 
+    [BookingReporting_BackUP].[InvoiceTotal] AS [InvoiceTotal], 
+    [BookingReporting_BackUP].[PaymentDifference] AS [PaymentDifference]
+    FROM [dbo].[BookingReporting_BackUP] AS [BookingReporting_BackUP]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="BookingApprovalInfo" EntityType="Self.BookingApprovalInfo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [BookingApprovalInfo].[ID] AS [ID], 
@@ -582,7 +730,8 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
     [BookingApprovalInfo].[ReturnTime] AS [ReturnTime], 
     [BookingApprovalInfo].[FromLocation] AS [FromLocation], 
     [BookingApprovalInfo].[ToLocation] AS [ToLocation], 
-    [BookingApprovalInfo].[Company] AS [Company]
+    [BookingApprovalInfo].[Company] AS [Company], 
+    [BookingApprovalInfo].[IsBookingApproved] AS [IsBookingApproved]
     FROM [dbo].[BookingApprovalInfo] AS [BookingApprovalInfo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="BookingAvailabilityInfo" EntityType="Self.BookingAvailabilityInfo" store:Type="Views" store:Schema="dbo">
@@ -715,7 +864,9 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SpecialHireDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="SpecialHireDBContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SpecialHireDBContext" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="BookingApprovalInfo_BackUp" EntityType="SpecialHireDBModel.BookingApprovalInfo_BackUp" />
+          <EntitySet Name="BookingAvailabilityInfo_BackUP" EntityType="SpecialHireDBModel.BookingAvailabilityInfo_BackUP" />
           <EntitySet Name="Bookinginfoes" EntityType="SpecialHireDBModel.Bookinginfo" />
           <EntitySet Name="BookingQuoteinfoes" EntityType="SpecialHireDBModel.BookingQuoteinfo" />
           <EntitySet Name="BookingTrailerInfoes" EntityType="SpecialHireDBModel.BookingTrailerInfo" />
@@ -723,6 +874,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <EntitySet Name="Buses" EntityType="SpecialHireDBModel.Bus" />
           <EntitySet Name="BusTypes" EntityType="SpecialHireDBModel.BusType" />
           <EntitySet Name="CompanyDetails" EntityType="SpecialHireDBModel.CompanyDetail" />
+          <EntitySet Name="DispatcherBookingInfo_BackUP" EntityType="SpecialHireDBModel.DispatcherBookingInfo_BackUP" />
           <EntitySet Name="DispatcherVehicleChecklists" EntityType="SpecialHireDBModel.DispatcherVehicleChecklist" />
           <EntitySet Name="DispatcherVehicleCustomerSurveys" EntityType="SpecialHireDBModel.DispatcherVehicleCustomerSurvey" />
           <EntitySet Name="Drivers" EntityType="SpecialHireDBModel.Driver" />
@@ -730,8 +882,10 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <EntitySet Name="MonthNames" EntityType="SpecialHireDBModel.MonthName" />
           <EntitySet Name="PaymentModes" EntityType="SpecialHireDBModel.PaymentMode" />
           <EntitySet Name="PaymentTerms" EntityType="SpecialHireDBModel.PaymentTerm" />
+          <EntitySet Name="Revenue_BackUp" EntityType="SpecialHireDBModel.Revenue_BackUp" />
           <EntitySet Name="Trailers" EntityType="SpecialHireDBModel.Trailer" />
           <EntitySet Name="TrailerTypes" EntityType="SpecialHireDBModel.TrailerType" />
+          <EntitySet Name="BookingReporting_BackUP" EntityType="SpecialHireDBModel.BookingReporting_BackUP" />
           <EntitySet Name="BookingApprovalInfoes" EntityType="SpecialHireDBModel.BookingApprovalInfo" />
           <EntitySet Name="BookingAvailabilityInfoes" EntityType="SpecialHireDBModel.BookingAvailabilityInfo" />
           <EntitySet Name="BookingReportings" EntityType="SpecialHireDBModel.BookingReporting" />
@@ -794,6 +948,46 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
             <End Role="Trailer" EntitySet="Trailers" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="BookingApprovalInfo_BackUp">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="Contact" />
+            <PropertyRef Name="PickUpTime" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnTime" />
+            <PropertyRef Name="FromLocation" />
+            <PropertyRef Name="ToLocation" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FromLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ToLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BookingAvailabilityInfo_BackUP">
+          <Key>
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
+            <PropertyRef Name="NoOfBussesConfirmed" />
+            <PropertyRef Name="NoOfTrailerConfirmed" />
+          </Key>
+          <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NoOfBooking" Type="Int32" />
+          <Property Name="NoOfBusses" Type="Int32" />
+          <Property Name="NoOfTrailers" Type="Int32" />
+          <Property Name="TotalBusses" Type="Int32" />
+          <Property Name="TotalTrailer" Type="Int32" />
+          <Property Name="NoOfBussesConfirmed" Type="Int32" Nullable="false" />
+          <Property Name="NoOfTrailerConfirmed" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Bookinginfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -950,6 +1144,31 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="BookingQuoteinfoes" Relationship="SpecialHireDBModel.FK_BookingQuoteInfo_CompanyDetail" FromRole="CompanyDetail" ToRole="BookingQuoteinfo" />
         </EntityType>
+        <EntityType Name="DispatcherBookingInfo_BackUP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="AlternateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FromLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ToLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfTrailers" Type="Int32" />
+          <Property Name="NumberOfBusses" Type="Int32" />
+          <Property Name="BusType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FleetNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DriverName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsVehicleAssigned" Type="Boolean" Nullable="false" />
+          <Property Name="IsTrailerAssigned" Type="Boolean" Nullable="false" />
+          <Property Name="IsJobCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="BookingID" Type="Int32" Nullable="false" />
+          <Property Name="BookingVehicleID" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="DispatcherVehicleChecklist">
           <Key>
             <PropertyRef Name="ID" />
@@ -1042,6 +1261,15 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Revenue_BackUp">
+          <Key>
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="OrderYear" />
+          </Key>
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="OrderMonth" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="OrderYear" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Trailer">
           <Key>
             <PropertyRef Name="ID" />
@@ -1070,9 +1298,51 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <NavigationProperty Name="BookingTrailerInfoes" Relationship="SpecialHireDBModel.FK_BookingTrailerInfo_TrialerType" FromRole="TrailerType" ToRole="BookingTrailerInfo" />
           <NavigationProperty Name="Trailers" Relationship="SpecialHireDBModel.FK_Trailer_TrailerType" FromRole="TrailerType" ToRole="Trailer" />
         </EntityType>
+        <EntityType Name="BookingReporting_BackUP">
+          <Key>
+            <PropertyRef Name="OrganiserName" />
+            <PropertyRef Name="QuotationNumber" />
+            <PropertyRef Name="InvoiceNumber" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="QuotationDate" />
+            <PropertyRef Name="InvoiceDate" />
+            <PropertyRef Name="QuotationValue" />
+            <PropertyRef Name="BusType" />
+            <PropertyRef Name="FleetNumber" />
+            <PropertyRef Name="DriverName" />
+            <PropertyRef Name="DriverNumber" />
+            <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
+            <PropertyRef Name="IsBookingDone" />
+            <PropertyRef Name="Distance" />
+            <PropertyRef Name="InvoiceTotal" />
+            <PropertyRef Name="PaymentDifference" />
+          </Key>
+          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuotationNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuotationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuotationValue" Type="Double" Nullable="false" />
+          <Property Name="BusType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FleetNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DriverName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DriverNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsBookingDone" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Distance" Type="Double" Nullable="false" />
+          <Property Name="OperatedKms" Type="Double" />
+          <Property Name="DifferenceKms" Type="Double" />
+          <Property Name="IsJobCompleted" Type="Boolean" />
+          <Property Name="InvoiceTotal" Type="Double" Nullable="false" />
+          <Property Name="PaymentDifference" Type="Double" Nullable="false" />
+        </EntityType>
         <EntityType Name="BookingApprovalInfo">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="InvoiceNumber" />
             <PropertyRef Name="OrganiserName" />
             <PropertyRef Name="Contact" />
             <PropertyRef Name="PickUpTime" />
@@ -1081,9 +1351,10 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
             <PropertyRef Name="FromLocation" />
             <PropertyRef Name="ToLocation" />
             <PropertyRef Name="Company" />
+            <PropertyRef Name="IsBookingApproved" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
           <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1093,6 +1364,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <Property Name="FromLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ToLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Company" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsBookingApproved" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="BookingAvailabilityInfo">
           <Key>
@@ -1189,7 +1461,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Total" Type="Double" />
-          <Property Name="OrderMonth" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="OrderMonth" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="OrderYear" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Booking_PaymentMode">
@@ -1366,6 +1638,37 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SpecialHireDBModelStoreContainer" CdmEntityContainer="SpecialHireDBContext">
+          <EntitySetMapping Name="BookingApprovalInfo_BackUp">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingApprovalInfo_BackUp">
+              <MappingFragment StoreEntitySet="BookingApprovalInfo_BackUp">
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ReturnTime" ColumnName="ReturnTime" />
+                <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
+                <ScalarProperty Name="PickUpTime" ColumnName="PickUpTime" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="OrganiserName" ColumnName="OrganiserName" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingAvailabilityInfo_BackUP">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingAvailabilityInfo_BackUP">
+              <MappingFragment StoreEntitySet="BookingAvailabilityInfo_BackUP">
+                <ScalarProperty Name="NoOfTrailerConfirmed" ColumnName="NoOfTrailerConfirmed" />
+                <ScalarProperty Name="NoOfBussesConfirmed" ColumnName="NoOfBussesConfirmed" />
+                <ScalarProperty Name="TotalTrailer" ColumnName="TotalTrailer" />
+                <ScalarProperty Name="TotalBusses" ColumnName="TotalBusses" />
+                <ScalarProperty Name="NoOfTrailers" ColumnName="NoOfTrailers" />
+                <ScalarProperty Name="NoOfBusses" ColumnName="NoOfBusses" />
+                <ScalarProperty Name="NoOfBooking" ColumnName="NoOfBooking" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Bookinginfoes">
             <EntityTypeMapping TypeName="SpecialHireDBModel.Bookinginfo">
               <MappingFragment StoreEntitySet="Bookinginfo">
@@ -1510,6 +1813,32 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DispatcherBookingInfo_BackUP">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.DispatcherBookingInfo_BackUP">
+              <MappingFragment StoreEntitySet="DispatcherBookingInfo_BackUP">
+                <ScalarProperty Name="BookingVehicleID" ColumnName="BookingVehicleID" />
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="IsJobCompleted" ColumnName="IsJobCompleted" />
+                <ScalarProperty Name="IsTrailerAssigned" ColumnName="IsTrailerAssigned" />
+                <ScalarProperty Name="IsVehicleAssigned" ColumnName="IsVehicleAssigned" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="FleetNumber" ColumnName="FleetNumber" />
+                <ScalarProperty Name="BusType" ColumnName="BusType" />
+                <ScalarProperty Name="NumberOfBusses" ColumnName="NumberOfBusses" />
+                <ScalarProperty Name="NumberOfTrailers" ColumnName="NumberOfTrailers" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ReturnTime" ColumnName="ReturnTime" />
+                <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
+                <ScalarProperty Name="PickUpTime" ColumnName="PickUpTime" />
+                <ScalarProperty Name="CellNumber" ColumnName="CellNumber" />
+                <ScalarProperty Name="OrganiserName" ColumnName="OrganiserName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="AlternateID" ColumnName="AlternateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DispatcherVehicleChecklists">
             <EntityTypeMapping TypeName="SpecialHireDBModel.DispatcherVehicleChecklist">
               <MappingFragment StoreEntitySet="DispatcherVehicleChecklist">
@@ -1603,6 +1932,15 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Revenue_BackUp">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.Revenue_BackUp">
+              <MappingFragment StoreEntitySet="Revenue_BackUp">
+                <ScalarProperty Name="OrderYear" ColumnName="OrderYear" />
+                <ScalarProperty Name="OrderMonth" ColumnName="OrderMonth" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Trailers">
             <EntityTypeMapping TypeName="SpecialHireDBModel.Trailer">
               <MappingFragment StoreEntitySet="Trailer">
@@ -1630,9 +1968,36 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BookingReporting_BackUP">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.BookingReporting_BackUP">
+              <MappingFragment StoreEntitySet="BookingReporting_BackUP">
+                <ScalarProperty Name="PaymentDifference" ColumnName="PaymentDifference" />
+                <ScalarProperty Name="InvoiceTotal" ColumnName="InvoiceTotal" />
+                <ScalarProperty Name="IsJobCompleted" ColumnName="IsJobCompleted" />
+                <ScalarProperty Name="DifferenceKms" ColumnName="DifferenceKms" />
+                <ScalarProperty Name="OperatedKms" ColumnName="OperatedKms" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="IsBookingDone" ColumnName="IsBookingDone" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
+                <ScalarProperty Name="DriverNumber" ColumnName="DriverNumber" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="FleetNumber" ColumnName="FleetNumber" />
+                <ScalarProperty Name="BusType" ColumnName="BusType" />
+                <ScalarProperty Name="QuotationValue" ColumnName="QuotationValue" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="QuotationNumber" ColumnName="QuotationNumber" />
+                <ScalarProperty Name="OrganiserName" ColumnName="OrganiserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BookingApprovalInfoes">
             <EntityTypeMapping TypeName="SpecialHireDBModel.BookingApprovalInfo">
               <MappingFragment StoreEntitySet="BookingApprovalInfo">
+                <ScalarProperty Name="IsBookingApproved" ColumnName="IsBookingApproved" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
                 <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
