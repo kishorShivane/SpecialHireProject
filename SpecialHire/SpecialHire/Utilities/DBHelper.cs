@@ -1,4 +1,5 @@
 ﻿using EbusDataProvider;
+using Microsoft.Ajax.Utilities;
 using SpecialHire.Models;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace SpecialHire.Utilities
 
         public List<BookingApprovalInfo> SearchPendingBookings(string bookingDate, string bookingID)
         {
+            var bookingApprovalInfos = new List<BookingApprovalInfo>();
             DateTime filterDate = new DateTime();
             if (bookingDate != string.Empty)
             {
@@ -27,17 +29,32 @@ namespace SpecialHire.Utilities
             {
                 using (SpecialHireDBContext DBContext = new SpecialHireDBContext(ConfigurationSettings.ConnectionKey))
                 {
-                    return (from item in DBContext.BookingApprovalInfoes.AsEnumerable()
-                            where (item.InvoiceNumber.ToLower().Contains(bookingID.ToLower()) || bookingID == string.Empty) &&
-                                    (bookingDate == string.Empty || item.InvoiceDate.Value.Date.Equals(filterDate.Date)) && item.IsBookingApproved == false
-                            orderby item.ID
-                            select item).ToList();
+                    bookingApprovalInfos = (from item in DBContext.BookingApprovalInfoes.AsEnumerable()
+                                            where (item.InvoiceNumber.ToLower().Contains(bookingID.ToLower()) || bookingID == string.Empty) &&
+                                                    ((bookingDate == string.Empty || item.InvoiceDate.Value.ToShortDateString() == filterDate.ToShortDateString() || (filterDate.Date >= item.PickUpDate.Date && filterDate.Date <= item.ReturnDate.Date))) &&
+                                                    item.IsBookingApproved == false
+                                            orderby item.ID
+                                            select item).ToList();
+
+                    //if (!string.IsNullOrEmpty(bookingDate))
+                    //{
+                    //    var inRangeData = DBContext.BookingApprovalInfoes.Where(x=>x.IsBookingApproved == false).ToList();
+                    //    inRangeData.ForEach(x =>
+                    //    {
+                    //        if (filterDate.Date >= x.PickUpDate.Date || filterDate.Date <= x.ReturnDate.Date)
+                    //        {
+                    //            bookingApprovalInfos.Add(x);
+                    //        }
+                    //    });
+                    //    bookingApprovalInfos.DistinctBy(x => x);
+                    //}
                 }
             }
             catch (Exception)
             {
                 throw;
             }
+            return bookingApprovalInfos;
         }
 
         public bool UpdateBookingStatus(int bookingID, string comment)
@@ -1309,7 +1326,7 @@ namespace SpecialHire.Utilities
 
         public List<DispatcherBookingInfoModel> SearchBookings(string bookingDate, string bookingID)
         {
-            DateTime filterDate = new DateTime();
+            DateTime? filterDate = null;
             if (bookingDate != string.Empty)
             {
                 filterDate = Convert.ToDateTime(bookingDate);
@@ -1321,7 +1338,8 @@ namespace SpecialHire.Utilities
                 {
                     List<DispatcherBookingInfoModel> result = (from quote in DBContext.DispatcherBookingInfoes.AsEnumerable()
                                                                where (quote.AlternateID.ToLower().Contains(bookingID) || bookingID == string.Empty) &&
-                                                                       (bookingDate == string.Empty || quote.PickUpDate.Equals(filterDate))
+                                                                       ((string.IsNullOrEmpty(bookingDate) && quote.PickUpDate > DateTime.Now) ||
+                                                                       (!string.IsNullOrEmpty(bookingDate) && quote.PickUpDate.Equals(filterDate)))
                                                                orderby quote.ID
                                                                select new DispatcherBookingInfoModel
                                                                {
@@ -1331,6 +1349,7 @@ namespace SpecialHire.Utilities
                                                                    OrganiserName = quote.OrganiserName,
                                                                    FromLocation = quote.FromLocation,
                                                                    NumberOfTrailers = quote.NumberOfTrailers.Value,
+                                                                   PickUpDate = quote.PickUpDate.ToShortDateString(),
                                                                    PickUpTime = quote.PickUpTime,
                                                                    QuotationID = quote.ID,
                                                                    ReturnTime = quote.ReturnTime,
@@ -1767,7 +1786,7 @@ namespace SpecialHire.Utilities
         #endregion
 
         #region Driver
-        public List<Driver> SearchDrivers(string driverName, string driverNumber)
+        public List<Driver> SearchDrivers(string driverName, string driverNumber, string depot)
         {
             try
             {
@@ -1775,7 +1794,8 @@ namespace SpecialHire.Utilities
                 {
                     return (from driver in DBContext.Drivers
                             where (driver.DriverName.ToLower().Contains(driverName.ToLower()) || driverName == string.Empty) &&
-                                    (driver.DriverNumber.ToLower().Contains(driverNumber.ToLower()) || driverNumber == string.Empty)
+                                    (driver.DriverNumber.ToLower().Contains(driverNumber.ToLower()) || driverNumber == string.Empty) &&
+                                    (driver.Depot.ToLower().Contains(depot.ToLower()) || depot == string.Empty)
                             select driver).ToList();
                 }
             }
@@ -1841,6 +1861,7 @@ namespace SpecialHire.Utilities
             item.DriverNumber = driver.DriverNumber;
             item.EmployeeNumber = driver.EmployeeNumber;
             item.ContactNumber = driver.ContactNumber;
+            item.Depot = driver.Depot;
             item.IsSpecialHireDriver = driver.IsSpecialHireDriver;
             item.Status = driver.Status;
             item.ModifiedBy = commonHelper.GetLoggedInUserName();

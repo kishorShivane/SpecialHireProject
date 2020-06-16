@@ -86,13 +86,14 @@
                             <table class="table table-striped" id="tblSearchResults">
                                 <thead class="thead-inverse">
                                     <tr>
-                                        <th>Organiser</th>
+                                        <th>Operating By</th>
                                         <th>Contact</th>
+                                        <th>Travel Date</th>
                                         <th>Pick Up</th>
                                         <th>Time</th>
                                         <th>Destination</th>
                                         <th>Return</th>
-                                        <th>Bus Type</th>
+                                        <th>Number Of Buses</th>
                                         <th>Fleet Number</th>
                                         <th>Driver Name</th>
                                         <th>Pick</th>
@@ -143,11 +144,25 @@
     var btnPrintDriverSheet = divDispatcherInfo.find("a#lnkPrintDriverSheet");
     var btnPrintMaps = divDispatcherInfo.find("a#lnkPrintMaps");
 
+    var lblOrganiserName = divDispatcherInfo.find("span#lblOrganiserName");
+    var lblCellNumber = divDispatcherInfo.find("span#lblCellNumber");
+    var lblPickUpDate = divDispatcherInfo.find("span#lblPickUpDate");
+    var lblPickUpTime = divDispatcherInfo.find("span#lblPickUpTime");
+    var lblReturnDate = divDispatcherInfo.find("span#lblReturnDate");
+    var lblReturnTime = divDispatcherInfo.find("span#lblReturnTime");
+    var lblFromLocation = divDispatcherInfo.find("span#lblFromLocation");
+    var lblToLocation = divDispatcherInfo.find("span#lblToLocation");
+
+    Date.prototype.addDays = function (days) {
+        this.setDate(this.getDate() + parseInt(days));
+        return this;
+    };
+
     function BindSearchGrid(IsPageLoad) {
         var BookingDate = "";
         debugger;
         if (!IsPageLoad)
-        { BookingDate = $("#txtSearchBookingDate").val(); } else { BookingDate = getLocalDate(new Date()); }
+        { BookingDate = $("#txtSearchBookingDate").val(); }
 
         var BookingID = $("#txtSearchBookingID").val();
         var tableBody = $("table#tblSearchResults").find("tbody");
@@ -157,7 +172,7 @@
             //alert("Please enter search criteria!!");
             //$("#txtSearchBookingDate").focus();
             //return false;
-            BookingDate = getLocalDate(new Date());
+            BookingDate = "";
         }
         $.ajax({
             async: false,
@@ -174,8 +189,7 @@
                 tableBody.html();
                 if (result.length == 0) {
                     if (!IsPageLoad)
-                    { alert("No records found for the selected criteria!!"); } else
-                    { alert("No jobs found for today!!"); }
+                    { alert("No records found for the selected criteria!!"); }
 
                     $("div#divSearchResults").hide();
                 }
@@ -185,11 +199,12 @@
                         var CurrentItem = this;
                         rows = rows + "<tr id='trDispatchVehicle" + index + "'><td><span id='lblOrganiserName'>" + CurrentItem.OrganiserName + "</span><input type='hidden' id='hdnSearchIsVehicleAssigned' value='" + CurrentItem.IsVehicleAssigned + "'/></td>"
                         rows = rows + "<td><span id='lblCellNumber'>" + CurrentItem.CellNumber + "</span><input type='hidden' id='hdnSearchIsJobCompleted' value='" + CurrentItem.IsJobCompleted + "'/></td>"
+                        rows = rows + "<td><span id='lblPickUpDate'>" + CurrentItem.PickUpDate + "</span><input type='hidden' id='hdnReturnDate' value='" + CurrentItem.ReturnDate + "'/></td>"
                         rows = rows + "<td><span id='lblFromLocation'>" + CurrentItem.FromLocation + "</span><input type='hidden' id='hdnNoOfTrailers' value='" + CurrentItem.NumberOfTrailers + "'/></td>"
                         rows = rows + "<td><span id='lblPickUpTime'>" + CurrentItem.PickUpTime + "</span><input type='hidden' id='hdnNoOfBusses' value='" + CurrentItem.NumberOfBusses + "'/></td>"
                         rows = rows + "<td><span id='lblToLocation'>" + CurrentItem.ToLocation + "</span><input type='hidden' id='hdnSearchBookingID' value='" + CurrentItem.BookingID + "'/></td>"
                         rows = rows + "<td><span id='lblReturnTime'>" + CurrentItem.ReturnTime + "</span><input type='hidden' id='hdnSearchBookingVehicleID' value='" + CurrentItem.BookingVehicleID + "'/></td>"
-                        rows = rows + "<td><span id='lblBusType'>" + CurrentItem.BusType + "</span><input type='hidden' id='hdnSearchIsTrailerAssigned' value='" + CurrentItem.IsTrailerAssigned + "'/></td>";
+                        rows = rows + "<td><span id='lblNoOfBuses'>" + CurrentItem.NumberOfBusses + "</span><input type='hidden' id='hdnSearchIsTrailerAssigned' value='" + CurrentItem.IsTrailerAssigned + "'/></td>";
                         rows = rows + "<td><span id='lblFleetNumber'>" + CurrentItem.FleetNumber + "</span><input type='hidden' id='hdnNumberOfBussesAssigned' value='" + CurrentItem.NumberOfBussesAssigned + "'/></td>";
                         rows = rows + "<td><span id='lblDriverName'>" + CurrentItem.DriverName + "</span><input type='hidden' id='hdnNumberOfTrailersAssigned' value='" + CurrentItem.NumberOfTrailersAssigned + "'/></td>";
                         if (CurrentItem.IsVehicleAssigned) {
@@ -298,6 +313,15 @@
         debugger;
         var quotationID = $(this).attr("value");
         var row = $(this).parent().parent();
+        var organizerName = row.find("span#lblOrganiserName").text();
+        var cellNumber = row.find("span#lblCellNumber").text();
+        var pickUpDate = row.find("span#lblPickUpDate").text();
+        var pickUpTime = row.find("span#lblPickUpTime").text();
+        var returnDate = row.find("input#hdnReturnDate").prop("value");
+        var returnTime = row.find("span#lblReturnTime").text();
+        var fromLocation = row.find("span#lblFromLocation").text();
+        var toLocation = row.find("span#lblToLocation").text();
+
         var bookingVehicleID = row.find("input#hdnSearchBookingVehicleID").prop("value");
         var IsTrailerAssigned = row.find("input#hdnSearchIsTrailerAssigned").prop("value");
         var IsJobCompleted = row.find("input#hdnSearchIsJobCompleted").prop("value");
@@ -327,6 +351,15 @@
                 hdnIsTrailerAssigned.prop("value", IsTrailerAssigned);
                 hdnIsJobCompleted.prop("value", IsJobCompleted);
                 hdnIsVehicleAssigned.prop("value", IsVehicleAssigned);
+
+                lblOrganiserName.text(organizerName);
+                lblCellNumber.text(cellNumber);
+                lblPickUpDate.text(pickUpDate);
+                lblPickUpTime.text(pickUpTime);
+                lblReturnDate.text(returnDate);
+                lblReturnTime.text(returnTime);
+                lblFromLocation.text(fromLocation);
+                lblToLocation.text(toLocation);
 
                 //if (IsTrailerAssigned == "true") { NoTrailersAssigned = NoTrailersAssigned + 1; }
                 //if (IsVehicleAssigned == "true") { NoBussesAssigned = NoBussesAssigned + 1; }

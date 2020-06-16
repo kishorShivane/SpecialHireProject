@@ -72,7 +72,7 @@
                                     <tr>
                                         <th>InvoiceNumber</th>
                                         <th>InvoicedDate</th>
-                                        <th>Organiser</th>
+                                        <th>Operating By</th>
                                         <th>Contact</th>
                                         <th>PickUp</th>
                                         <th>Time</th>
@@ -123,8 +123,7 @@
                 tableBody.html();
                 if (result.length == 0) {
                     if (!IsPageLoad)
-                    { alert("No records found for the selected criteria!!"); } else
-                    { alert("No jobs found for today!!"); }
+                    { alert("No records found for the selected criteria!!"); }
 
                     $("div#divSearchResults").hide();
                 }
@@ -181,8 +180,8 @@
                 alert('Error: ' + xhr.statusText);
             },
             success: function (result) {
-                BindSearchGrid(false);
-                alert("Approved Successfully..!!");
+                BindSearchGrid(true);
+                alert("Booking Approved successfully..!!");
             }
         }).done(function (result) {
             return false;

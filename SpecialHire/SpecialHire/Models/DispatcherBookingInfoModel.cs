@@ -9,6 +9,7 @@ namespace SpecialHire.Models
     {
         public string OrganiserName { get; set; }
         public string CellNumber { get; set; }
+        public string PickUpDate { get; set; }
         public string PickUpTime { get; set; }
         public string ReturnTime { get; set; }
         public string FromLocation { get; set; }

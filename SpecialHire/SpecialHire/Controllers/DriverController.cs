@@ -41,11 +41,11 @@ namespace SpecialHire.Controllers
         }
 
         [HttpPost]
-        public JsonResult SearchDrivers(string DriverName, string DriverNumber)
+        public JsonResult SearchDrivers(string DriverName, string DriverNumber, string Depot)
         {
             try
             {
-                var response = DBHelper.SearchDrivers(DriverName, DriverNumber);
+                var response = DBHelper.SearchDrivers(DriverName, DriverNumber, Depot);
                 return Json(response);
             }
             catch (System.Exception)

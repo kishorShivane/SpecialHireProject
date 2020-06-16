@@ -21,6 +21,7 @@ namespace EbusDataProvider
         public string CellNumber { get; set; }
         public string PickUpTime { get; set; }
         public System.DateTime PickUpDate { get; set; }
+        public System.DateTime ReturnDate { get; set; }
         public string ReturnTime { get; set; }
         public string FromLocation { get; set; }
         public string ToLocation { get; set; }

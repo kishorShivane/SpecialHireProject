@@ -26,5 +26,6 @@ namespace EbusDataProvider
         public string ToLocation { get; set; }
         public string Company { get; set; }
         public bool IsBookingApproved { get; set; }
+        public System.DateTime ReturnDate { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace EbusDataProvider
         public string DriverNumber { get; set; }
         public string EmployeeNumber { get; set; }
         public string ContactNumber { get; set; }
+        public string Depot { get; set; }
         public bool IsSpecialHireDriver { get; set; }
         public bool Status { get; set; }
         public string ModifiedBy { get; set; }

@@ -291,6 +291,7 @@ warning 6002: The table/view 'SpecialHire.dbo.BookingReporting_BackUP' does not 
           <Property Name="DriverNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmployeeNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Depot" Type="nvarchar" MaxLength="50" />
           <Property Name="IsSpecialHireDriver" Type="bit" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
@@ -385,6 +386,7 @@ warning 6002: The table/view 'SpecialHire.dbo.BookingApprovalInfo' does not have
             <PropertyRef Name="ToLocation" />
             <PropertyRef Name="Company" />
             <PropertyRef Name="IsBookingApproved" />
+            <PropertyRef Name="ReturnDate" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -398,6 +400,7 @@ warning 6002: The table/view 'SpecialHire.dbo.BookingApprovalInfo' does not have
           <Property Name="ToLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Company" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="IsBookingApproved" Type="bit" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SpecialHire.dbo.BookingAvailabilityInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -464,6 +467,7 @@ warning 6002: The table/view 'SpecialHire.dbo.DispatcherBookingInfo' does not ha
             <PropertyRef Name="CellNumber" />
             <PropertyRef Name="PickUpTime" />
             <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
             <PropertyRef Name="ReturnTime" />
             <PropertyRef Name="FromLocation" />
             <PropertyRef Name="ToLocation" />
@@ -480,6 +484,7 @@ warning 6002: The table/view 'SpecialHire.dbo.DispatcherBookingInfo' does not ha
           <Property Name="CellNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PickUpTime" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="PickUpDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
           <Property Name="ReturnTime" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="FromLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ToLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -731,7 +736,8 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
     [BookingApprovalInfo].[FromLocation] AS [FromLocation], 
     [BookingApprovalInfo].[ToLocation] AS [ToLocation], 
     [BookingApprovalInfo].[Company] AS [Company], 
-    [BookingApprovalInfo].[IsBookingApproved] AS [IsBookingApproved]
+    [BookingApprovalInfo].[IsBookingApproved] AS [IsBookingApproved], 
+    [BookingApprovalInfo].[ReturnDate] AS [ReturnDate]
     FROM [dbo].[BookingApprovalInfo] AS [BookingApprovalInfo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="BookingAvailabilityInfo" EntityType="Self.BookingAvailabilityInfo" store:Type="Views" store:Schema="dbo">
@@ -780,6 +786,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
     [DispatcherBookingInfo].[CellNumber] AS [CellNumber], 
     [DispatcherBookingInfo].[PickUpTime] AS [PickUpTime], 
     [DispatcherBookingInfo].[PickUpDate] AS [PickUpDate], 
+    [DispatcherBookingInfo].[ReturnDate] AS [ReturnDate], 
     [DispatcherBookingInfo].[ReturnTime] AS [ReturnTime], 
     [DispatcherBookingInfo].[FromLocation] AS [FromLocation], 
     [DispatcherBookingInfo].[ToLocation] AS [ToLocation], 
@@ -1214,6 +1221,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <Property Name="DriverNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContactNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Depot" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsSpecialHireDriver" Type="Boolean" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1352,6 +1360,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
             <PropertyRef Name="ToLocation" />
             <PropertyRef Name="Company" />
             <PropertyRef Name="IsBookingApproved" />
+            <PropertyRef Name="ReturnDate" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1365,6 +1374,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <Property Name="ToLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Company" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsBookingApproved" Type="Boolean" Nullable="false" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="BookingAvailabilityInfo">
           <Key>
@@ -1425,6 +1435,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
             <PropertyRef Name="CellNumber" />
             <PropertyRef Name="PickUpTime" />
             <PropertyRef Name="PickUpDate" />
+            <PropertyRef Name="ReturnDate" />
             <PropertyRef Name="ReturnTime" />
             <PropertyRef Name="FromLocation" />
             <PropertyRef Name="ToLocation" />
@@ -1441,6 +1452,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <Property Name="CellNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PickUpTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="PickUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ReturnTime" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="FromLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ToLocation" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -1880,6 +1892,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="IsSpecialHireDriver" ColumnName="IsSpecialHireDriver" />
+                <ScalarProperty Name="Depot" ColumnName="Depot" />
                 <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
                 <ScalarProperty Name="EmployeeNumber" ColumnName="EmployeeNumber" />
                 <ScalarProperty Name="DriverNumber" ColumnName="DriverNumber" />
@@ -1997,6 +2010,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <EntitySetMapping Name="BookingApprovalInfoes">
             <EntityTypeMapping TypeName="SpecialHireDBModel.BookingApprovalInfo">
               <MappingFragment StoreEntitySet="BookingApprovalInfo">
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
                 <ScalarProperty Name="IsBookingApproved" ColumnName="IsBookingApproved" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
@@ -2069,6 +2083,7 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
                 <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
                 <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
                 <ScalarProperty Name="ReturnTime" ColumnName="ReturnTime" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
                 <ScalarProperty Name="PickUpDate" ColumnName="PickUpDate" />
                 <ScalarProperty Name="PickUpTime" ColumnName="PickUpTime" />
                 <ScalarProperty Name="CellNumber" ColumnName="CellNumber" />
