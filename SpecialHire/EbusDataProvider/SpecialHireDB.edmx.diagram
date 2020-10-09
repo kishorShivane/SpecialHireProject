@@ -45,6 +45,8 @@
         <AssociationConnector Association="SpecialHireDBModel.FK_VehicleDetails_BusType" />
         <AssociationConnector Association="SpecialHireDBModel.FK_Bus_BusType" />
         <AssociationConnector Association="SpecialHireDBModel.FK_Trailer_TrailerType" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.FromLocation" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SpecialHireDBModel.ToLocation" Width="1.5" PointX="17.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

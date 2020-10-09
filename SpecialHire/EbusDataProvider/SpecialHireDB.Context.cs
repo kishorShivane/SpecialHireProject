@@ -52,5 +52,7 @@ namespace EbusDataProvider
         public virtual DbSet<BookingReporting> BookingReportings { get; set; }
         public virtual DbSet<DispatcherBookingInfo> DispatcherBookingInfoes { get; set; }
         public virtual DbSet<Revenue> Revenues { get; set; }
+        public virtual DbSet<FromLocation> FromLocations { get; set; }
+        public virtual DbSet<ToLocation> ToLocations { get; set; }
     }
 }

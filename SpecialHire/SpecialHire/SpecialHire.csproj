@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -164,6 +165,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ApprovalController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
+    <Compile Include="Controllers\QuickQuoteController.cs" />
     <Compile Include="Controllers\BookingQuoteController.cs" />
     <Compile Include="Controllers\BusController.cs" />
     <Compile Include="Controllers\BusTypeController.cs" />
@@ -302,6 +304,8 @@
     <Content Include="Views\Report\ScheduledWorked.cshtml" />
     <Content Include="Views\Report\PreviewScheduledWorkedReportToPDF.cshtml" />
     <Content Include="Views\Approval\Index.cshtml" />
+    <Content Include="Views\QuickQuote\Index.cshtml" />
+    <Content Include="Views\QuickQuote\ExportQuotationToPDF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

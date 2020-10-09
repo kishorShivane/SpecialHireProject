@@ -131,6 +131,9 @@
     <Compile Include="Event.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FromLocation.cs">
+      <DependentUpon>SpecialHireDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MonthName.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>
@@ -166,6 +169,9 @@
       <DependentUpon>SpecialHireDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="SpecialHireDBContextCustom.cs" />
+    <Compile Include="ToLocation.cs">
+      <DependentUpon>SpecialHireDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Trailer.cs">
       <DependentUpon>SpecialHireDB.tt</DependentUpon>
     </Compile>

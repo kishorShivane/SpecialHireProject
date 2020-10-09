@@ -23,7 +23,9 @@ namespace SpecialHire.Models
         public List<SelectListItem> PaymentModes { get; set; }
         public List<SelectListItem> BusTypes { get; set; }
         public List<SelectListItem> TrailerTypes { get; set; }
-        public List<SelectListItem> CompanyDetails { get; set; }        
+        public List<SelectListItem> CompanyDetails { get; set; }
+        public List<SelectListItem> FromLocations { get; set; }
+        public List<SelectListItem> ToLocations { get; set; }
     }
 
     public class BookingQuoteInfoBase
@@ -79,6 +81,15 @@ namespace SpecialHire.Models
 
         public List<BookingVehicleInfoModel> BookingVehicleInfo { get; set; }
         public List<BookingTrailerInfoModel> BookingTrailerInfo { get; set; }
+
+        //New fields
+        public bool IsLongDistance { get; set; }
+        public bool IsFuneral { get; set; }
+        public bool IsScholarRate { get; set; }
+        public int NumberOfBusses { get; set; }
+        public int NumberOfTrailers { get; set; }
+        public double Hours { get; set; }
+
     }
 
 

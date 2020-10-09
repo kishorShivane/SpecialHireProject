@@ -89,7 +89,9 @@
             <!-- Sidebar -->
             <div id="sidebar-wrapper" style="overflow: hidden;max-height:650px">
                 <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-
+                    <li @*class="active"*@ id="liQuotation">
+                        <a href=@Url.Action("Index", "QuickQuote")><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text fa-stack-1x "></i></span> Quick Quotation</a>
+                    </li>
                     <li @*class="active"*@ id="liQuotation">
                         <a href=@Url.Action("Index", "BookingQuote")><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text fa-stack-1x "></i></span> Quotation</a>
                     </li>
@@ -100,8 +102,8 @@
                         <a href=@Url.Action("Index", "Availability")><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar-check-o fa-stack-1x "></i></span>Availability</a>
                     </li>
                     @*<li id="liBooking">
-                        <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book fa-stack-1x "></i></span>Booking</a>
-                    </li>*@
+            <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book fa-stack-1x "></i></span>Booking</a>
+        </li>*@
                     <li id="liDispatcher">
                         <a href=@Url.Action("Index", "Dispatch")><span class="fa-stack fa-lg pull-left"><i class="fa fa-road fa-stack-1x "></i></span>Dispatcher</a>
                     </li>

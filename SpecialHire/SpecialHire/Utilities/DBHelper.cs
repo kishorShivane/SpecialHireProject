@@ -1320,6 +1320,40 @@ namespace SpecialHire.Utilities
                 throw;
             }
         }
+
+        public List<SelectListItem> GetFromLocations()
+        {
+            try
+            {
+                using (SpecialHireDBContext DBContext = new SpecialHireDBContext(ConfigurationSettings.ConnectionKey))
+                {
+                    return commonHelper.AddDefaultItem((from loc in DBContext.FromLocations.AsEnumerable()
+                                                        where loc.Status == true
+                                                        select new SelectListItem { Text = loc.Location, Value = loc.ID.ToString() }).ToList());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<SelectListItem> GetToLocations()
+        {
+            try
+            {
+                using (SpecialHireDBContext DBContext = new SpecialHireDBContext(ConfigurationSettings.ConnectionKey))
+                {
+                    return commonHelper.AddDefaultItem((from loc in DBContext.ToLocations.AsEnumerable()
+                                                        where loc.Status == true
+                                                        select new SelectListItem { Text = loc.Location, Value = loc.ID.ToString() }).ToList());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Dispatcher

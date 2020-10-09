@@ -308,6 +308,14 @@ warning 6002: The table/view 'SpecialHire.dbo.BookingReporting_BackUP' does not 
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="FromLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="MonthName">
           <Key>
             <PropertyRef Name="ID" />
@@ -345,6 +353,14 @@ warning 6002: The table/view 'SpecialHire.dbo.BookingReporting_BackUP' does not 
           <Property Name="Total" Type="float" Nullable="false" />
           <Property Name="OrderMonth" Type="nvarchar" MaxLength="30" />
           <Property Name="OrderYear" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Trailer">
           <Key>
@@ -693,10 +709,12 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
           <EntitySet Name="DispatcherVehicleCustomerSurvey" EntityType="Self.DispatcherVehicleCustomerSurvey" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FromLocation" EntityType="Self.FromLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonthName" EntityType="Self.MonthName" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentTerms" EntityType="Self.PaymentTerms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Revenue_BackUp" EntityType="Self.Revenue_BackUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ToLocation" EntityType="Self.ToLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrailerType" EntityType="Self.TrailerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingReporting_BackUP" EntityType="Self.BookingReporting_BackUP" store:Type="Tables" store:Schema="dbo">
@@ -954,6 +972,8 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
             <End Role="TrailerType" EntitySet="TrailerTypes" />
             <End Role="Trailer" EntitySet="Trailers" />
           </AssociationSet>
+          <EntitySet Name="FromLocations" EntityType="SpecialHireDBModel.FromLocation" />
+          <EntitySet Name="ToLocations" EntityType="SpecialHireDBModel.ToLocation" />
         </EntityContainer>
         <EntityType Name="BookingApprovalInfo_BackUp">
           <Key>
@@ -1644,6 +1664,22 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FromLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2101,6 +2137,24 @@ warning 6002: The table/view 'SpecialHire.dbo.Revenue' does not have a primary k
                 <ScalarProperty Name="OrderMonth" ColumnName="OrderMonth" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FromLocations">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.FromLocation">
+              <MappingFragment StoreEntitySet="FromLocation">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToLocations">
+            <EntityTypeMapping TypeName="SpecialHireDBModel.ToLocation">
+              <MappingFragment StoreEntitySet="ToLocation">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
