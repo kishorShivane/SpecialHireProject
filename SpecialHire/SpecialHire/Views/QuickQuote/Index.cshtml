@@ -171,7 +171,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-addon">LongDistance</div>
-                                @Html.RadioButtonFor(m => m.IsLongDistance, true, new { id = "chkLongDistance", @class = "form-control" })
+                                @Html.RadioButtonFor(m => m.IsLongDistance, true, new { id = "chkLongDistance", @class = "form-control", title = "Long Distance: R 27.50  Per KM and R 150 Per Hr" })
                             </div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-addon">Funeral</div>
-                                @Html.RadioButtonFor(m => m.IsFuneral, true, new { id = "chkFuneral", @class = "form-control" })
+                                @Html.RadioButtonFor(m => m.IsFuneral, true, new { id = "chkFuneral", @class = "form-control", title = "Funeral: R 12.50  Per KM and R 115 Per Hr" })
                             </div>
                         </div>
                     </div>
@@ -187,12 +187,12 @@
                         <div class="form-group">
                             <div class="input-group input-group-sm">
                                 <div class="input-group-addon">Scholor Rate</div>
-                                @Html.RadioButtonFor(m => m.IsScholarRate, true, new { id = "chkScholorRate", @class = "form-control" })
+                                @Html.RadioButtonFor(m => m.IsScholarRate, true, new { id = "chkScholorRate", @class = "form-control", title = "Scholar Rates: R 10 Per KM and R 105 Per Hr" })
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <button type="button" class="btn btn-info" id="btnBookingTypeInfo">Information</button>
+                        @*<button type="button" class="btn btn-info" id="btnBookingTypeInfo">Information</button>*@
                     </div>
                 </div>
                 <div class="row" id="divGoogleLocations">
@@ -368,7 +368,7 @@
     var pdfPaymentTerms = '@ViewBag.ConfigurationSettings.PDFPaymentTerms';
     var defaultPaymentMode = '@ViewBag.ConfigurationSettings.DefaultPaymentMode';
     var totalCapacity = 0;
-    var relativePathToPDFFiles = @relativePathToPDFFiles;
+    var relativePathToPDFFiles = '@relativePathToPDFFiles';
 
     $(document).ready(function () {
         EnforceNumeric();
@@ -416,7 +416,7 @@
                 var total = (perHour + perKm) * noOfBusses;
                 quotationValueControl.val(total);
             }
-        }       
+        }
     }
 
     function ShiftLocationBasedOnBookingType() {
