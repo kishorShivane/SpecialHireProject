@@ -225,7 +225,15 @@ namespace SpecialHire.Controllers
                 //ignore
             }
 
-            return Server.MapPath("~/PDF/" + fileName);
+            UriBuilder urlBuilder =
+                                    new System.UriBuilder(Request.Url.AbsoluteUri)
+                                    {
+                                        Path = Url.Content("~/PDF/" + fileName),
+                                        Query = null,
+                                    };
+            string url = urlBuilder.ToString();
+
+            return url;
         }
     }
 }
